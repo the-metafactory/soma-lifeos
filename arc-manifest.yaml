@@ -74,3 +74,25 @@ artifacts:
     description: "Optimize prompts and agent workflows through measured iteration."
   - path: skills/system
     description: "Check system integrity, recall work context, and document updates."
+  - path: skills/aperture-oscillation
+    description: "Explore a problem at tactical and strategic scopes, then synthesize design tensions."
+  - path: skills/be-creative
+    description: "Generate diverse ideas through verbalized sampling and structured creativity workflows."
+  - path: skills/council
+    description: "Debate decisions through multiple expert perspectives and visible deliberation rounds."
+  - path: skills/first-principles
+    description: "Deconstruct assumptions and rebuild solutions from fundamental truths."
+  - path: skills/ideate
+    description: "Evolve and rank novel ideas across repeated generation and testing cycles."
+  - path: skills/iterative-depth
+    description: "Explore a problem through successive lenses to surface hidden requirements."
+  - path: skills/red-team
+    description: "Stress-test ideas and plans through adversarial analysis and validation."
+  - path: skills/root-cause-analysis
+    description: "Investigate incidents with structured, blameless causal analysis."
+  - path: skills/science
+    description: "Apply hypotheses, experiments and measured iteration to problem solving."
+  - path: skills/systems-thinking
+    description: "Analyze feedback loops, system archetypes and leverage points."
+  - path: skills/world-threat-model
+    description: "Stress-test ideas and strategies against multiple future time horizons."

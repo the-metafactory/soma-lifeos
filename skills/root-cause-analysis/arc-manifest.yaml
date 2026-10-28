@@ -1,0 +1,23 @@
+schema: arc/v1
+name: root-cause-analysis
+version: 0.1.0
+type: skill
+tier: custom
+description: "Investigate incidents with structured, blameless causal analysis."
+license: MIT
+author:
+  name: The MetaFactory
+  github: the-metafactory
+upstream:
+  repo: danielmiessler/PAI
+  path: Packs/RootCauseAnalysis/src
+  commit: 2fde1bbe9e8f280cd4998e244b53e3c66f3dc8b9
+capabilities:
+  filesystem:
+    read:
+      - "./**"
+    write: []
+  network: []
+  bash:
+    allowed: false
+  secrets: []
