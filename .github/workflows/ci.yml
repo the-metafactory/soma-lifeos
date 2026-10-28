@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: Pack check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: "latest"
+
+      # check-pack.ts and its tests run `arc validate` from PATH. v0.46.1 is the
+      # first release that accepts lowercase SKILL.md names (arc#385).
+      - uses: actions/checkout@v4
+        with:
+          repository: the-metafactory/arc
+          ref: v0.46.1
+          path: .arc
+
+      - name: Put arc on PATH
+        run: |
+          (cd .arc && bun install --frozen-lockfile)
+          mkdir -p "$HOME/.local/bin"
+          printf '#!/bin/sh\nexec bun "%s/.arc/src/cli.ts" "$@"\n' "$GITHUB_WORKSPACE" > "$HOME/.local/bin/arc"
+          chmod +x "$HOME/.local/bin/arc"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
+      - run: arc --version
+
+
+      # Scoped to test/: a bare `bun test` would also run arc's suite in .arc/.
+      - run: bun test test/
+
+      - run: bun scripts/check-pack.ts
