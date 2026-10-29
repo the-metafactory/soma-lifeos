@@ -1,7 +1,8 @@
 import { LinkedInAdapter } from "./adapters/linkedin";
 import { postMastodon } from "./adapters/mastodon";
+import { AdapterError } from "./adapters/adapter-error";
+import { network, type Transport } from "./transport";
 
-export type Transport = (url: string, init: RequestInit) => Promise<Response>;
 type Environment = Readonly<Record<string, string | undefined>>;
 type Channel = {
   name: "LinkedIn" | "Mastodon";
@@ -65,12 +66,6 @@ function channels(text: string, env: Environment, transport: Transport): Channel
   ];
 }
 
-const network: Transport = (url, init) => fetch(url, {
-  ...init,
-  redirect: "error",
-  signal: AbortSignal.timeout(30_000),
-});
-
 export async function runBroadcast(options: {
   args: string[];
   env: Environment;
@@ -108,9 +103,10 @@ export async function runBroadcast(options: {
     try {
       const url = await post.send();
       options.write(`${post.name}: posted ${url}`);
-    } catch {
+    } catch (error) {
       failed = true;
-      options.write(`${post.name}: failed. Check the channel before retrying; the outcome may be unknown.`);
+      const detail = error instanceof AdapterError ? ` (${error.message})` : "";
+      options.write(`${post.name}: failed${detail}. Check the channel before retrying; the outcome may be unknown.`);
     }
   }
   return failed ? 1 : 0;

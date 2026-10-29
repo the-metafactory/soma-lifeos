@@ -11,7 +11,7 @@ author:
   github: the-metafactory
 artifacts:
   - path: skills/broadcast
-    description: "Preview LinkedIn and Mastodon posts; publish each only after explicit confirmation."
+    description: "Preview LinkedIn and Mastodon posts; --post requires a terminal and yes per channel."
   - path: skills/apify
     description: "Scrape social media, business data, ecommerce, and websites with Apify actor wrappers."
   - path: skills/bright-data

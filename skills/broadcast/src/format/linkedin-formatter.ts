@@ -7,8 +7,9 @@ const SANS = {
 } as const;
 
 const URL_PATTERN = /^https?:\/\/\S+/i;
-const MENTION_PATTERN = /^@\[[^\]\n]+\]\(urn:li:(?:person|organization):[A-Za-z0-9_-]+\)/;
-const MENTION_PATTERN_GLOBAL = /@\[[^\]\n]+\]\(urn:li:(?:person|organization):[A-Za-z0-9_-]+\)/g;
+const MENTION = String.raw`@\[[^\]\n]+\]\(urn:li:(?:person|organization):[A-Za-z0-9_-]+\)`;
+const MENTION_PATTERN = new RegExp('^' + MENTION);
+const MENTION_PATTERN_GLOBAL = new RegExp(MENTION, 'g');
 const MARKDOWN_LINK_PATTERN = /^\[([^\]\n]+)\]\((https?:\/\/[^\s)]+)\)/i;
 
 const HEADER_LINE = /^\s{0,3}#{1,6}\s+(.*)$/;
@@ -145,7 +146,7 @@ function context(text: string, index: number): string {
   return JSON.stringify(text.slice(Math.max(0, index - 20), index + 20));
 }
 
-function readLiveSpan(text: string, index: number): number | null {
+function urlOrMentionEnd(text: string, index: number): number | null {
   const rest = text.slice(index);
 
   const url = URL_PATTERN.exec(rest);
@@ -157,6 +158,13 @@ function readLiveSpan(text: string, index: number): number | null {
   if (mention) {
     return index + mention[0].length;
   }
+
+  return null;
+}
+
+function readLiveSpan(text: string, index: number): number | null {
+  const protectedEnd = urlOrMentionEnd(text, index);
+  if (protectedEnd !== null) return protectedEnd;
 
   if (isHashtagStart(text, index)) {
     return index + 1;
@@ -310,17 +318,8 @@ function convertChar(char: string, style: Style): string {
 }
 
 function getProtectedSpanEnd(text: string, index: number): number | null {
-  const rest = text.slice(index);
-
-  const url = URL_PATTERN.exec(rest);
-  if (url) {
-    return index + url[0].length;
-  }
-
-  const mention = MENTION_PATTERN.exec(rest);
-  if (mention) {
-    return index + mention[0].length;
-  }
+  const protectedEnd = urlOrMentionEnd(text, index);
+  if (protectedEnd !== null) return protectedEnd;
 
   if (text[index] === '`') {
     const end = text.indexOf('`', index + 1);

@@ -1,5 +1,6 @@
 import { assertLittleText, escapeLittleText, formatForLinkedIn, truncateCodePoints } from "../format/linkedin-formatter";
-import type { Transport } from "../broadcast";
+import type { Transport } from "../transport";
+import { AdapterError } from "./adapter-error";
 
 const LINKEDIN_VERSION = "202601";
 
@@ -20,11 +21,11 @@ export class LinkedInAdapter {
       "Content-Type": "application/json",
     };
     const identity = await this.transport("https://api.linkedin.com/v2/userinfo", { headers });
-    if (!identity.ok) throw new Error(`LinkedIn user info failed (HTTP ${identity.status})`);
+    if (!identity.ok) throw new AdapterError(`LinkedIn user info failed (HTTP ${identity.status})`);
     const data: unknown = await identity.json();
     if (typeof data !== "object" || data === null || !("sub" in data)
       || typeof data.sub !== "string" || !/^[A-Za-z0-9_-]+$/.test(data.sub)) {
-      throw new Error("LinkedIn user info is missing a valid member id");
+      throw new AdapterError("LinkedIn user info is missing a valid member id");
     }
 
     const postData = {
@@ -48,9 +49,9 @@ export class LinkedInAdapter {
       },
       body: JSON.stringify(postData),
     });
-    if (!response.ok) throw new Error(`LinkedIn post failed (HTTP ${response.status})`);
+    if (!response.ok) throw new AdapterError(`LinkedIn post failed (HTTP ${response.status})`);
     const postId = response.headers.get("x-restli-id");
-    if (!postId) throw new Error("LinkedIn accepted the post but returned no post id; check before retrying");
+    if (!postId) throw new AdapterError("LinkedIn accepted the post but returned no post id");
     return `https://www.linkedin.com/feed/update/${encodeURIComponent(postId)}`;
   }
 }

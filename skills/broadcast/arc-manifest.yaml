@@ -3,7 +3,7 @@ name: broadcast
 version: 0.1.0
 type: skill
 tier: custom
-description: "Preview LinkedIn and Mastodon posts; publish each only after explicit confirmation."
+description: "Preview LinkedIn and Mastodon posts; --post requires a terminal and yes per channel."
 license: MIT
 author:
   name: The MetaFactory

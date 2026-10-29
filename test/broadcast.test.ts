@@ -2,9 +2,10 @@ import { expect, test } from "bun:test";
 import { resolve } from "node:path";
 import { readFileSync } from "node:fs";
 import { YAML } from "bun";
-import { parseArgs, runBroadcast, type Transport } from "../skills/broadcast/src/broadcast";
+import { parseArgs, runBroadcast } from "../skills/broadcast/src/broadcast";
+import type { Transport } from "../skills/broadcast/src/transport";
 import { LinkedInAdapter } from "../skills/broadcast/src/adapters/linkedin";
-import { assertLittleText, escapeLittleText, formatForLinkedIn, truncateCodePoints } from "../skills/broadcast/src/format/linkedin-formatter";
+import { assertLittleText, escapeLittleText, formatForLinkedIn, mentionSpansInCodePoints, truncateCodePoints } from "../skills/broadcast/src/format/linkedin-formatter";
 
 const member = resolve(import.meta.dir, "../skills/broadcast");
 const configured = {
@@ -178,6 +179,52 @@ test("post failures and malformed successes are reported without retrying", asyn
   }
 });
 
+test("Mastodon reports its public status URL and rejects lookalike origins", async () => {
+  const fallback = "https://social.example/api/v1/statuses/456";
+  for (const [url, expected] of [
+    ["https://social.example/@reader/456", "https://social.example/@reader/456"],
+    [undefined, fallback],
+    [42, fallback],
+    ["https://elsewhere.example/@reader/456", fallback],
+    ["https://social.example.evil.example/456", fallback],
+    ["https://social.example@evil.example/456", fallback],
+    ["https://social.example:8443/@reader/456", fallback],
+    ["https://social.example/\u001b[2J", fallback],
+  ]) {
+    const run = harness({ post: true, answers: ["no", "yes"], transport: async () =>
+      Response.json({ id: "456", url }),
+    });
+    expect(await run.result).toBe(0);
+    expect(run.lines.at(-1)).toBe(`Mastodon: posted ${expected}`);
+    expect(run.calls).toHaveLength(1);
+  }
+});
+
+test("safe adapter failure details survive without echoing response bodies", async () => {
+  for (const [channel, endpoint, response, detail] of [
+    ["LinkedIn", "/userinfo", new Response("fixture-secret", { status: 401 }), "LinkedIn user info failed (HTTP 401)"],
+    ["LinkedIn", "/userinfo", Response.json({ sub: 42 }), "LinkedIn user info is missing a valid member id"],
+    ["LinkedIn", "/rest/posts", new Response("fixture-secret", { status: 429 }), "LinkedIn post failed (HTTP 429)"],
+    ["LinkedIn", "/rest/posts", new Response(null, { status: 201 }), "LinkedIn accepted the post but returned no post id"],
+    ["Mastodon", "/api/v1/statuses", new Response("fixture-secret", { status: 401 }), "Mastodon post failed (HTTP 401)"],
+    ["Mastodon", "/api/v1/statuses", new Response("fixture-secret", { status: 429 }), "Mastodon post failed (HTTP 429)"],
+    ["Mastodon", "/api/v1/statuses", Response.json({}), "Mastodon accepted the post but returned no valid id"],
+  ] satisfies [string, string, Response, string][]) {
+    const run = harness({ post: true, answers: ["yes", "yes"], transport: async url => {
+      if (url.endsWith(endpoint)) return response;
+      if (url.endsWith("/userinfo")) return Response.json({ sub: "member-fixture" });
+      if (url.endsWith("/rest/posts")) return new Response(null, { status: 201, headers: { "x-restli-id": "urn:li:share:123" } });
+      return Response.json({ id: "456" });
+    } });
+    expect(await run.result).toBe(1);
+    const output = run.lines.join("\n");
+    expect(output).toContain(`${channel}: failed (${detail})`);
+    expect(output).toContain("Check the channel before retrying");
+    expect(output).toContain(`${channel === "LinkedIn" ? "Mastodon" : "LinkedIn"}: posted`);
+    expect(output).not.toContain("fixture-secret");
+  }
+});
+
 test("arguments reject empty content, removed platform switches, automatic approval and terminal escapes", () => {
   for (const args of [[], ["--post"], ["--text", ""], ["--text"], ["--text", "--post"], ["--text", "ok", "--yes"], ["--text", "ok", "--platform", "twitter"], ["--text", "ok", "--post", "--post"], ["--text", "ok\u001b[2J"]]) {
     expect(() => parseArgs(args)).toThrow();
@@ -199,6 +246,26 @@ test("upstream formatter preserves URLs, mentions and emoji while escaping and t
   }
   expect(truncateCodePoints("long", 2)).toBe("..");
   expect(() => assertLittleText("unescaped (body)")).toThrow();
+});
+
+test("shared URL and mention detection preserves protected spans through formatting and escaping", () => {
+  const mention = "@[Reader](urn:li:person:abc_123)";
+  const organization = "@[Team](urn:li:organization:xyz-789)";
+  const url = "https://example.org/a_*b_(c)";
+  const text = `**Hello** ${mention} ${organization} ${url}`;
+  const formatted = formatForLinkedIn(text);
+  expect(formatted).toBe(`𝗛𝗲𝗹𝗹𝗼 ${mention} ${organization} ${url}`);
+  expect(escapeLittleText(formatted)).toBe(formatted);
+  expect(() => assertLittleText(formatted)).not.toThrow();
+  const spans = mentionSpansInCodePoints(`😀 ${mention} ${organization}`);
+  expect(spans).toEqual([
+    { start: 2, end: 2 + mention.length },
+    { start: 3 + mention.length, end: 3 + mention.length + organization.length },
+  ]);
+  expect(mentionSpansInCodePoints(`😀 ${mention} ${organization}`)).toEqual(spans);
+  expect(truncateCodePoints(`😀 ${mention} tail`, 12)).toBe("😀...");
+  expect(formatForLinkedIn("**Hi `x*y` friend**")).toBe("𝗛𝗶 `x*y` 𝗳𝗿𝗶𝗲𝗻𝗱");
+  expect(escapeLittleText("#News (body)")).toBe("#News \\(body\\)");
 });
 
 test("CLI runs from the member directory and refuses piped approval", () => {

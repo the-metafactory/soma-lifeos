@@ -16,11 +16,11 @@ From the member directory, preview a post:
 bun Tools/Broadcast.ts --text 'A short post with https://example.org'
 ```
 
-Add `--post` to request publication. Standard input and output must both be terminals. Only `yes` (case-insensitive, with surrounding whitespace allowed) confirms a post. Empty input and every other answer skip it. There is no automatic approval flag. Leave the terminal on the principal's side; an agent must never type the confirmation for them.
+Add `--post` to request publication. Standard input and output must both be terminals. Only `yes` (case-insensitive, with surrounding whitespace allowed) confirms a post. Empty input and every other answer skip it. There is no automatic approval flag. This check rejects piped input; it does not authenticate a human or prevent automation through a pseudo-terminal. Principal confirmation is an operating rule: agents provide the command, and the principal runs it and answers in their own terminal.
 
 LinkedIn retains upstream's REST Posts client, version `202601`, with its Markdown-to-Unicode formatter and little-text escaping. The preview shows the exact commentary sent to the API, including escape characters. Commentary is truncated at 3,000 code points, as upstream does. Mastodon receives the original text with public visibility through `POST /api/v1/statuses`. Instance-specific text limits are enforced by the server. Links remain in the text on both channels. No metadata is fetched during preview or posting.
 
-The command returns a nonzero exit status for invalid arguments, a non-interactive post attempt, or a failed send. Unavailable and declined channels are reported separately. Sends run once per confirmation, without automatic retries. An error on one channel allows the other channel's independent confirmation and send.
+The command returns a nonzero exit status for invalid arguments, a non-interactive post attempt, or a failed send. Unavailable and declined channels are reported separately. Sends run once per confirmation, without automatic retries. An error on one channel allows the other channel's independent confirmation and send. Known adapter failures show HTTP status or missing-response-field details; response bodies and unexpected exception messages are omitted. Successful Mastodon posts show the returned public URL when it belongs to the configured instance, falling back to the status API URL otherwise.
 
 ## Port scope
 
