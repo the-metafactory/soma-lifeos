@@ -1,0 +1,20 @@
+{
+  "topics": [
+    { "name": "security operations", "terms": ["security", "incident response", "threat hunting"] },
+    { "name": "crisis management", "terms": ["crisis", "resilience", "emergency response"] },
+    { "name": "AI infrastructure", "terms": ["AI infrastructure", "machine learning infrastructure", "inference", "GPU"] }
+  ],
+  "region": "Europe",
+  "sources": [
+    {
+      "name": "Safety meets Security 2027",
+      "url": "https://www.iese.fraunhofer.de/en/events/2027/safety-meets-security.html",
+      "region": "Europe",
+      "location": "Kaiserslautern, Germany",
+      "locationText": "Kaiserslautern",
+      "deadlineLabel": "Submission deadline:",
+      "openText": "Submit your abstract now",
+      "payment": { "status": "unknown" }
+    }
+  ]
+}
