@@ -14,6 +14,12 @@ const configured = {
   MASTODON_TOKEN: "fixture",
 };
 
+function defaultResponse(url: string): Response {
+  if (url.endsWith("/userinfo")) return Response.json({ sub: "member-fixture" });
+  if (url.endsWith("/rest/posts")) return new Response(null, { status: 201, headers: { "x-restli-id": "urn:li:share:123" } });
+  return Response.json({ id: "456" });
+}
+
 function harness(options: {
   post?: boolean;
   interactive?: boolean;
@@ -28,9 +34,7 @@ function harness(options: {
   const transport: Transport = async (url, init) => {
     calls.push({ url, init });
     if (options.transport) return options.transport(url, init);
-    if (url.endsWith("/userinfo")) return Response.json({ sub: "member-fixture" });
-    if (url.endsWith("/rest/posts")) return new Response(null, { status: 201, headers: { "x-restli-id": "urn:li:share:123" } });
-    return Response.json({ id: "456" });
+    return defaultResponse(url);
   };
   const result = runBroadcast({
     args: ["--text", options.text ?? "A short post.", ...(options.post ? ["--post"] : [])],
@@ -210,12 +214,9 @@ test("safe adapter failure details survive without echoing response bodies", asy
     ["Mastodon", "/api/v1/statuses", new Response("fixture-secret", { status: 429 }), "Mastodon post failed (HTTP 429)"],
     ["Mastodon", "/api/v1/statuses", Response.json({}), "Mastodon accepted the post but returned no valid id"],
   ] satisfies [string, string, Response, string][]) {
-    const run = harness({ post: true, answers: ["yes", "yes"], transport: async url => {
-      if (url.endsWith(endpoint)) return response;
-      if (url.endsWith("/userinfo")) return Response.json({ sub: "member-fixture" });
-      if (url.endsWith("/rest/posts")) return new Response(null, { status: 201, headers: { "x-restli-id": "urn:li:share:123" } });
-      return Response.json({ id: "456" });
-    } });
+    const run = harness({ post: true, answers: ["yes", "yes"], transport: async url =>
+      url.endsWith(endpoint) ? response : defaultResponse(url),
+    });
     expect(await run.result).toBe(1);
     const output = run.lines.join("\n");
     expect(output).toContain(`${channel}: failed (${detail})`);
