@@ -16,8 +16,10 @@ capabilities:
   filesystem:
     read:
       - "./**"
-    write: []
+    write:
+      - "./**"
+      - ~/.soma/memory/SKILLS/execution.jsonl
   network: []
   bash:
-    allowed: false
+    allowed: true
   secrets: []

@@ -16,8 +16,13 @@ capabilities:
   filesystem:
     read:
       - "./**"
-    write: []
-  network: []
+    write:
+      - "./**"
+      - ~/.soma/memory/SKILLS/execution.jsonl
+      - ~/.soma/memory/WORK/**
+  network:
+    - host: generativelanguage.googleapis.com
+      reason: Send the problem statement to Gemini through the llm CLI in the TechnicalCreativityGemini3 workflow.
   bash:
-    allowed: false
+    allowed: true
   secrets: []

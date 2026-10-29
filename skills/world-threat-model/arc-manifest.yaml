@@ -16,8 +16,14 @@ capabilities:
   filesystem:
     read:
       - "./**"
-    write: []
+      - ~/.soma/skills/WorldThreatModel/**
+      - ~/.soma/memory/RESEARCH/WorldModels/**
+    write:
+      - "./**"
+      - ~/.soma/memory/SKILLS/execution.jsonl
+      - ~/.soma/memory/RESEARCH/WorldModels/**
+  # UpdateModels researches through the host's WebSearch tool; the hosts it contacts depend on the query.
   network: []
   bash:
-    allowed: false
+    allowed: true
   secrets: []
