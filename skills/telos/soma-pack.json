@@ -1,0 +1,446 @@
+{
+  "schema": "soma.pai-pack-import.v1",
+  "skillName": "telos",
+  "packName": "Telos",
+  "description": "Life OS and project analysis — goals, dependencies, beliefs, wisdom, books, movies, narrative points, interview extraction, McKinsey reports, and project dashboards",
+  "files": [
+    {
+      "target": "references/PAI-PACK-INSTALL.md",
+      "classification": "source-doc",
+      "origin": "source",
+      "source": "INSTALL.md"
+    },
+    {
+      "target": "references/PAI-PACK-README.md",
+      "classification": "source-doc",
+      "origin": "source",
+      "source": "README.md"
+    },
+    {
+      "target": "references/PAI-PACK-VERIFY.md",
+      "classification": "source-doc",
+      "origin": "source",
+      "source": "VERIFY.md"
+    },
+    {
+      "target": "DashboardTemplate/.env.example",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/DashboardTemplate/.env.example"
+    },
+    {
+      "target": "DashboardTemplate/.gitignore",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/DashboardTemplate/.gitignore"
+    },
+    {
+      "target": "DashboardTemplate/App/add-file/page.tsx",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/DashboardTemplate/App/add-file/page.tsx"
+    },
+    {
+      "target": "DashboardTemplate/App/api/chat/route.ts",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/DashboardTemplate/App/api/chat/route.ts"
+    },
+    {
+      "target": "DashboardTemplate/App/api/file/get/route.ts",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/DashboardTemplate/App/api/file/get/route.ts"
+    },
+    {
+      "target": "DashboardTemplate/App/api/file/save/route.ts",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/DashboardTemplate/App/api/file/save/route.ts"
+    },
+    {
+      "target": "DashboardTemplate/App/api/files/count/route.ts",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/DashboardTemplate/App/api/files/count/route.ts"
+    },
+    {
+      "target": "DashboardTemplate/App/api/upload/route.ts",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/DashboardTemplate/App/api/upload/route.ts"
+    },
+    {
+      "target": "DashboardTemplate/App/ask/page.tsx",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/DashboardTemplate/App/ask/page.tsx"
+    },
+    {
+      "target": "DashboardTemplate/App/file/[slug]/page.tsx",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/DashboardTemplate/App/file/[slug]/page.tsx"
+    },
+    {
+      "target": "DashboardTemplate/App/globals.css",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/DashboardTemplate/App/globals.css"
+    },
+    {
+      "target": "DashboardTemplate/App/layout.tsx",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/DashboardTemplate/App/layout.tsx"
+    },
+    {
+      "target": "DashboardTemplate/App/page.tsx",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/DashboardTemplate/App/page.tsx"
+    },
+    {
+      "target": "DashboardTemplate/App/progress/page.tsx",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/DashboardTemplate/App/progress/page.tsx"
+    },
+    {
+      "target": "DashboardTemplate/App/teams/page.tsx",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/DashboardTemplate/App/teams/page.tsx"
+    },
+    {
+      "target": "DashboardTemplate/App/vulnerabilities/page.tsx",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/DashboardTemplate/App/vulnerabilities/page.tsx"
+    },
+    {
+      "target": "DashboardTemplate/Components/Ui/badge.tsx",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/DashboardTemplate/Components/Ui/badge.tsx"
+    },
+    {
+      "target": "DashboardTemplate/Components/Ui/button.tsx",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/DashboardTemplate/Components/Ui/button.tsx"
+    },
+    {
+      "target": "DashboardTemplate/Components/Ui/card.tsx",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/DashboardTemplate/Components/Ui/card.tsx"
+    },
+    {
+      "target": "DashboardTemplate/Components/Ui/progress.tsx",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/DashboardTemplate/Components/Ui/progress.tsx"
+    },
+    {
+      "target": "DashboardTemplate/Components/Ui/table.tsx",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/DashboardTemplate/Components/Ui/table.tsx"
+    },
+    {
+      "target": "DashboardTemplate/Components/sidebar.tsx",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/DashboardTemplate/Components/sidebar.tsx"
+    },
+    {
+      "target": "DashboardTemplate/Lib/data.ts",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/DashboardTemplate/Lib/data.ts"
+    },
+    {
+      "target": "DashboardTemplate/Lib/telos-data.ts",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/DashboardTemplate/Lib/telos-data.ts"
+    },
+    {
+      "target": "DashboardTemplate/Lib/utils.ts",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/DashboardTemplate/Lib/utils.ts"
+    },
+    {
+      "target": "DashboardTemplate/README.md",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/DashboardTemplate/README.md"
+    },
+    {
+      "target": "DashboardTemplate/bun.lock",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/DashboardTemplate/bun.lock"
+    },
+    {
+      "target": "DashboardTemplate/next-env.d.ts",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/DashboardTemplate/next-env.d.ts"
+    },
+    {
+      "target": "DashboardTemplate/next.config.mjs",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/DashboardTemplate/next.config.mjs"
+    },
+    {
+      "target": "DashboardTemplate/package.json",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/DashboardTemplate/package.json"
+    },
+    {
+      "target": "DashboardTemplate/postcss.config.mjs",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/DashboardTemplate/postcss.config.mjs"
+    },
+    {
+      "target": "DashboardTemplate/tailwind.config.ts",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/DashboardTemplate/tailwind.config.ts"
+    },
+    {
+      "target": "DashboardTemplate/tsconfig.json",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/DashboardTemplate/tsconfig.json"
+    },
+    {
+      "target": "ReportTemplate/App/globals.css",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/ReportTemplate/App/globals.css"
+    },
+    {
+      "target": "ReportTemplate/App/layout.tsx",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/ReportTemplate/App/layout.tsx"
+    },
+    {
+      "target": "ReportTemplate/App/page.tsx",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/ReportTemplate/App/page.tsx"
+    },
+    {
+      "target": "ReportTemplate/Components/callout.tsx",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/ReportTemplate/Components/callout.tsx"
+    },
+    {
+      "target": "ReportTemplate/Components/cover-page.tsx",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/ReportTemplate/Components/cover-page.tsx"
+    },
+    {
+      "target": "ReportTemplate/Components/exhibit.tsx",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/ReportTemplate/Components/exhibit.tsx"
+    },
+    {
+      "target": "ReportTemplate/Components/finding-card.tsx",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/ReportTemplate/Components/finding-card.tsx"
+    },
+    {
+      "target": "ReportTemplate/Components/quote-block.tsx",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/ReportTemplate/Components/quote-block.tsx"
+    },
+    {
+      "target": "ReportTemplate/Components/recommendation-card.tsx",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/ReportTemplate/Components/recommendation-card.tsx"
+    },
+    {
+      "target": "ReportTemplate/Components/section.tsx",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/ReportTemplate/Components/section.tsx"
+    },
+    {
+      "target": "ReportTemplate/Components/severity-badge.tsx",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/ReportTemplate/Components/severity-badge.tsx"
+    },
+    {
+      "target": "ReportTemplate/Components/timeline.tsx",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/ReportTemplate/Components/timeline.tsx"
+    },
+    {
+      "target": "ReportTemplate/Lib/report-data.ts",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/ReportTemplate/Lib/report-data.ts"
+    },
+    {
+      "target": "ReportTemplate/Lib/utils.ts",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/ReportTemplate/Lib/utils.ts"
+    },
+    {
+      "target": "ReportTemplate/Public/Fonts/advocate_34_narr_reg.woff2",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/ReportTemplate/Public/Fonts/advocate_34_narr_reg.woff2"
+    },
+    {
+      "target": "ReportTemplate/Public/Fonts/advocate_54_wide_reg.woff2",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/ReportTemplate/Public/Fonts/advocate_54_wide_reg.woff2"
+    },
+    {
+      "target": "ReportTemplate/Public/Fonts/concourse_3_bold.woff2",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/ReportTemplate/Public/Fonts/concourse_3_bold.woff2"
+    },
+    {
+      "target": "ReportTemplate/Public/Fonts/concourse_3_regular.woff2",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/ReportTemplate/Public/Fonts/concourse_3_regular.woff2"
+    },
+    {
+      "target": "ReportTemplate/Public/Fonts/concourse_4_bold.woff2",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/ReportTemplate/Public/Fonts/concourse_4_bold.woff2"
+    },
+    {
+      "target": "ReportTemplate/Public/Fonts/concourse_4_regular.woff2",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/ReportTemplate/Public/Fonts/concourse_4_regular.woff2"
+    },
+    {
+      "target": "ReportTemplate/Public/Fonts/heliotrope_3_caps_regular.woff2",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/ReportTemplate/Public/Fonts/heliotrope_3_caps_regular.woff2"
+    },
+    {
+      "target": "ReportTemplate/Public/Fonts/heliotrope_3_regular.woff2",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/ReportTemplate/Public/Fonts/heliotrope_3_regular.woff2"
+    },
+    {
+      "target": "ReportTemplate/Public/Fonts/valkyrie_a_bold.woff2",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/ReportTemplate/Public/Fonts/valkyrie_a_bold.woff2"
+    },
+    {
+      "target": "ReportTemplate/Public/Fonts/valkyrie_a_italic.woff2",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/ReportTemplate/Public/Fonts/valkyrie_a_italic.woff2"
+    },
+    {
+      "target": "ReportTemplate/Public/Fonts/valkyrie_a_regular.woff2",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/ReportTemplate/Public/Fonts/valkyrie_a_regular.woff2"
+    },
+    {
+      "target": "ReportTemplate/next-env.d.ts",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/ReportTemplate/next-env.d.ts"
+    },
+    {
+      "target": "ReportTemplate/package.json",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/ReportTemplate/package.json"
+    },
+    {
+      "target": "ReportTemplate/postcss.config.js",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/ReportTemplate/postcss.config.js"
+    },
+    {
+      "target": "ReportTemplate/tailwind.config.ts",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/ReportTemplate/tailwind.config.ts"
+    },
+    {
+      "target": "ReportTemplate/tsconfig.json",
+      "classification": "template",
+      "origin": "source",
+      "source": "src/ReportTemplate/tsconfig.json"
+    },
+    {
+      "target": "SKILL.md",
+      "classification": "portable",
+      "origin": "source",
+      "source": "src/SKILL.md"
+    },
+    {
+      "target": "Tools/UpdateTelos.ts",
+      "classification": "portable",
+      "origin": "source",
+      "source": "src/Tools/UpdateTelos.ts"
+    },
+    {
+      "target": "Workflows/CreateNarrativePoints.md",
+      "classification": "portable",
+      "origin": "source",
+      "source": "src/Workflows/CreateNarrativePoints.md"
+    },
+    {
+      "target": "Workflows/InterviewExtraction.md",
+      "classification": "portable",
+      "origin": "source",
+      "source": "src/Workflows/InterviewExtraction.md"
+    },
+    {
+      "target": "Workflows/Update.md",
+      "classification": "portable",
+      "origin": "source",
+      "source": "src/Workflows/Update.md"
+    },
+    {
+      "target": "Workflows/WriteReport.md",
+      "classification": "portable",
+      "origin": "source",
+      "source": "src/Workflows/WriteReport.md"
+    },
+    {
+      "target": "soma-pack.json",
+      "classification": "portable",
+      "origin": "generated",
+      "generator": "pai-pack-importer"
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+schema: arc/v1
+name: sales
+version: 0.1.0
+type: skill
+tier: custom
+description: "Turn product documentation into sales narratives, visuals, and talking points."
+license: MIT
+author:
+  name: The MetaFactory
+  github: the-metafactory
+upstream:
+  repo: danielmiessler/PAI
+  path: Packs/Sales/src
+  commit: 2fde1bbe9e8f280cd4998e244b53e3c66f3dc8b9
+capabilities:
+  filesystem:
+    read:
+      - ./**
+      - ~/.soma/skills/**
+    write:
+      - ./**
+      - ~/.soma/memory/SKILLS/execution.jsonl
+  # Fixed service hosts; workflows also use URLs and targets chosen by the principal.
+  network: []
+  bash:
+    allowed: true
+  secrets: []

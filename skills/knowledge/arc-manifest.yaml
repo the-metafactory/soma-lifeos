@@ -1,0 +1,28 @@
+schema: arc/v1
+name: knowledge
+version: 0.1.0
+type: skill
+tier: custom
+description: Manage and search a typed knowledge archive with linked notes and provenance.
+license: MIT
+author:
+  name: The MetaFactory
+  github: the-metafactory
+upstream:
+  repo: danielmiessler/PAI
+  path: Packs/Knowledge/src
+  commit: 2fde1bbe9e8f280cd4998e244b53e3c66f3dc8b9
+capabilities:
+  filesystem:
+    read:
+      - ./**
+      - ~/.soma/memory/KNOWLEDGE/**
+      - ~/.soma/UNMAPPED/PAI/TOOLS/**
+    write:
+      - ./**
+      - ~/.soma/memory/KNOWLEDGE/**
+  # Fixed service hosts; workflows also use URLs and targets chosen by the principal.
+  network: []
+  bash:
+    allowed: true
+  secrets: []

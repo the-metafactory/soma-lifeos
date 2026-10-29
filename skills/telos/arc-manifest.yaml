@@ -1,0 +1,32 @@
+schema: arc/v1
+name: telos
+version: 0.1.0
+type: skill
+tier: custom
+description: "Analyze personal goals and project context, and create reports and dashboards."
+license: MIT
+author:
+  name: The MetaFactory
+  github: the-metafactory
+upstream:
+  repo: danielmiessler/PAI
+  path: Packs/Telos/src
+  commit: 2fde1bbe9e8f280cd4998e244b53e3c66f3dc8b9
+capabilities:
+  filesystem:
+    read:
+      - ./**
+      - ~/.soma/UNMAPPED/PAI/**
+      - ~/.soma/skills/Telos/**
+    write:
+      - ./**
+      - ~/.soma/UNMAPPED/PAI/USER/TELOS/**
+      - ~/.soma/skills/Telos/**
+      - ~/.soma/memory/SKILLS/execution.jsonl
+  # Fixed service hosts; workflows also use URLs and targets chosen by the principal.
+  network:
+    - host: localhost
+      reason: Serve and inspect the local TELOS dashboard.
+  bash:
+    allowed: true
+  secrets: []

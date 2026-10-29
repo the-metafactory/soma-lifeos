@@ -1,0 +1,43 @@
+schema: arc/v1
+name: security
+version: 0.1.0
+type: skill
+tier: custom
+description: "Route reconnaissance, web assessments, prompt injection testing, and security intelligence."
+license: MIT
+author:
+  name: The MetaFactory
+  github: the-metafactory
+upstream:
+  repo: danielmiessler/PAI
+  path: Packs/Security/src
+  commit: 2fde1bbe9e8f280cd4998e244b53e3c66f3dc8b9
+capabilities:
+  filesystem:
+    read:
+      - ./**
+      - /tmp/**
+      - ~/.soma/**
+    write:
+      - ./**
+      - /tmp/**
+      - ~/.soma/memory/SKILLS/security/**
+  # Fixed service hosts; workflows also use URLs and targets chosen by the principal.
+  network:
+    - host: ipinfo.io
+      reason: Look up IP address and network ownership information.
+    - host: api.bgpview.io
+      reason: Look up ASN and network prefix information.
+    - host: api.dehashed.com
+      reason: Query authorized exposure intelligence.
+    - host: api.hunter.io
+      reason: Query domain and email discovery data.
+    - host: api.osint.industries
+      reason: Query open source intelligence.
+    - host: api.github.com
+      reason: Query public repository intelligence.
+  bash:
+    allowed: true
+  secrets:
+    - IPINFO_API_KEY
+    - PDCP_API_KEY
