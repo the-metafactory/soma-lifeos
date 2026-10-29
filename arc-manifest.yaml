@@ -34,3 +34,21 @@ artifacts:
     description: List, refresh and compare vendor security annual reports with cited evidence.
   - path: skills/unify
     description: Check harmony across Soma skills, policy and purpose or explicitly selected paths.
+  - path: skills/research
+    description: Research topics at selectable depths and extract cited knowledge from web and media sources.
+  - path: skills/extract-wisdom
+    description: Extract structured wisdom and actionable insights from articles, videos, podcasts, and interviews.
+  - path: skills/content-analysis
+    description: Route content analysis and wisdom extraction for articles, videos, and podcasts.
+  - path: skills/story-explanation
+    description: Explain complex topics through narrative summaries in several lengths and formats.
+  - path: skills/write-story
+    description: Develop fiction through interviews, story bibles, exploration, chapter writing, and revision.
+  - path: skills/interview
+    description: Conduct phased interviews to review and fill personal context, preferences, and goals.
+  - path: skills/private-investigator
+    description: Find and verify people ethically through public records, social media, and reverse lookups.
+  - path: skills/osint
+    description: Research people, companies, domains, and threat actors through public sources.
+  - path: skills/us-metrics
+    description: Fetch and analyze US economic and social indicators from public data sources.
