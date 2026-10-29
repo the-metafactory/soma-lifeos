@@ -30,3 +30,5 @@ artifacts:
     description: Find open calls for papers by topic and region and draft speaking proposals.
   - path: skills/annual-reports
     description: List, refresh and compare vendor security annual reports with cited evidence.
+  - path: skills/unify
+    description: Check harmony across Soma skills, policy and purpose or explicitly selected paths.
