@@ -56,3 +56,21 @@ artifacts:
     description: Research people, companies, domains, and threat actors through public sources.
   - path: skills/us-metrics
     description: Fetch and analyze US economic and social indicators from public data sources.
+  - path: skills/agents
+    description: "Compose custom agents and coordinate parallel agent teams."
+  - path: skills/delegation
+    description: "Delegate work with clear scope, context, and completion criteria."
+  - path: skills/create-cli
+    description: "Create and extend command-line tools with reusable design patterns."
+  - path: skills/create-skill
+    description: "Create, validate, improve, and maintain agent skills."
+  - path: skills/prompting
+    description: "Build and validate reusable prompts and structured templates."
+  - path: skills/evals
+    description: "Evaluate agent behavior with scenarios, graders, and regression suites."
+  - path: skills/loop
+    description: "Run iterative agent work against explicit completion criteria."
+  - path: skills/optimize
+    description: "Optimize prompts and agent workflows through measured iteration."
+  - path: skills/system
+    description: "Check system integrity, recall work context, and document updates."
