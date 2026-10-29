@@ -105,7 +105,6 @@ Before delivery, check that all sections are present, each era claim has a dated
 citation or an explicit evidence gap, and frontier claims explain their departure
 from the mainstream. Remove unverifiable links and qualify affected claims.
 
-For this workflow, save any report, working notes and execution log under
-`<soma-home>/memory/SKILLS/research/pareto/<date>-<topic-slug>/`, where `<soma-home>`
-is `SOMA_HOME` or `~/.soma`. This replaces the legacy storage and execution-log
-locations in `../SKILL.md` for Pareto runs.
+Save reports and working notes according to the Pareto rule in
+[File Organization](../SKILL.md#file-organization), then append the run's entry
+as described in [Execution Log](../SKILL.md#execution-log).
