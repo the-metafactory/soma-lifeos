@@ -1,0 +1,37 @@
+schema: arc/v1
+name: browser
+version: 0.1.0
+type: skill
+tier: custom
+description: "Automate headless browsing, screenshots, stories, and data extraction with agent-browser."
+license: MIT
+author:
+  name: The MetaFactory
+  github: the-metafactory
+upstream:
+  repo: danielmiessler/PAI
+  path: Packs/Browser/src
+  commit: 2fde1bbe9e8f280cd4998e244b53e3c66f3dc8b9
+capabilities:
+  filesystem:
+    read:
+      - ./**
+      - /tmp/**
+      - ~/.agent-browser/**
+    write:
+      - ./**
+      - /tmp/**
+      - ~/.soma/memory/SKILLS/execution.jsonl
+      - ~/.agent-browser/**
+  # Fixed service hosts; browsing and scraping also contact user-selected target hosts.
+  network:
+    - host: localhost
+      reason: Review local development servers and application stories.
+    - host: github.com
+      reason: Check agent-browser releases and upstream documentation.
+    - host: registry.npmjs.org
+      reason: Install and update the agent-browser CLI.
+  bash:
+    allowed: true
+  secrets:
+    []
