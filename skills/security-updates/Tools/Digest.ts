@@ -2,14 +2,15 @@ import { createHash } from "node:crypto";
 
 export const MAX_ITEMS = 32;
 export const DAY_MS = 86_400_000;
-export const categories = ["news", "research", "ideas"] satisfies Category[];
-export type Category = "news" | "research" | "ideas";
+export const categories = ["news", "research", "ideas"] as const;
+export type Category = (typeof categories)[number];
+const adapters = ["feed", "ncsc", "newsletter"] as const;
 export type Source = {
   id: string;
   name: string;
   url: string;
   collect_url: string;
-  adapter: "feed" | "ncsc" | "newsletter";
+  adapter: (typeof adapters)[number];
   categories: [Category, ...Category[]];
 };
 export type Item = {
@@ -44,7 +45,11 @@ function nonEmpty(value: unknown): value is string {
 }
 
 function isCategory(value: unknown): value is Category {
-  return value === "news" || value === "research" || value === "ideas";
+  return typeof value === "string" && categories.some(category => category === value);
+}
+
+function isAdapter(value: unknown): value is Source["adapter"] {
+  return typeof value === "string" && adapters.some(adapter => adapter === value);
 }
 
 export function httpUrl(raw: string, base?: string): string {
@@ -66,7 +71,7 @@ export function parseSources(value: unknown): Source[] {
       || !Array.isArray(entry.categories)) throw new Error("invalid source entry");
     const [first, ...rest] = entry.categories;
     if (!isCategory(first) || !rest.every(isCategory)) throw new Error(`invalid categories for ${entry.id}`);
-    if (entry.adapter !== "feed" && entry.adapter !== "ncsc" && entry.adapter !== "newsletter") {
+    if (!isAdapter(entry.adapter)) {
       throw new Error(`invalid adapter for ${entry.id}`);
     }
     if (ids.has(entry.id)) throw new Error(`duplicate source id ${entry.id}`);
@@ -97,18 +102,20 @@ export function canonicalUrl(raw: string): string {
   return `${url.host.toLowerCase().replace(/^www\./, "")}${url.pathname.replace(/\/+$/, "")}${query ? `?${query}` : ""}`;
 }
 
+function normalizedTitle(item: Item): string {
+  return item.title.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim();
+}
+
 export function itemKeys(item: Item): string[] {
-  const title = item.title.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim();
   const bases = [`u:${canonicalUrl(item.url)}`];
-  if (item.date) bases.push(`t:${title}:${item.date.slice(0, 10)}`);
+  if (item.date) bases.push(`t:${normalizedTitle(item)}:${item.date.slice(0, 10)}`);
   return bases.map(basis => createHash("sha256").update(basis).digest("hex"));
 }
 
 function batchKeys(item: Item): string[] {
   const keys = itemKeys(item);
   if (item.date === null) {
-    const title = item.title.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim();
-    keys.push(createHash("sha256").update(`undated-title:${title}`).digest("hex"));
+    keys.push(createHash("sha256").update(`undated-title:${normalizedTitle(item)}`).digest("hex"));
   }
   return keys;
 }

@@ -175,6 +175,70 @@ test("HTTP, parse, transport and oversized-response failures preserve healthy re
   expect(md).toContain("request timed out");
 });
 
+test("redirects cannot reach an unconfigured origin and healthy sources still collect", async () => {
+  let forbiddenRequests = 0;
+  const forbidden = Bun.serve({ port: 0, fetch() {
+    forbiddenRequests++;
+    return new Response(rss(entry("Unexpected internal article")));
+  } });
+  const server = Bun.serve({ port: 0, fetch(request) {
+    return new URL(request.url).pathname === "/redirect"
+      ? Response.redirect(forbidden.url.href)
+      : new Response(rss(entry("Healthy security research")));
+  } });
+  servers.push(forbidden, server);
+  const results = await collectSources([
+    { ...source, collect_url: new URL("/redirect", server.url).href },
+    { ...source, id: "healthy", collect_url: new URL("/feed", server.url).href },
+  ]);
+  expect(forbiddenRequests).toBe(0);
+  expect(results[0]).toMatchObject({ kind: "unavailable", reason: expect.stringContaining("not allowed") });
+  expect(results[1]).toMatchObject({ kind: "available", items: [expect.objectContaining({ title: "Healthy security research" })] });
+});
+
+test("redirects allow configured origins and resolve article links against the final URL", async () => {
+  const destination = Bun.serve({ port: 0, fetch() {
+    return new Response(rss(entry("Redirected security research", "article")));
+  } });
+  const server = Bun.serve({ port: 0, fetch(request) {
+    return new URL(request.url).pathname === "/start"
+      ? new Response(null, { status: 301, headers: { Location: "/next" } })
+      : Response.redirect(new URL("/listing/feed", destination.url).href, 307);
+  } });
+  servers.push(destination, server);
+  const results = await collectSources([{ ...source, url: destination.url.href, collect_url: new URL("/start", server.url).href }]);
+  expect(results[0]).toMatchObject({ kind: "available", items: [expect.objectContaining({ url: new URL("/listing/article", destination.url).href })] });
+});
+
+test("redirect loops and malformed locations fail with bounded requests", async () => {
+  let requests = 0;
+  const server = Bun.serve({ port: 0, fetch(request) {
+    requests++;
+    const path = new URL(request.url).pathname;
+    return new Response(null, { status: 302, headers: path === "/missing" ? {}
+      : { Location: path === "/invalid" ? "file:///etc/passwd" : "/loop" } });
+  } });
+  servers.push(server);
+  const results = await collectSources(["loop", "missing", "invalid"].map(id => ({ ...source, id, collect_url: new URL(`/${id}`, server.url).href })));
+  expect(requests).toBe(8);
+  expect(results[0]).toMatchObject({ kind: "unavailable", reason: expect.stringContaining("redirect limit") });
+  expect(results[1]).toMatchObject({ kind: "unavailable", reason: expect.stringContaining("Location") });
+  expect(results[2]).toMatchObject({ kind: "unavailable", reason: expect.stringContaining("HTTP(S)") });
+});
+
+test("manifest-listed NCSC redirect hosts are allowed with manual fetching", async () => {
+  const calls: string[] = [];
+  const results = await collectSources([{ ...source, collect_url: "https://www.ncsc.admin.ch/feed" }], async (url, init) => {
+    calls.push(url);
+    expect(init.redirect).toBe("manual");
+    return url.includes("ncsc.admin.ch")
+      ? Response.redirect("https://www.bacs.admin.ch/feed", 308)
+      : new Response(rss(entry("Swiss security research")));
+  });
+  expect(calls).toEqual(["https://www.ncsc.admin.ch/feed", "https://www.bacs.admin.ch/feed"]);
+  expect(results[0]?.kind).toBe("available");
+});
+
 test("all-source failure leaves state and digest untouched and releases the lock", async () => {
   const somaHome = home();
   const successful = await collect({ somaHome, sources: [source], now, fetcher: async () => new Response(rss(entry("A security story"))) });

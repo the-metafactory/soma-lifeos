@@ -1,4 +1,5 @@
 import { randomUUID } from "node:crypto";
+import { YAML } from "bun";
 import { closeSync, mkdirSync, openSync, readFileSync, renameSync, unlinkSync, writeFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { join, resolve } from "node:path";
@@ -8,8 +9,45 @@ import type { Digest, Item, Source, SourceResult, State } from "./Digest";
 type Fetcher = (url: string, init: RequestInit) => Promise<Response>;
 const MAX_BYTES = 2_000_000;
 const TIMEOUT_MS = 20_000;
+const MAX_REDIRECTS = 5;
 
 const message = (error: unknown): string => error instanceof Error ? error.message : String(error);
+const errno = (error: unknown): unknown => error instanceof Error && "code" in error ? error.code : undefined;
+
+function allowedHosts(sources: Source[]): Set<string> {
+  const manifest: unknown = YAML.parse(readFileSync(resolve(import.meta.dir, "..", "arc-manifest.yaml"), "utf8"));
+  if (typeof manifest !== "object" || manifest === null || !("capabilities" in manifest)
+    || typeof manifest.capabilities !== "object" || manifest.capabilities === null
+    || !("network" in manifest.capabilities) || !Array.isArray(manifest.capabilities.network)) {
+    throw new Error("manifest needs network capabilities");
+  }
+  const hosts = new Set(sources.flatMap(source => [new URL(source.url).host, new URL(source.collect_url).host]));
+  for (const entry of manifest.capabilities.network) {
+    if (typeof entry !== "object" || entry === null || !("host" in entry) || typeof entry.host !== "string") {
+      throw new Error("manifest network capability needs a host");
+    }
+    hosts.add(entry.host.toLowerCase());
+  }
+  return hosts;
+}
+
+async function fetchListing(url: string, hosts: Set<string>, fetcher: Fetcher): Promise<{ response: Response; base: string }> {
+  const signal = AbortSignal.timeout(TIMEOUT_MS);
+  for (let redirects = 0; ; redirects++) {
+    const response = await fetcher(url, {
+      signal, redirect: "manual",
+      headers: { "User-Agent": "soma-security-updates/0.1", Accept: "application/rss+xml, application/atom+xml, text/html, */*" },
+    });
+    if (![301, 302, 303, 307, 308].includes(response.status)) return { response, base: url };
+    await response.body?.cancel();
+    if (redirects >= MAX_REDIRECTS) throw new Error(`redirect limit exceeded (${MAX_REDIRECTS})`);
+    const location = response.headers.get("Location");
+    if (!location) throw new Error("redirect is missing Location");
+    const next = httpUrl(location, url);
+    if (!hosts.has(new URL(next).host)) throw new Error(`redirect host not allowed: ${new URL(next).host}`);
+    url = next;
+  }
+}
 
 function decodeEntities(text: string): string {
   const named: Record<string, string> = { amp: "&", lt: "<", gt: ">", quot: '"', apos: "'", nbsp: " ", ndash: "–", mdash: "—", rsquo: "’", lsquo: "‘", hellip: "…" };
@@ -116,15 +154,12 @@ async function boundedText(response: Response): Promise<string> {
 }
 
 export async function collectSources(sources: Source[], fetcher: Fetcher = fetch): Promise<SourceResult[]> {
+  const hosts = allowedHosts(sources);
   return Promise.all(sources.map(async (source): Promise<SourceResult> => {
     try {
-      const response = await fetcher(source.collect_url, {
-        signal: AbortSignal.timeout(TIMEOUT_MS), redirect: "follow",
-        headers: { "User-Agent": "soma-security-updates/0.1", Accept: "application/rss+xml, application/atom+xml, text/html, */*" },
-      });
+      const { response, base } = await fetchListing(source.collect_url, hosts, fetcher);
       if (!response.ok) { await response.body?.cancel(); throw new Error(`HTTP ${response.status}`); }
       const text = await boundedText(response);
-      const base = response.url || source.collect_url;
       const items = source.adapter === "feed" ? parseFeed(text, source, base) : await parseHtml(text, source, base);
       return { kind: "available", source, items };
     } catch (error) {
@@ -137,7 +172,7 @@ function loadState(path: string): State {
   try {
     return parseState(JSON.parse(readFileSync(path, "utf8")));
   } catch (error) {
-    if (error instanceof Error && "code" in error && error.code === "ENOENT") {
+    if (errno(error) === "ENOENT") {
       return { version: 1, last_check_timestamp: null, seen: [] };
     }
     throw error;
@@ -151,7 +186,7 @@ function atomicWrite(path: string, content: string): void {
     renameSync(temp, path);
   } finally {
     try { unlinkSync(temp); } catch (error) {
-      if (!(error instanceof Error && "code" in error && error.code === "ENOENT")) throw error;
+      if (errno(error) !== "ENOENT") throw error;
     }
   }
 }
@@ -162,7 +197,7 @@ export async function collect(options: { sources: Source[]; somaHome: string; no
   const lockPath = join(directory, "collect.lock");
   let lock: number;
   try { lock = openSync(lockPath, "wx", 0o600); } catch (error) {
-    if (error instanceof Error && "code" in error && error.code === "EEXIST") throw new Error("a collector already holds collect.lock for this Soma home");
+    if (errno(error) === "EEXIST") throw new Error("a collector already holds collect.lock for this Soma home");
     throw error;
   }
   try {

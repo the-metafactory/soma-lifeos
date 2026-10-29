@@ -80,26 +80,5 @@
       "adapter": "feed",
       "collect_url": "https://cert.europa.eu/publications/security-advisories-rss"
     }
-  ],
-  "categories": {
-    "news": {
-      "name": "Security News",
-      "emoji": "🔴",
-      "description": "Breaches, incidents, exploits in the wild"
-    },
-    "research": {
-      "name": "Security Research",
-      "emoji": "🔬",
-      "description": "CVEs, vulnerabilities, techniques, papers"
-    },
-    "ideas": {
-      "name": "Security Ideas",
-      "emoji": "💡",
-      "description": "Opinions, trends, strategy, career"
-    }
-  },
-  "limits": {
-    "max_total_items": 32,
-    "target_per_category": 10
-  }
+  ]
 }
