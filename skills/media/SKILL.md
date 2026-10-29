@@ -11,5 +11,5 @@ Unified skill for visual and video content creation.
 
 | Request Pattern | Route To |
 |---|---|
-| Art, header images, visualizations, mermaid, diagrams, flowcharts, infographics, pack icons | `Art/SKILL.md` |
+| Art, images, visualizations, diagrams, flowcharts, infographics, pack icons | Pack `art` skill: [../art/SKILL.md](../art/SKILL.md) |
 | Video, animation, motion graphics, video rendering, Remotion, React video | `Remotion/SKILL.md` |

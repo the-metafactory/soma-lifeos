@@ -1,6 +1,6 @@
 import { YAML } from "bun";
-import { readFileSync, realpathSync, statSync } from "node:fs";
-import { basename, resolve, sep } from "node:path";
+import { existsSync, readFileSync, readdirSync, realpathSync, statSync } from "node:fs";
+import { basename, relative, resolve, sep } from "node:path";
 
 type Mapping = Record<string, unknown>;
 
@@ -83,6 +83,25 @@ function checkMember(root: string, path: string, errors: string[]): void {
   runArcValidate(root, member, path, errors);
 }
 
+function checkNotificationEndpoints(root: string, directory: string, errors: string[]): void {
+  try {
+    for (const entry of readdirSync(directory, { withFileTypes: true })) {
+      const path = resolve(directory, entry.name);
+      if (entry.isDirectory()) {
+        checkNotificationEndpoints(root, path, errors);
+      } else if (entry.isFile()) {
+        for (const [index, line] of readFileSync(path, "utf8").split("\n").entries()) {
+          for (const [endpoint] of line.matchAll(/localhost:(31337|8888)/g)) {
+            errors.push(`${relative(root, path)}:${index + 1}: forbidden local notification endpoint ${endpoint}`);
+          }
+        }
+      }
+    }
+  } catch (error) {
+    errors.push(`${relative(root, directory)}: endpoint scan failed: ${describe(error)}`);
+  }
+}
+
 export function checkPack(directory: string): number {
   const errors: string[] = [];
   let root: string;
@@ -117,6 +136,9 @@ export function checkPack(directory: string): number {
       checkMember(root, path, errors);
     }
   }
+
+  const skills = resolve(root, "skills");
+  if (existsSync(skills)) checkNotificationEndpoints(root, skills, errors);
 
   if (errors.length) {
     for (const error of errors) console.error(error);
