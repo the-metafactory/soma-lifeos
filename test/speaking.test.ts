@@ -4,6 +4,7 @@ import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { YAML } from "bun";
 import { inspectPage, isoDate, parseConfig, renderDraft, renderSearch, search, visibleText } from "../skills/speaking/Tools/Calls.ts";
+import organizerSnapshot from "./fixtures/speaking-fraunhofer-2026-10-29.json";
 
 const member = resolve(import.meta.dir, "../skills/speaking");
 const now = new Date("2026-10-29T12:00:00Z");
@@ -22,7 +23,7 @@ const page = (date = "2026-11-05", subject = "security") => `<main><h1>Example S
 const folders: string[] = [];
 const servers: ReturnType<typeof Bun.serve>[] = [];
 function temporary() { const path = mkdtempSync(join(tmpdir(), "speaking-test-")); folders.push(path); return path; }
-function serve(handler: (request: Request) => Response) {
+function serve(handler: (request: Request) => Response | Promise<Response>) {
   const server = Bun.serve({ port: 0, fetch: handler }); servers.push(server); return server;
 }
 afterAll(() => { for (const server of servers) server.stop(true); for (const path of folders) rmSync(path, { recursive: true, force: true }); });
@@ -150,6 +151,92 @@ async function cli(args: string[], somaHome: string) {
   return { stdout, stderr, code };
 }
 
+test("draft normalizes the configured URL and only requests the chosen in-region source", async () => {
+  const requests: string[] = [];
+  const server = serve(request => { requests.push(new URL(request.url).pathname); return new Response(page("2099-11-05")); });
+  const home = temporary();
+  const configPath = join(home, "config.json");
+  const rawUrl = server.url.origin;
+  writeFileSync(configPath, JSON.stringify({ ...config(), sources: [
+    { ...source, url: rawUrl },
+    { ...source, url: new URL("/unrelated", server.url).href },
+    { ...source, url: new URL("/outside", server.url).href, region: "Asia" },
+  ] }));
+  const args = ["draft", "--config", configPath, "--title", "Containment", "--angle", "Incident decisions.",
+    "--takeaway", "Map objectives.", "--takeaway", "Name authority.", "--takeaway", "Rehearse.", "--call"];
+  const draft = await cli([...args, rawUrl], home);
+  expect(draft).toMatchObject({ code: 0, stderr: "" });
+  expect(draft.stdout).toContain(`URL: ${server.url.href}`);
+  expect(requests).toEqual(["/"]);
+  for (const call of [new URL("/missing", server.url).href, new URL("/outside", server.url).href]) {
+    expect((await cli([...args, call], home)).code).toBe(2);
+    expect(requests).toEqual(["/"]);
+  }
+  for (const call of ["not-a-url", "file:///etc/passwd", "https://user:password@example.org"]) {
+    const invalid = await cli([...args, call], home);
+    expect(invalid.code).toBe(2);
+    expect(invalid.stderr).toContain("call URL must be HTTP(S) without credentials");
+    expect(requests).toEqual(["/"]);
+  }
+});
+
+test("draft with a normalized URL does not fetch unrelated sources", async () => {
+  const requests: string[] = [];
+  let unavailable = false;
+  const server = serve(request => {
+    const path = new URL(request.url).pathname;
+    requests.push(path);
+    return unavailable && path === "/" ? new Response("down", { status: 503 }) : new Response(page("2099-11-05"));
+  });
+  const home = temporary();
+  const configPath = join(home, "config.json");
+  writeFileSync(configPath, JSON.stringify({ ...config(), sources: [
+    { ...source, url: server.url.href }, { ...source, url: new URL("/unrelated", server.url).href },
+  ] }));
+  const args = ["draft", "--config", configPath, "--call", server.url.href,
+    "--title", "Containment", "--angle", "Incident decisions.", "--takeaway", "Map objectives.",
+    "--takeaway", "Name authority.", "--takeaway", "Rehearse."];
+  const draft = await cli(args, home);
+  expect(draft.code).toBe(0);
+  expect(requests).toEqual(["/"]);
+  unavailable = true;
+  const rejected = await cli(args, home);
+  expect(rejected.code).toBe(2);
+  expect(rejected.stderr).toContain("not currently open");
+  expect(requests).toEqual(["/", "/"]);
+});
+
+test("search starts another request while an earlier source is pending", async () => {
+  const firstStarted = Promise.withResolvers<void>();
+  const secondStarted = Promise.withResolvers<void>();
+  const releaseFirst = Promise.withResolvers<void>();
+  const server = serve(async request => {
+    if (new URL(request.url).pathname === "/first") {
+      firstStarted.resolve();
+      await releaseFirst.promise;
+    } else secondStarted.resolve();
+    return new Response(page());
+  });
+  const names = ["first", "second", "third", "fourth", "fifth", "sixth"];
+  const c = parseConfig({ ...config(), sources: names.map(id => ({
+    ...source, name: id, url: new URL(`/${id}`, server.url).href,
+  })) });
+  const pending = search(c, now);
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  try {
+    await firstStarted.promise;
+    await Promise.race([secondStarted.promise, new Promise((_, reject) => {
+      timer = setTimeout(() => reject(new Error("second source was not requested while first was pending")), 1000);
+    })]);
+  } finally {
+    clearTimeout(timer);
+    releaseFirst.resolve();
+    const result = await pending;
+    expect(result.sources.map(s => s.name)).toEqual(names);
+    expect(result.calls).toHaveLength(names.length);
+  }
+});
+
 test("member CLI uses explicit config and saves search and freshly checked proposal to an isolated home", async () => {
   let closed = false;
   let requests = 0;
@@ -219,4 +306,19 @@ test("member provenance pointers registration and forbidden-path guard", () => {
   }
   expect(readFileSync(join(member, "SKILL.md"), "utf8")).toContain("name: speaking");
   expect(parseConfig(JSON.parse(readFileSync(join(member, "config.json"), "utf8")))).toMatchObject({ region: "Europe" });
+});
+
+test("bundled config extracts the dated organizer-page snapshot", () => {
+  const c = parseConfig(JSON.parse(readFileSync(join(member, "config.json"), "utf8")));
+  const s = c.sources.find(s => s.url === organizerSnapshot.sourceUrl);
+  if (!s) throw new Error("snapshot must cover the bundled source");
+  expect(organizerSnapshot.deadlineLabelOccurrences).toBe(1);
+  const html = organizerSnapshot.excerpts.join("\n");
+  expect(inspectPage(s, c, html, organizerSnapshot.capturedAt.slice(0, 10))).toMatchObject({
+    kind: "checked", outcome: "matched", calls: [{
+      url: organizerSnapshot.sourceUrl, deadline: "2026-11-30", location: "Kaiserslautern, Germany",
+      payment: { status: "unknown" }, topics: ["security operations"],
+    }],
+  });
+  expect(inspectPage(s, c, html, "2026-12-01")).toMatchObject({ outcome: "expired", calls: [] });
 });

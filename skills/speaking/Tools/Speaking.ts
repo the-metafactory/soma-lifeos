@@ -1,6 +1,6 @@
 import { homedir } from "node:os";
 import { join, resolve } from "node:path";
-import { parseConfig, renderDraft, renderSearch, saveMarkdown, search } from "./Calls.ts";
+import { httpUrl, parseConfig, renderDraft, renderSearch, saveMarkdown, search } from "./Calls.ts";
 
 const help = `Speaking — local CFP search and proposal drafts
 Run from the member directory:
@@ -12,7 +12,12 @@ Soma home: --soma-home, SOMA_HOME, then $HOME/.soma.
 Exit: 0 checked source/draft, 1 no source available in region, 2 invalid input or local error.
 `;
 
-function options(args: string[]) {
+type Options = { configPath: string | undefined; somaHome: string; save: boolean } & (
+  | { command: "search"; json: boolean }
+  | { command: "draft"; call: string; title: string; angle: string; takeaways: string[] }
+);
+
+function options(args: string[]): Options {
   const command = args[0];
   if (command !== "search" && command !== "draft") throw new Error("choose search or draft; use --help for usage");
   let configPath: string | undefined;
@@ -43,9 +48,13 @@ function options(args: string[]) {
       case "--takeaway": takeaways.push(value); break;
     }
   }
-  if (command === "search" && (call || title || angle || takeaways.length)) throw new Error("draft options require the draft command");
-  if (command === "draft" && (json || !call || !title || !angle || takeaways.length !== 3)) throw new Error("draft needs --call, --title, --angle and three --takeaway values; --json is search-only");
-  return { command, configPath, somaHome: resolve(somaHome), json, save, call, title, angle, takeaways };
+  const common = { configPath, somaHome: resolve(somaHome), save };
+  if (command === "search") {
+    if (call || title || angle || takeaways.length) throw new Error("draft options require the draft command");
+    return { ...common, command, json };
+  }
+  if (json || !call || !title || !angle || takeaways.length !== 3) throw new Error("draft needs --call, --title, --angle and three --takeaway values; --json is search-only");
+  return { ...common, command, call: httpUrl(call, "call URL"), title, angle, takeaways };
 }
 
 export async function main(args = process.argv.slice(2)): Promise<number> {
@@ -55,16 +64,18 @@ export async function main(args = process.argv.slice(2)): Promise<number> {
     const privateConfig = join(opts.somaHome, "memory/SKILLS/speaking/config.json");
     const configPath = opts.configPath ?? (await Bun.file(privateConfig).exists() ? privateConfig : resolve(import.meta.dir, "../config.json"));
     const config = parseConfig(await Bun.file(configPath).json());
-    const result = await search(config);
     if (opts.command === "search") {
+      const result = await search(config);
       const markdown = renderSearch(result);
       if (opts.save) await saveMarkdown(opts.somaHome, "opportunities", markdown);
       process.stdout.write(opts.json ? JSON.stringify(result, null, 2) + "\n" : markdown);
       return result.sources.some(s => s.kind === "checked") ? 0 : 1;
     }
+    const source = config.sources.find(s => s.url === opts.call && s.region.toLowerCase() === config.region.toLowerCase());
+    if (!source) throw new Error("chosen call is not configured in the current region; run search and choose a listed URL");
+    const result = await search({ ...config, sources: [source] });
     const call = result.calls.find(c => c.url === opts.call);
     if (!call) throw new Error("chosen call is not currently open and matching; run search and inspect source statuses");
-    if (!opts.title || !opts.angle) throw new Error("draft requires a title and angle");
     const markdown = renderDraft({ call, checkedAt: result.checkedAt, title: opts.title, angle: opts.angle, takeaways: opts.takeaways });
     if (opts.save) await saveMarkdown(opts.somaHome, "proposal", markdown);
     process.stdout.write(markdown);

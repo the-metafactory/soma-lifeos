@@ -39,10 +39,16 @@ function list(value: unknown, label: string): unknown[] {
   return value;
 }
 
-function httpUrl(value: unknown): string {
-  const url = new URL(text(value, "source URL"));
+export function httpUrl(value: unknown, label = "source URL"): string {
+  const input = text(value, label);
+  let url: URL;
+  try {
+    url = new URL(input);
+  } catch {
+    throw new Error(`${label} must be HTTP(S) without credentials`);
+  }
   if (!["http:", "https:"].includes(url.protocol) || url.username || url.password) {
-    throw new Error("source URL must be HTTP(S) without credentials");
+    throw new Error(`${label} must be HTTP(S) without credentials`);
   }
   return url.href;
 }
@@ -174,12 +180,15 @@ export async function search(config: Config, now = new Date()): Promise<Search> 
   const checkedAt = now.toISOString();
   const today = checkedAt.slice(0, 10);
   const sources: SourceResult[] = [];
-  for (const source of config.sources.filter(s => s.region.toLowerCase() === config.region.toLowerCase())) {
-    try {
-      sources.push(inspectPage(source, config, await readPage(source.url), today));
-    } catch (error) {
-      sources.push({ kind: "unavailable", name: source.name, url: source.url, reason: error instanceof Error ? error.message : String(error) });
-    }
+  const inRegion = config.sources.filter(s => s.region.toLowerCase() === config.region.toLowerCase());
+  for (let offset = 0; offset < inRegion.length; offset += 4) {
+    sources.push(...await Promise.all(inRegion.slice(offset, offset + 4).map(async (source): Promise<SourceResult> => {
+      try {
+        return inspectPage(source, config, await readPage(source.url), today);
+      } catch (error) {
+        return { kind: "unavailable", name: source.name, url: source.url, reason: error instanceof Error ? error.message : String(error) };
+      }
+    })));
   }
   const calls = sources.flatMap(s => s.kind === "checked" ? s.calls : []).sort((a, b) => a.deadline.localeCompare(b.deadline) || a.name.localeCompare(b.name));
   return { checkedAt, region: config.region, topics: config.topics.map(t => t.name), sources, calls };
@@ -188,12 +197,17 @@ export async function search(config: Config, now = new Date()): Promise<Search> 
 const md = (value: string): string => value.replace(/[\\`*_{}\[\]<>#!|]/g, "\\$&");
 const payLine = (pay: Payment): string => pay.status === "unknown" ? "unknown (no verified fee statement)" : `${pay.status} — ${md(pay.evidence)}`;
 
+function callFields(call: Call): string[] {
+  return [`Deadline: ${call.deadline} (${call.urgency})`, `Location: ${md(call.location)}`,
+    `Pays: ${payLine(call.payment)}`, `URL: ${call.url}`, `Topic match: ${call.topics.map(md).join(", ")}`];
+}
+
 export function renderSearch(result: Search): string {
   const lines = ["# Open calls for papers", "", `Checked: ${result.checkedAt}`, `Region: ${md(result.region)}`, `Topics: ${result.topics.map(md).join(", ")}`, "",
     "Only future UTC deadline dates are listed. Verify the organizer's timezone and closing time before submitting.", ""];
   if (!result.calls.length) lines.push("No matching open calls among successfully checked sources.", "");
-  for (const call of result.calls) lines.push(`## ${md(call.name)}`, "", `- Deadline: ${call.deadline} (${call.urgency})`, `- Location: ${md(call.location)}`,
-    `- Pays: ${payLine(call.payment)}`, `- URL: ${call.url}`, `- Topic match: ${call.topics.map(md).join(", ")}`, `- Next action: review the CFP and choose an angle at ${call.url}`, "");
+  for (const call of result.calls) lines.push(`## ${md(call.name)}`, "", ...callFields(call).map(field => `- ${field}`),
+    `- Next action: review the CFP and choose an angle at ${call.url}`, "");
   lines.push("## Sources checked", "");
   if (!result.sources.length) lines.push("No sources configured for this region.");
   for (const source of result.sources) lines.push(`- ${md(source.name)}: ${source.kind === "checked" ? source.outcome : `unavailable (${md(source.reason)})`} — ${source.url}`);
@@ -207,8 +221,7 @@ export function renderDraft(input: { call: Call; checkedAt: string; title: strin
   const angle = text(input.angle, "angle");
   if (input.takeaways.length !== 3) throw new Error("provide exactly three takeaways");
   const takeaways = input.takeaways.map(t => text(t, "takeaway"));
-  return ["# Proposal draft — awaiting principal review", "", `Call: ${md(call.name)}`, `URL: ${call.url}`, `Checked: ${input.checkedAt}`,
-    `Deadline: ${call.deadline}`, `Location: ${md(call.location)}`, `Pays: ${payLine(call.payment)}`, `Topic fit: ${call.topics.map(md).join(", ")}`, "",
+  return ["# Proposal draft — awaiting principal review", "", `Call: ${md(call.name)}`, `Checked: ${input.checkedAt}`, ...callFields(call), "",
     `## ${md(title)}`, "", "### Abstract", "", md(angle), "", "### Audience takeaways", "", ...takeaways.map(t => `- ${md(t)}`), "",
     "### Submission review", "", "Check the organizer's required format, length and eligibility. Add only speaker facts supplied by the principal. Submit or send only after the principal confirms this complete draft.", ""].join("\n");
 }
