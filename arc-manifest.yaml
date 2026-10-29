@@ -26,3 +26,5 @@ artifacts:
     description: "Create, refine, export, integrate, and verify web interfaces through Claude Design."
   - path: skills/security-updates
     description: Collect ranked security news, research and breach reports with persistent deduplication.
+  - path: skills/annual-reports
+    description: List, refresh and compare vendor security annual reports with cited evidence.
