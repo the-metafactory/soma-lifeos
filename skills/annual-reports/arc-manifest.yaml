@@ -1,0 +1,725 @@
+schema: arc/v1
+name: annual-reports
+version: 0.1.0
+type: skill
+tier: custom
+description: List, refresh and compare vendor security annual reports with cited evidence.
+license: MIT
+author:
+  name: The MetaFactory
+  github: the-metafactory
+upstream:
+  repo: danielmiessler/PAI
+  path: LifeOS/install/skills/AnnualReports
+  commit: fb9aef4640a73feae4c2e6483b26f58491ce2665
+capabilities:
+  filesystem:
+    read:
+      - ./**
+      - "${SOMA_HOME}/memory/SKILLS/annual-reports/**"
+    write:
+      - "${SOMA_HOME}/memory/SKILLS/annual-reports/**"
+  network:
+    - host: abnormal.ai
+      reason: Read the public report index or a bundled publisher report.
+    - host: app.stationx.net
+      reason: Read the public report index or a bundled publisher report.
+    - host: appomni.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: apwg.org
+      reason: Read the public report index or a bundled publisher report.
+    - host: arcticwolf.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: atis.org
+      reason: Read the public report index or a bundled publisher report.
+    - host: beazley.security
+      reason: Read the public report index or a bundled publisher report.
+    - host: bell-sw.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: bigid.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: bitsfrombytes.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: blog.checkpoint.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: blog.cloudflare.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: blog.google
+      reason: Read the public report index or a bundled publisher report.
+    - host: blog.lastpass.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: blogs.cisco.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: business.comcast.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: calypsoai.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: censys.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: checkmarx.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: cipher.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: citizenlab.ca
+      reason: Read the public report index or a bundled publisher report.
+    - host: cloud.google.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: cloudprotection.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: cloudsecurityalliance.org
+      reason: Read the public report index or a bundled publisher report.
+    - host: cofense.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: cogility.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: commercial.allianz.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: connecteurope.org
+      reason: Read the public report index or a bundled publisher report.
+    - host: content.naic.org
+      reason: Read the public report index or a bundled publisher report.
+    - host: content.salt.security
+      reason: Read the public report index or a bundled publisher report.
+    - host: cpl.thalesgroup.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: cristosvelasco.de
+      reason: Read the public report index or a bundled publisher report.
+    - host: ctid.mitre.org
+      reason: Read the public report index or a bundled publisher report.
+    - host: cyberdefensewire.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: cyberexchange.uk.net
+      reason: Read the public report index or a bundled publisher report.
+    - host: cyberint.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: cybersecurity.arcticwolf.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: cybersecurityventures.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: cyble.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: cycode.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: cypressdatadefense.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: deepstrike.io
+      reason: Read the public report index or a bundled publisher report.
+    - host: deeptechnation.ch
+      reason: Read the public report index or a bundled publisher report.
+    - host: defenseinnovationmarketplace.dtic.mil
+      reason: Read the public report index or a bundled publisher report.
+    - host: delinea.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: digiamericas.org
+      reason: Read the public report index or a bundled publisher report.
+    - host: digital.ai
+      reason: Read the public report index or a bundled publisher report.
+    - host: digitalisationworld.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: drata.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: duo.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: durin.ai
+      reason: Read the public report index or a bundled publisher report.
+    - host: episki.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: expel.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: explore.dnsfilter.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: ferma.eu
+      reason: Read the public report index or a bundled publisher report.
+    - host: fidelissecurity.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: filigran.io
+      reason: Read the public report index or a bundled publisher report.
+    - host: financialpost.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: flashpoint.io
+      reason: Read the public report index or a bundled publisher report.
+    - host: fluidattacks.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: get.chainguard.dev
+      reason: Read the public report index or a bundled publisher report.
+    - host: github.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: go.dashlane.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: go.open-systems.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: go.veeam.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: grcengineer.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: guardz.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: gurucul.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: health-isac.org
+      reason: Read the public report index or a bundled publisher report.
+    - host: hl.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: home.bigid.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: hostingjournalist.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: industrialcyber.co
+      reason: Read the public report index or a bundled publisher report.
+    - host: info.deepinstinct.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: info.flexera.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: info.processunity.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: info.varonis.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: interisle.net
+      reason: Read the public report index or a bundled publisher report.
+    - host: internationalaisafetyreport.org
+      reason: Read the public report index or a bundled publisher report.
+    - host: intezer.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: inthecloud.withgoogle.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: intuitionlabs.ai
+      reason: Read the public report index or a bundled publisher report.
+    - host: investor.cisco.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: investor.fortinet.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: ir.crowdstrike.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: it-harvest.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: itwire.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: konghq.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: kpmg.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: labs.cloudsecurityalliance.org
+      reason: Read the public report index or a bundled publisher report.
+    - host: medium.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: menlovc.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: mile2.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: mixmode.ai
+      reason: Read the public report index or a bundled publisher report.
+    - host: mkto.deloitte.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: momentumcyber.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: netdiligence.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: news.blackduck.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: newsroom.cisco.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: newsroom.gendigital.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: nmfta.org
+      reason: Read the public report index or a bundled publisher report.
+    - host: omadaidentity.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: openai.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: orca.security
+      reason: Read the public report index or a bundled publisher report.
+    - host: ordr.net
+      reason: Read the public report index or a bundled publisher report.
+    - host: paths.ext.hpe.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: pditechnologies.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: pentera.io
+      reason: Read the public report index or a bundled publisher report.
+    - host: pointwild.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: prowler.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: public.cyber.mil
+      reason: Read the public report index or a bundled publisher report.
+    - host: raw.githubusercontent.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: redcanary.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: resource.cobalt.io
+      reason: Read the public report index or a bundled publisher report.
+    - host: resources.anthropic.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: resources.dataminr.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: resources.prophetsecurity.ai
+      reason: Read the public report index or a bundled publisher report.
+    - host: salt.security
+      reason: Read the public report index or a bundled publisher report.
+    - host: saviynt.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: securelist.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: securityscorecard.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: services.google.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: shieldworkz.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: siliconangle.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: slcyber.io
+      reason: Read the public report index or a bundled publisher report.
+    - host: snyk.io
+      reason: Read the public report index or a bundled publisher report.
+    - host: solutions.cerbos.dev
+      reason: Read the public report index or a bundled publisher report.
+    - host: spaces.okta.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: spycloud.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: strategyofsecurity.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: strike48.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: tailscale.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: takepoint.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: team8.vc
+      reason: Read the public report index or a bundled publisher report.
+    - host: telefonicatech.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: thinkst.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: torq.io
+      reason: Read the public report index or a bundled publisher report.
+    - host: umbrella.cisco.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: unlock.cyberresilience.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: upstream.auto
+      reason: Read the public report index or a bundled publisher report.
+    - host: vipre.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: vmblog.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: waterfall-security.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: web.coalitioninc.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: wwv.vulncheck.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.accenture.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.aicd.com.au
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.ajg.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.akamai.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.akto.io
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.altitudecyber.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.anthropic.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.aon.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.appdome.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.arkoselabs.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.armis.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.aryaka.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.asd.gov.au
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.at-bay.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.axis.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.axur.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.beyondtrust.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.binalyze.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.biocatch.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.bitdefender.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.bitsight.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.blackduck.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.bridewell.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.businesswire.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.capgemini.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.catonetworks.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.chainalysis.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.chainguard.dev
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.checkpoint.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.cisco.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.cloudflare.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.clutch.security
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.comptia.org
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.contrastsecurity.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.crowdstrike.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.cscdbs.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.cyber.gc.ca
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.cyber.gov.au
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.cyberark.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.cyberproof.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.cyentia.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.cyera.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.cyfirma.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.darktrace.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.datadoghq.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.deepinstinct.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.deloitte.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.descope.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.dhs.gov
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.digicert.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.dni.gov
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.dpmc.govt.nz
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.dragos.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.dsci.in
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.duha.co
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.edgescan.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.elastic.co
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.enisa.europa.eu
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.ensigninfosecurity.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.eset.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.europeanpaymentscouncil.eu
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.europol.europa.eu
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.f5.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.fairinstitute.org
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.fbi.gov
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.federalreserve.gov
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.fincen.gov
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.finos.org
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.forescout.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.forrester.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.fortinet.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.fortra.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.futuriom.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.gartner.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.gendigital.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.genetec.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.getastra.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.gitguardian.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.go.nametag.co
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.gov.uk
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.government.se
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.grandviewresearch.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.greynoise.io
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.grfcpa.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.grip.security
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.gsma.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.guidewire.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.hackerone.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.hardenstance.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.hiddenlayer.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.hiscoxgroup.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.hitchpartners.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.hiya.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.honeywell.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.hornetsecurity.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.howdengroupholdings.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.hpe.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.hughes.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.humansecurity.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.huntress.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.hypr.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.ibm.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.iconiq.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.idtheftcenter.org
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.immuta.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.imperva.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.instagram.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.intel471.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.interpol.int
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.intruder.io
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.isaca.org
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.isc2.org
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.k7computing.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.kelacyber.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.kiteworks.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.knowbe4.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.kodemsecurity.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.kroll.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.kuppingercole.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.latio.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.legitsecurity.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.lokmattimes.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.manageengine.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.mckinsey.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.memcyco.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.microsoft.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.mimecast.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.mixmode.ai
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.mnp.ca
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.mobileworldlive.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.n2k.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.nccgroup.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.ncsc.gov.uk
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.ncsc.govt.nz
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.nctech.org
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.netscout.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.netskope.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.newswire.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.nozominetworks.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.okta.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.opswat.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.orangecyberdefense.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.paloaltonetworks.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.picussecurity.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.pillar.security
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.pindrop.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.plataformamedia.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.plume.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.prnewswire.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.proofpoint.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.pst.no
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.rapid7.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.reco.ai
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.recordedfuture.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.redhat.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.redhelix.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.reliaquest.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.riskrecon.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.rpclegal.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.rwbaird.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.sailpoint.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.sans.org
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.secureworld.io
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.securitas.uk.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.security.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.securitysystemsnews.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.semperis.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.seqrite.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.silentpush.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.sisainfosec.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.sixmap.io
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.softwareseni.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.sonatype.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.sonicwall.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.sophos.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.soprasteria.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.splunk.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.straiker.ai
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.synack.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.sysdig.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.telecomtv.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.threatdown.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.traceable.ai
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.trellix.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.trendmicro.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.trmlabs.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.truesec.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.trustkibu.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.trustwave.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.unosecur.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.vanta.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.veeam.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.veracode.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.verizon.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.vikingcloud.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.visa.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.vulncheck.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.watchguard.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.weforum.org
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.whitehouse.gov
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.wipro.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.withsecure.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.wiz.io
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.yubico.com
+      reason: Read the public report index or a bundled publisher report.
+    - host: www.zscaler.com
+      reason: Read the public report index or a bundled publisher report.
+  bash:
+    allowed: true
+  secrets: []
