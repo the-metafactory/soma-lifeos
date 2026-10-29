@@ -46,7 +46,21 @@ export function collectInputs(options: { paths: string[]; somaHome: string }): I
             continue;
           }
           try {
-            const childBoundary = skillLinks && lstatSync(child).isSymbolicLink() ? realpathSync(child) : boundary;
+            let childBoundary = boundary;
+            if (skillLinks && lstatSync(child).isSymbolicLink()) {
+              const installed = realpathSync(child);
+              let isSkill = false;
+              try {
+                isSkill = lstatSync(installed).isDirectory() && lstatSync(join(installed, "SKILL.md")).isFile();
+              } catch {
+                // A missing or unreadable entry file does not identify an installed skill.
+              }
+              if (!isSkill) {
+                result.gaps.push({ path: child, reason: "Installed skill link target must be a directory containing a regular SKILL.md" });
+                continue;
+              }
+              childBoundary = installed;
+            }
             visit(child, childBoundary, next);
           } catch (error) {
             result.gaps.push({ path: child, reason: describe(error) });
@@ -92,7 +106,7 @@ export function renderInputs(input: InputSet): string {
   ].join("\n");
 }
 
-const USAGE = "Usage: bun Tools/CollectInputs.ts [--soma-home PATH] [--json] [--] [PATH ...]\nNo paths: read <soma-home>/skills/, policy/, profile/purpose.md. Explicit paths replace defaults.\nSoma home: --soma-home, then SOMA_HOME, then the user's .soma directory.\nDirectories recurse through text files; hidden files and node_modules are excluded.\nInstalled skill links are followed; other links leaving a selected directory become coverage gaps.\nOutputs sources for agent analysis, not a harmony verdict. Writes nothing.\nExit: 0 complete collection, 1 coverage gaps or no sources, 2 usage error.";
+const USAGE = "Usage: bun Tools/CollectInputs.ts [--soma-home PATH] [--json] [--] [PATH ...]\nNo paths: read <soma-home>/skills/, policy/, profile/purpose.md. Explicit paths replace defaults.\nSoma home: --soma-home, then SOMA_HOME, then the user's .soma directory.\nDirectories recurse through text files; hidden files and node_modules are excluded.\nInstalled skill links require a directory containing a regular SKILL.md; other links leaving a selected directory become coverage gaps.\nOutputs sources for agent analysis, not a harmony verdict. Writes nothing.\nExit: 0 complete collection, 1 coverage gaps or no sources, 2 usage error.";
 
 if (import.meta.main) {
   try {

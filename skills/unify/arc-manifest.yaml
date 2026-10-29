@@ -14,6 +14,12 @@ upstream:
   commit: fb9aef4640a73feae4c2e6483b26f58491ce2665
 capabilities:
   filesystem:
+    # Static default reads only: arc/v1 lists paths, not runtime-selected scopes.
+    # Explicit inputs and CheckReport's input are principal-selected paths.
+    # Default collection also reads resolved installed skill link targets;
+    # --soma-home can select a different home. These may be outside the globs.
+    # A capability-enforcing host must grant the selected/resolved paths before
+    # running the tools. See SKILL.md for scope and coverage-gap handling.
     read:
       - ./**
       - "${SOMA_HOME}/skills/**"

@@ -6,13 +6,13 @@
  * Usage:
  *   bun Tools/CheckReport.ts <report.md> [--max-recs N] [--json]
  *
- * Checks (Intents/Harmonize.md § Output format and § Ideal State):
+ * Checks (Intents/Harmonize.md § Write and check the report):
  *   - the eight parts appear in order: verdict, summit, inputs, harmony map,
  *     stragglers, unifying principle, recommendations, lens trail
  *   - every harmony-map row names a known relationship, two path:line sources
  *     and evidence citing both sources
  *   - every stragglers row starts with a path:line
- *   - recommendations number at most --max-recs (default 8, "about seven")
+ *   - recommendations number at most --max-recs (default 8)
  *     and each names what it resolves, where it lands and its proof
  *
  * Whether a finding is real stays a human judgment.
@@ -98,6 +98,83 @@ function col(header: string[], word: string): number {
   return header.findIndex((h) => h.includes(word));
 }
 
+function checkHarmonyMap(lines: string[]): { problems: string[]; count: number } {
+  const problems: string[] = [];
+  let count = 0;
+  const harmony = sectionTable(lines);
+  if (!harmony) problems.push("harmony map has no table");
+  else {
+    problems.push(...harmony.problems.map(problem => `harmony map: ${problem}`));
+    const rel = col(harmony.header, "relationship");
+    const ev = col(harmony.header, "evidence");
+    const a = harmony.header.indexOf("a");
+    const b = harmony.header.indexOf("b");
+    const mechanism = col(harmony.header, "mechanism");
+    if (a < 0 || b < 0) problems.push("harmony map needs A and B source columns");
+    if (mechanism < 0) problems.push("harmony map needs a Mechanism column");
+    if (rel < 0) problems.push("harmony map table has no Relationship column");
+    if (ev < 0) problems.push("harmony map table has no Evidence column");
+    count = harmony.rows.length;
+    harmony.rows.forEach((r, i) => {
+      const n = i + 1;
+      if (rel >= 0) {
+        const v = (r[rel] ?? "").toLowerCase();
+        if (!RELATIONSHIPS.includes(v))
+          problems.push(`harmony map row ${n}: relationship "${r[rel] ?? ""}" is not one of ${RELATIONSHIPS.join(", ")}`);
+      }
+      if (ev >= 0 && EMPTY_CELL.test(r[ev] ?? "")) problems.push(`harmony map row ${n}: evidence (both sides) is empty`);
+      if (mechanism >= 0 && EMPTY_CELL.test(r[mechanism] ?? "")) problems.push(`harmony map row ${n}: mechanism is empty`);
+      for (const [label, index] of [["A", a], ["B", b]] as const) {
+        if (index < 0) continue;
+        const source = r[index] ?? "";
+        if (!SOURCE.test(source)) problems.push(`harmony map row ${n}: ${label} needs a path:line`);
+        else if (ev >= 0 && !cites(r[ev] ?? "", source)) problems.push(`harmony map row ${n}: evidence does not cite ${label} (${source})`);
+      }
+    });
+    if (!count && !NO_CONFLICTS.test(lines.join("\n"))) problems.push("empty harmony map must explicitly say no conflicts found within the inspected scope");
+  }
+  return { problems, count };
+}
+
+function checkStragglers(lines: string[]): { problems: string[]; count: number } {
+  const problems: string[] = [];
+  let count = 0;
+  const stragglers = sectionTable(lines);
+  if (stragglers) {
+    problems.push(...stragglers.problems.map(problem => `stragglers: ${problem}`));
+    count = stragglers.rows.length;
+    stragglers.rows.forEach((r, i) => {
+      if (!SOURCE.test(r[0] ?? "")) problems.push(`stragglers row ${i + 1}: first cell "${r[0] ?? ""}" is not a path:line`);
+    });
+  }
+  if (!count && !/\bnone (?:found|identified)\b/i.test(lines.join("\n"))) problems.push("empty stragglers must explicitly say none found");
+  return { problems, count };
+}
+
+function checkRecommendations(lines: string[], maxRecs: number): { problems: string[]; count: number } {
+  const problems: string[] = [];
+  let count = 0;
+  const recs = sectionTable(lines);
+  if (!recs) problems.push("recommendations has no table");
+  else {
+    problems.push(...recs.problems.map(problem => `recommendations: ${problem}`));
+    count = recs.rows.length;
+    if (!count && !/\bnone warranted\b/i.test(lines.join("\n"))) problems.push("empty recommendations must explicitly say none warranted");
+    if (count > maxRecs) problems.push(`recommendations: ${count} rows, more than ${maxRecs}`);
+    for (const word of ["resolves", "lands", "proof"]) {
+      const c = col(recs.header, word);
+      if (c < 0) {
+        problems.push(`recommendations table has no "${word}" column`);
+        continue;
+      }
+      recs.rows.forEach((r, i) => {
+        if (EMPTY_CELL.test(r[c] ?? "")) problems.push(`recommendations row ${i + 1}: "${recs.header[c]}" is empty`);
+      });
+    }
+  }
+  return { problems, count };
+}
+
 export function checkReport(text: string, maxRecs = 8): CheckResult {
   const lines = text.split("\n");
   const problems: string[] = [];
@@ -132,7 +209,11 @@ export function checkReport(text: string, maxRecs = 8): CheckResult {
     from = found + 1;
   }
 
-  const body = (idx: number): string[] => {
+  type SectionKey = (typeof SECTIONS)[number]["key"];
+  const indexOf = (key: SectionKey): number => SECTIONS.findIndex(section => section.key === key);
+  const hasSection = (key: SectionKey): boolean => starts[indexOf(key)] >= 0;
+  const body = (key: SectionKey): string[] => {
+    const idx = indexOf(key);
     const s = starts[idx];
     if (s < 0) return [];
     const next = starts.slice(idx + 1).find((n) => n > s);
@@ -140,80 +221,16 @@ export function checkReport(text: string, maxRecs = 8): CheckResult {
   };
 
   for (const [i, section] of SECTIONS.entries()) {
-    if (starts[i] >= 0 && !body(i).some(line => line.trim())) problems.push(`section "${section.key}" is empty`);
+    if (starts[i] >= 0 && !body(section.key).some(line => line.trim())) problems.push(`section "${section.key}" is empty`);
   }
 
-  // Harmony map: known relationship, non-empty both-sides evidence.
-  let harmonyRows = 0;
-  const harmony = sectionTable(body(3));
-  if (starts[3] >= 0) {
-    if (!harmony) problems.push("harmony map has no table");
-    else {
-      problems.push(...harmony.problems.map(problem => `harmony map: ${problem}`));
-      const rel = col(harmony.header, "relationship");
-      const ev = col(harmony.header, "evidence");
-      const a = harmony.header.indexOf("a");
-      const b = harmony.header.indexOf("b");
-      const mechanism = col(harmony.header, "mechanism");
-      if (a < 0 || b < 0) problems.push("harmony map needs A and B source columns");
-      if (mechanism < 0) problems.push("harmony map needs a Mechanism column");
-      if (rel < 0) problems.push("harmony map table has no Relationship column");
-      if (ev < 0) problems.push("harmony map table has no Evidence column");
-      harmonyRows = harmony.rows.length;
-      harmony.rows.forEach((r, i) => {
-        const n = i + 1;
-        if (rel >= 0) {
-          const v = (r[rel] ?? "").toLowerCase();
-          if (!RELATIONSHIPS.includes(v))
-            problems.push(`harmony map row ${n}: relationship "${r[rel] ?? ""}" is not one of ${RELATIONSHIPS.join(", ")}`);
-        }
-        if (ev >= 0 && EMPTY_CELL.test(r[ev] ?? "")) problems.push(`harmony map row ${n}: evidence (both sides) is empty`);
-        if (mechanism >= 0 && EMPTY_CELL.test(r[mechanism] ?? "")) problems.push(`harmony map row ${n}: mechanism is empty`);
-        for (const [label, index] of [["A", a], ["B", b]] as const) {
-          if (index < 0) continue;
-          const source = r[index] ?? "";
-          if (!SOURCE.test(source)) problems.push(`harmony map row ${n}: ${label} needs a path:line`);
-          else if (ev >= 0 && !cites(r[ev] ?? "", source)) problems.push(`harmony map row ${n}: evidence does not cite ${label} (${source})`);
-        }
-      });
-      if (!harmonyRows && !NO_CONFLICTS.test(body(3).join("\n"))) problems.push("empty harmony map must explicitly say no conflicts found within the inspected scope");
-    }
-  }
-
-  // Stragglers: an empty list must be explicit.
-  let stragglerRows = 0;
-  const stragglers = sectionTable(body(4));
-  if (stragglers) {
-    problems.push(...stragglers.problems.map(problem => `stragglers: ${problem}`));
-    stragglerRows = stragglers.rows.length;
-    stragglers.rows.forEach((r, i) => {
-      if (!SOURCE.test(r[0] ?? "")) problems.push(`stragglers row ${i + 1}: first cell "${r[0] ?? ""}" is not a path:line`);
-    });
-  }
-  if (!stragglerRows && !/\bnone (?:found|identified)\b/i.test(body(4).join("\n"))) problems.push("empty stragglers must explicitly say none found");
-
-  // Recommendations: count and placement cells.
-  let recommendations = 0;
-  const recs = sectionTable(body(6));
-  if (starts[6] >= 0) {
-    if (!recs) problems.push("recommendations has no table");
-    else {
-      problems.push(...recs.problems.map(problem => `recommendations: ${problem}`));
-      recommendations = recs.rows.length;
-      if (!recommendations && !/\bnone warranted\b/i.test(body(6).join("\n"))) problems.push("empty recommendations must explicitly say none warranted");
-      if (recommendations > maxRecs) problems.push(`recommendations: ${recommendations} rows, more than ${maxRecs}`);
-      for (const word of ["resolves", "lands", "proof"]) {
-        const c = col(recs.header, word);
-        if (c < 0) {
-          problems.push(`recommendations table has no "${word}" column`);
-          continue;
-        }
-        recs.rows.forEach((r, i) => {
-          if (EMPTY_CELL.test(r[c] ?? "")) problems.push(`recommendations row ${i + 1}: "${recs.header[c]}" is empty`);
-        });
-      }
-    }
-  }
+  const harmony = hasSection("harmony map") ? checkHarmonyMap(body("harmony map")) : { problems: [], count: 0 };
+  const stragglers = checkStragglers(body("stragglers"));
+  const recs = hasSection("recommendations") ? checkRecommendations(body("recommendations"), maxRecs) : { problems: [], count: 0 };
+  problems.push(...harmony.problems, ...stragglers.problems, ...recs.problems);
+  const { count: harmonyRows } = harmony;
+  const { count: stragglerRows } = stragglers;
+  const { count: recommendations } = recs;
 
   return { ok: problems.length === 0, problems, recommendations, harmonyRows, stragglerRows };
 }

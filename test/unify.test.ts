@@ -145,6 +145,26 @@ test("unreadable, binary, hidden and dependency sources become visible coverage 
   expect(collectInputs({ paths: [], somaHome: home }).gaps).toHaveLength(4);
 });
 
+test("default collection skips installed links without a regular skill entry file", () => {
+  const home = temporary();
+  const outside = temporary();
+  put(home, "skills/local/SKILL.md", "Local skill.");
+  put(home, "policy/behavior.md", "Policy.");
+  put(home, "profile/purpose.md", "Purpose.");
+  const unrelated = put(outside, "unrelated/secret.txt", "Unrelated text must stay outside collection.");
+  mkdirSync(join(outside, "directory-marker/SKILL.md"), { recursive: true });
+  mkdirSync(join(outside, "linked-marker"));
+  const marker = put(outside, "marker.md", "External marker must not qualify a skill.");
+  symlinkSync(marker, join(outside, "linked-marker/SKILL.md"));
+  const targets = [dirname(unrelated), unrelated, join(outside, "directory-marker"), join(outside, "linked-marker")];
+  for (const [index, target] of targets.entries()) symlinkSync(target, join(home, `skills/rejected-${index}`));
+  const input = collectInputs({ paths: [], somaHome: home });
+  expect(input.sources).toHaveLength(3);
+  expect(input.sources.every(source => !source.path.includes("rejected-"))).toBe(true);
+  expect(input.gaps).toHaveLength(targets.length);
+  for (const gap of input.gaps) expect(gap.reason).toContain("regular SKILL.md");
+});
+
 test("collector CLI works from member directory with environment, home override and explicit paths", () => {
   const home = temporary();
   put(home, "skills/example/SKILL.md", "Skill.");

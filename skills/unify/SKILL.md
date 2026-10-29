@@ -30,6 +30,17 @@ to produce the report.
    `No conflicts found within the inspected scope.` Validate it with
    [Tools/CheckReport.ts](Tools/CheckReport.ts) before handing it over.
 
+Default discovery follows top-level installed skill links only when their target
+is a directory containing a regular `SKILL.md`. It reads that directory tree;
+other links that leave a selected tree become coverage gaps.
+
+The manifest's read globs describe static defaults. Arc's path lists cannot
+express principal-selected inputs or resolved installed skill link targets.
+On a capability-enforcing host, grant the exact selected paths and resolved
+skill target trees before collection, including a home chosen by `--soma-home`.
+Grant the selected report path before checking it. If access is denied, report
+the coverage gap and resolve it with the principal before judging that scope.
+
 ```bash
 bun Tools/CollectInputs.ts
 bun Tools/CollectInputs.ts --soma-home /path/to/soma-home
