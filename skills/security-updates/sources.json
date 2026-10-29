@@ -1,0 +1,105 @@
+{
+  "sources": [
+    {
+      "id": "tldrsec",
+      "name": "tl;dr sec",
+      "url": "https://tldrsec.com",
+      "adapter": "newsletter",
+      "collect_url": "https://tldrsec.com",
+      "type": "newsletter",
+      "description": "Comprehensive weekly security newsletter by Clint Gibler",
+      "categories": ["news", "research", "ideas"]
+    },
+    {
+      "id": "nosecurity",
+      "name": "No Security",
+      "url": "https://no.security",
+      "adapter": "feed",
+      "collect_url": "https://no.security/rss.xml",
+      "type": "blog",
+      "description": "Caleb Sima's security insights and analysis",
+      "categories": ["ideas", "research"]
+    },
+    {
+      "id": "krebsonsecurity",
+      "name": "Krebs on Security",
+      "url": "https://krebsonsecurity.com",
+      "adapter": "feed",
+      "collect_url": "https://krebsonsecurity.com/feed/",
+      "type": "blog",
+      "description": "Brian Krebs investigative security journalism",
+      "categories": ["news"]
+    },
+    {
+      "id": "thehackernews",
+      "name": "The Hacker News",
+      "url": "https://thehackernews.com",
+      "adapter": "feed",
+      "collect_url": "https://feeds.feedburner.com/TheHackersNews",
+      "type": "news",
+      "description": "Security news and vulnerability coverage",
+      "categories": ["news", "research"]
+    },
+    {
+      "id": "schneier",
+      "name": "Schneier on Security",
+      "url": "https://schneier.com",
+      "adapter": "feed",
+      "collect_url": "https://www.schneier.com/feed/atom/",
+      "type": "blog",
+      "description": "Bruce Schneier's security commentary and analysis",
+      "categories": ["ideas", "research"]
+    },
+    {
+      "id": "riskybusiness",
+      "name": "Risky Business",
+      "url": "https://risky.biz",
+      "adapter": "feed",
+      "collect_url": "https://risky.biz/feeds/risky-business/",
+      "type": "podcast",
+      "description": "Security news podcast and analysis",
+      "categories": ["news", "ideas"]
+    },
+    {
+      "id": "ncsc",
+      "name": "Swiss NCSC",
+      "url": "https://www.ncsc.admin.ch",
+      "type": "advisory",
+      "description": "Swiss National Cyber Security Centre hot topics and weekly reviews",
+      "categories": ["news", "research", "ideas"],
+      "adapter": "ncsc",
+      "collect_url": "https://www.ncsc.admin.ch/ncsc/en/home/aktuell/im-fokus.html"
+    },
+    {
+      "id": "cert-eu",
+      "name": "CERT-EU",
+      "url": "https://cert.europa.eu",
+      "type": "advisory",
+      "description": "CERT-EU security advisories for European institutions",
+      "categories": ["research", "news"],
+      "adapter": "feed",
+      "collect_url": "https://cert.europa.eu/publications/security-advisories-rss"
+    }
+  ],
+  "categories": {
+    "news": {
+      "name": "Security News",
+      "emoji": "🔴",
+      "description": "Breaches, incidents, exploits in the wild"
+    },
+    "research": {
+      "name": "Security Research",
+      "emoji": "🔬",
+      "description": "CVEs, vulnerabilities, techniques, papers"
+    },
+    "ideas": {
+      "name": "Security Ideas",
+      "emoji": "💡",
+      "description": "Opinions, trends, strategy, career"
+    }
+  },
+  "limits": {
+    "max_total_items": 32,
+    "target_per_category": 10
+  }
+}
