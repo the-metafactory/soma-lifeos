@@ -17,7 +17,6 @@ capabilities:
     read:
       - ./**
       - /tmp/**
-      - ~/.soma/UNMAPPED/.env
     write:
       - ./**
       - /tmp/**

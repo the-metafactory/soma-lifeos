@@ -21,6 +21,7 @@ capabilities:
     write:
       - ./**
       - /tmp/**
+      - ~/Downloads/**
       - ~/.soma/memory/SKILLS/execution.jsonl
   # Fixed service hosts; browsing and scraping also contact user-selected target hosts.
   network:
