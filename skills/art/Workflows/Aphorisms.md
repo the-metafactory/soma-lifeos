@@ -2,15 +2,6 @@
 
 **Aphorisms as shareable visual quote cards using editorial aesthetic.**
 
-## Voice Notification
-
-```bash
-curl -s -X POST http://localhost:31337/notify \
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the Aphorisms workflow in the Art skill to create quote cards"}' \
-  > /dev/null 2>&1 &
-```
-
 Running **Aphorisms** in **Art**...
 
 ---

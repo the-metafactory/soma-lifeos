@@ -5,17 +5,6 @@ description: "Phased conversational interview across PAI context files. Four pha
 
 # Interview — phased conversational context review + fill
 
-## 🚨 MANDATORY: Voice Notification
-
-Before running the workflow, send:
-
-```bash
-curl -s -X POST http://localhost:31337/notify \
-  -H "Content-Type: application/json" \
-  -d '{"message": "Starting the interview. Scanning phases first."}' \
-  > /dev/null 2>&1 &
-```
-
 ## What this skill does
 
 Runs a **phased conversational interview** across every PAI context file. Phase 1 (foundational TELOS) is the core — the DA always reviews it first, even if files look "complete," because foundational context is never actually done. Only after Phase 1 does the interview move to IDEAL_STATE dimensions, preferences, and identity.
@@ -73,7 +62,7 @@ For each file:
 
 **Review mode** (for Phase 1 files at ≥80%):
 1. Read the file with the Read tool.
-2. Summarize what's there to the principal in 2-3 sentences. No voice here — text only.
+2. Summarize what's there to the principal in 2-3 sentences.
 3. Ask targeted review questions ONE AT A TIME:
    - "Is <specific item> still accurate?"
    - "Anything outdated to retire?"
@@ -81,28 +70,20 @@ For each file:
    - "Anything you'd sharpen, reframe, or expand?"
 4. The principal answers by voice or text.
 5. If the principal wants a change, the DA writes it via Edit tool — precise old_string/new_string, preserve surrounding structure.
-6. Voice-confirm only on actual changes:
-   ```bash
-   curl -s -X POST http://localhost:31337/notify \
-     -H "Content-Type: application/json" \
-     -d '{"message": "Updated <FILE> — captured the refinement."}' \
-     > /dev/null 2>&1 &
-   ```
-7. Ask: "Anything else for <FILE>, or move on?"
+6. Ask: "Anything else for <FILE>, or move on?"
 
 **Fill mode** (for files below 80%):
 1. Ask the first scanner prompt — one at a time, never a firehose.
 2. The principal answers (voice or typed).
 3. The DA writes the answer into the correct slot in the file — replacing TBD markers, filling empty sections, appending items.
-4. Voice-confirm what got captured.
-5. Next prompt. Repeat until done with this file or the principal says "next."
+4. Next prompt. Repeat until done with this file or the principal says "next."
 
 ### Step 4 — Phase transitions
 
 After Phase 1 completes:
-1. Voice: "Phase 1 done. Ready for Phase 2 IDEAL_STATE, or break here?"
+1. Ask: "Phase 1 done. Ready for Phase 2 IDEAL_STATE, or break here?"
 2. If the principal says continue, proceed to Phase 2 top priority (usually HEALTH).
-3. If the principal says stop, run final scan, voice a summary of what changed, say goodbye.
+3. If the principal says stop, run final scan, summarize what changed, say goodbye.
 
 Same pattern Phase 2 → Phase 3 → Phase 4.
 
@@ -118,7 +99,7 @@ bun ~/.claude/PAI/TOOLS/TelosRenderer.ts 2>/dev/null || true
 
 - **One question at a time.** Never dump all prompts at once.
 - **The principal never types schema.** They speak/type the answer in their own words; the DA formats it into the file's structure.
-- **Always show the principal what got written** before moving on. Brief voice + one line text.
+- **Always show the principal what got written** before moving on. One line of text.
 - **Respect stop signals.** "Enough" / "stop" / "later" → save progress (state is already persistent in the files themselves), end gracefully.
 - **Don't ask again about filled fields.** The scanner's completeness score decides what's still gap-worthy.
 - **Narrative dimensions stay narrative.** For CREATIVE/RELATIONSHIPS, don't coerce answers into metrics — write prose that matches the principal's words.
