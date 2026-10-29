@@ -10,6 +10,10 @@ author:
   name: The MetaFactory
   github: the-metafactory
 artifacts:
+  - path: skills/art
+    description: Create static illustrations, diagrams, thumbnails, icons, and wallpapers.
+  - path: skills/media
+    description: Create visual content and render videos with Art and Remotion.
   - path: skills/bitter-lesson-engineering
     description: Audit an explicitly supplied instruction file with a CUT or KEEP verdict and reason for every rule.
   - path: skills/broadcast
