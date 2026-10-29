@@ -22,3 +22,5 @@ artifacts:
     description: "Automate real Chrome sessions and record, replay, and verify browser workflows."
   - path: skills/webdesign
     description: "Create, refine, export, integrate, and verify web interfaces through Claude Design."
+  - path: skills/security-updates
+    description: Collect ranked security news, research and breach reports with persistent deduplication.

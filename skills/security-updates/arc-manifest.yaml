@@ -1,0 +1,47 @@
+schema: arc/v1
+name: security-updates
+version: 0.1.0
+type: skill
+tier: custom
+description: Collect ranked security news, research and breach reports with persistent deduplication.
+license: MIT
+author:
+  name: The MetaFactory
+  github: the-metafactory
+upstream:
+  repo: danielmiessler/PAI
+  path: LifeOS/install/skills/SecurityUpdates
+  commit: fb9aef4640a73feae4c2e6483b26f58491ce2665
+capabilities:
+  filesystem:
+    read:
+      - ./**
+      - "${SOMA_HOME}/memory/SKILLS/security-updates/**"
+    write:
+      - "${SOMA_HOME}/memory/SKILLS/security-updates/**"
+  network:
+    - host: tldrsec.com
+      reason: Read the upstream security newsletter.
+    - host: no.security
+      reason: Read the upstream research and ideas feed.
+    - host: krebsonsecurity.com
+      reason: Read breach reporting.
+    - host: thehackernews.com
+      reason: Read security news.
+    - host: feeds.feedburner.com
+      reason: Read The Hacker News RSS feed.
+    - host: schneier.com
+      reason: Read security commentary.
+    - host: www.schneier.com
+      reason: Follow the commentary feed redirect.
+    - host: risky.biz
+      reason: Read the upstream security podcast feed.
+    - host: www.ncsc.admin.ch
+      reason: Read Swiss NCSC hot topics.
+    - host: www.bacs.admin.ch
+      reason: Follow the Swiss NCSC site redirect.
+    - host: cert.europa.eu
+      reason: Read CERT-EU security advisories.
+  bash:
+    allowed: true
+  secrets: []
