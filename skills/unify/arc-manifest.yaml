@@ -1,0 +1,27 @@
+schema: arc/v1
+name: unify
+version: 0.1.0
+type: skill
+tier: custom
+description: Check harmony across Soma skills, policy and purpose or explicitly selected paths.
+license: MIT
+author:
+  name: The MetaFactory
+  github: the-metafactory
+upstream:
+  repo: danielmiessler/PAI
+  path: LifeOS/install/skills/Unify
+  commit: fb9aef4640a73feae4c2e6483b26f58491ce2665
+capabilities:
+  filesystem:
+    read:
+      - ./**
+      - "${SOMA_HOME}/skills/**"
+      - "${SOMA_HOME}/policy/**"
+      - "${SOMA_HOME}/profile/purpose.md"
+    write:
+      - "${SOMA_HOME}/memory/SKILLS/unify/**"
+  network: []
+  bash:
+    allowed: true
+  secrets: []

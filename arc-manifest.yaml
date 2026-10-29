@@ -28,3 +28,5 @@ artifacts:
     description: Collect ranked security news, research and breach reports with persistent deduplication.
   - path: skills/annual-reports
     description: List, refresh and compare vendor security annual reports with cited evidence.
+  - path: skills/unify
+    description: Check harmony across Soma skills, policy and purpose or explicitly selected paths.
