@@ -1,6 +1,7 @@
 import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { dirname, join, resolve } from "node:path";
+import { YAML } from "bun";
 
 export type Report = { vendor: string; name: string; url: string; year: number | null };
 export type Catalog = {
@@ -30,6 +31,22 @@ export function httpUrl(value: unknown): string {
   return url;
 }
 
+const manifest = object(YAML.parse(readFileSync(resolve(import.meta.dir, "../arc-manifest.yaml"), "utf8")));
+const network = object(manifest.capabilities).network;
+if (!Array.isArray(network)) throw new Error("Manifest needs network hosts");
+const allowedHosts = new Set(network.map(value => text(object(value).host)));
+
+export function networkUrl(value: unknown): string {
+  const url = httpUrl(value);
+  const parsed = new URL(url);
+  if (!allowedHosts.has(parsed.hostname) || parsed.port) throw new Error(`Network destination is not granted by the member manifest: ${parsed.host}`);
+  return url;
+}
+
+export function catalogYearLabel(year: number | null): string {
+  return year === null ? "unknown (verify the original edition)" : `${year} (index label; unverified edition)`;
+}
+
 export function reportYear(value: unknown): number | null {
   if (value === null || value === undefined) return null;
   if (typeof value !== "number" || !Number.isInteger(value) || value < 1900 || value > 2199) {
@@ -40,7 +57,7 @@ export function reportYear(value: unknown): number | null {
 
 export function parseReport(value: unknown): Report {
   const entry = object(value);
-  return { vendor: text(entry.vendor), name: text(entry.name), url: httpUrl(entry.url), year: reportYear(entry.year) };
+  return { vendor: text(entry.vendor), name: text(entry.name), url: networkUrl(entry.url), year: reportYear(entry.year) };
 }
 
 export function parseCatalog(value: unknown): Catalog {
@@ -99,9 +116,19 @@ export function saveFile(path: string, content: string) {
 }
 
 export async function fetchText(url: string): Promise<{ content: string; url: string; contentType: string }> {
-  const response = await fetch(httpUrl(url), {
-    signal: AbortSignal.timeout(30_000), headers: { "User-Agent": "Soma-AnnualReports/1.0" },
-  });
+  let destination = networkUrl(url);
+  const signal = AbortSignal.timeout(30_000);
+  let response: Response;
+  for (let redirects = 0; ; redirects++) {
+    response = await fetch(destination, {
+      signal, redirect: "manual", headers: { "User-Agent": "Soma-AnnualReports/1.0" },
+    });
+    if (![301, 302, 303, 307, 308].includes(response.status)) break;
+    await response.body?.cancel();
+    const location = response.headers.get("location");
+    if (!location || redirects >= 5) throw new Error("Missing redirect location or too many redirects");
+    destination = networkUrl(new URL(location, destination).href);
+  }
   const contentType = response.headers.get("content-type") ?? "";
   if (!response.ok || /application\/pdf/i.test(contentType)) {
     await response.body?.cancel();
@@ -122,5 +149,5 @@ export async function fetchText(url: string): Promise<{ content: string; url: st
   } finally {
     await reader.cancel();
   }
-  return { content: Buffer.concat(chunks).toString("utf8"), url: response.url || url, contentType };
+  return { content: Buffer.concat(chunks).toString("utf8"), url: destination, contentType };
 }

@@ -1,6 +1,12 @@
 import { readFileSync } from "node:fs";
 import { describe, httpUrl, object, reportYear, text } from "./Catalog.ts";
 
+function locator(value: unknown): string {
+  const result = text(value);
+  if (!/^(?:p(?:p)?\.\s*\d+(?:[-–]\d+)?|section\s+\S.*)$/i.test(result)) throw new Error("Citation needs p. N, pp. N-N, or Section <heading>");
+  return result;
+}
+
 export function renderAnalysis(value: unknown): string {
   const input = object(value);
   if (!Array.isArray(input.reports) || input.reports.length < 2) throw new Error("Analysis needs at least two reports");
@@ -8,7 +14,12 @@ export function renderAnalysis(value: unknown): string {
     const report = object(value);
     const year = reportYear(report.year);
     if (year === null) throw new Error("Verify the report year before analysis");
-    return { id: text(report.id), vendor: text(report.vendor), name: text(report.name), year, url: httpUrl(report.url), coverage: text(report.coverage) };
+    if (!report.editionEvidence) throw new Error("Analysis needs original edition evidence with a locator and a quote containing the year");
+    const edition = object(report.editionEvidence);
+    const quote = text(edition.quote);
+    if (!new RegExp(`\\b${year}\\b`).test(quote)) throw new Error("Original edition evidence quote must contain the report year");
+    const editionEvidence = { locator: locator(edition.locator), quote };
+    return { id: text(report.id), vendor: text(report.vendor), name: text(report.name), year, editionEvidence, url: httpUrl(report.url), coverage: text(report.coverage) };
   });
   const byId = new Map(reports.map(report => [report.id, report]));
   if (byId.size !== reports.length || new Set(reports.map(report => report.url)).size !== reports.length) {
@@ -25,19 +36,18 @@ export function renderAnalysis(value: unknown): string {
       const id = text(citation.report);
       const report = byId.get(id);
       if (!report) throw new Error(`Unknown cited report: ${id}`);
-      const locator = text(citation.locator);
-      if (!/^(?:p(?:p)?\.\s*\d+(?:[-–]\d+)?|section\s+\S.*)$/i.test(locator)) throw new Error("Citation needs p. N, pp. N-N, or Section <heading>");
+      const location = locator(citation.locator);
       used.add(id);
-      return `[${report.vendor}, ${report.name} (${report.year}), ${locator}](${report.url})`;
+      return `[${report.vendor}, ${report.name} (${report.year}), ${location}](${report.url})`;
     });
     return `- ${statement} ${citations.join("; ")}`;
   });
   for (const report of reports) if (!used.has(report.id)) throw new Error(`Report has no cited claim: ${report.name}`);
   return [
     "# Cross-report analysis", "", "## Reports consulted", "",
-    ...reports.map(report => `- [${report.vendor}: ${report.name} (${report.year})](${report.url}) — Data coverage: ${report.coverage}`),
+    ...reports.map(report => `- [${report.vendor}: ${report.name} (${report.year})](${report.url}) — Data coverage: ${report.coverage}\n  Edition evidence: “${report.editionEvidence.quote}” ([${report.editionEvidence.locator}](${report.url}))`),
     "", "## Claims", "", ...claims, "", "## Limitations", "", text(input.limitations), "",
-    "Citation structure checked; source accuracy and comparability require reading the originals.", "",
+    "Citation structure and supplied edition evidence checked; quotes, source accuracy and comparability require reading the originals.", "",
   ].join("\n");
 }
 

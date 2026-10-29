@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { argumentsFor, type Catalog, describe, entries, fetchText, httpUrl, loadCatalog, parseCatalog, saveFile, text, upstream } from "./Catalog.ts";
+import { argumentsFor, type Catalog, describe, entries, fetchText, networkUrl, loadCatalog, parseCatalog, saveFile, text, upstream } from "./Catalog.ts";
 
 export function parseMarkdownReports(markdown: string, source = upstream): Catalog {
   const categories: Catalog["categories"] = { analysis: {}, survey: {} };
@@ -18,7 +18,7 @@ export function parseMarkdownReports(markdown: string, source = upstream): Catal
       const match = /^-\s+\[([^\]]+)\]\(([^)]+)\)\s*-\s*\[([^\]]+)\]\(([^)]+)\)(?:\s*\((\d{4})\))?/.exec(line);
       if (!match) throw new Error(`Unrecognized report entry in ${section}/${category}`);
       const [, vendor, url, name, , year] = match;
-      categories[section][category]?.push({ vendor: text(vendor), name: text(name), url: httpUrl(url), year: year ? Number(year) : null });
+      categories[section][category]?.push({ vendor: text(vendor), name: text(name), url: networkUrl(url), year: year ? Number(year) : null });
     }
   }
   const metadata = { source, lastUpdated: new Date().toISOString().slice(0, 10), totalReports: 0 };
@@ -35,11 +35,10 @@ export function compareReports(current: Catalog, updated: Catalog) {
 }
 
 export async function updateSources({ directory, args }: ReturnType<typeof argumentsFor>) {
-  let dryRun = false, diff = false, readme: string | undefined;
+  let preview = false, readme: string | undefined;
   for (let i = 0; i < args.length; i++) {
     const arg = args[i];
-    if (arg === "--dry-run") dryRun = true;
-    else if (arg === "--diff") diff = true;
+    if (arg === "--dry-run" || arg === "--diff") preview = true;
     else if (arg === "--readme") {
       readme = args[++i];
       if (!readme || readme.startsWith("--")) throw new Error("--readme needs a path");
@@ -53,8 +52,8 @@ export async function updateSources({ directory, args }: ReturnType<typeof argum
       !Object.values(updated.categories[section]).some(reports => reports.length)) throw new Error(`Parsed no ${section} reports; catalog unchanged`);
   }
   const changes = compareReports(current, updated);
-  if (!dryRun && !diff) saveFile(join(directory, "sources.json"), JSON.stringify(updated, null, 2) + "\n");
-  return `Input: ${readme ? "local README (not a verified upstream fetch)" : upstream}\nTotal parsed: ${updated.metadata.totalReports}\nNew or changed reports: ${changes.added}\nRemoved or changed reports: ${changes.removed}\n${dryRun || diff ? "Preview only; no changes saved" : "Updated state catalog"}\n`;
+  if (!preview) saveFile(join(directory, "sources.json"), JSON.stringify(updated, null, 2) + "\n");
+  return `Input: ${readme ? "local README (not a verified upstream fetch)" : upstream}\nTotal parsed: ${updated.metadata.totalReports}\nNew or changed reports: ${changes.added}\nRemoved or changed reports: ${changes.removed}\n${preview ? "Preview only; no changes saved" : "Updated state catalog"}\n`;
 }
 
 if (import.meta.main) {
