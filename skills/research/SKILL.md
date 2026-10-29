@@ -38,6 +38,7 @@ Route to the appropriate workflow based on the request.
 **CRITICAL:** For due diligence, company/person background checks, or vetting -> **INVOKE OSINT SKILL INSTEAD**
 
 ### Research Modes (Primary Workflows)
+- Pareto / vital few / zeitgeist / where is thinking on a topic heading (these requests override Quick/Standard/Extensive/Deep depth defaults) -> `Workflows/Pareto.md`
 - Quick/minor research (1 Perplexity, 1 query) -> `Workflows/QuickResearch.md`
 - Standard research - DEFAULT (4 agents: Claude + Gemini + Grok + Perplexity, cross-checked) -> `Workflows/StandardResearch.md`
 - Extensive research (7 explorers + 2 verifiers = 9 agents) -> `Workflows/ExtensiveResearch.md`
