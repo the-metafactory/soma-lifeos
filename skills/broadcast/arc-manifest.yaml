@@ -1,0 +1,29 @@
+schema: arc/v1
+name: broadcast
+version: 0.1.0
+type: skill
+tier: custom
+description: "Preview LinkedIn and Mastodon posts; publish each only after explicit confirmation."
+license: MIT
+author:
+  name: The MetaFactory
+  github: the-metafactory
+upstream:
+  repo: danielmiessler/PAI
+  path: LifeOS/install/skills/Broadcast
+  commit: fb9aef4640a73feae4c2e6483b26f58491ce2665
+capabilities:
+  filesystem:
+    read:
+      - ./**
+    write: []
+  network:
+    - host: api.linkedin.com
+      reason: Resolve the authenticated member and publish confirmed LinkedIn posts.
+    # Mastodon also contacts the runtime origin in MASTODON_INSTANCE.
+    # Arc currently accepts only literal hostnames in this declaration.
+  bash:
+    allowed: true
+  secrets:
+    - LINKEDIN_ACCESS_TOKEN
+    - MASTODON_TOKEN
