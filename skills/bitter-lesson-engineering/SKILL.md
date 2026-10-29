@@ -51,7 +51,7 @@ Print the target path, the audited line range, the rule count and CUT/KEEP count
 
 ```text
 File: <target path>
-Coverage: lines 1–<last line>; complete
+Coverage: lines <first>–<last>; <complete|incomplete: reason>
 Rules: <N>; CUT: <C>; KEEP: <K>
 KEEP R001 <target>:<line or range> [<kind>] “<identifying quote>” — <one-sentence reason>.
 CUT R002 <target>:<line or range> [<kind>] “<identifying quote>” — <one-sentence reason>.
@@ -59,6 +59,6 @@ CUT R002 <target>:<line or range> [<kind>] “<identifying quote>” — <one-se
 
 Use one sentence for each reason, specific to that rule; cite the surviving rule ID for a duplicate. Report zero rules explicitly when the target has none. Before finishing, reconcile the source against the inventory: every rule has exactly one verdict, IDs have no gaps or repeats, and CUT + KEEP equals the rule count. Disclose any excluded non-rule sections or unresolved conflicts after the verdicts.
 
-The audit proposes changes only. Leave target files untouched; show a proposed trimmed version only if requested, and apply it only after the principal approves that specific file's proposed version.
+The audit proposes changes only. Leave target files untouched; show a proposed trimmed version only if requested.
 
 For upstream provenance and omitted features, read [port notes](references/port.md).

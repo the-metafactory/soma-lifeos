@@ -1,6 +1,6 @@
 # Port notes
 
-Source: `danielmiessler/PAI`, `LifeOS/install/skills/BitterLessonEngineering`, commit `fb9aef4640a73feae4c2e6483b26f58491ce2665`. The root `NOTICE.md` carries the upstream MIT notice.
+Source: `danielmiessler/PAI`, `LifeOS/install/skills/BitterLessonEngineering`, commit `fb9aef4640a73feae4c2e6483b26f58491ce2665`. See the root [upstream MIT notice](../../../NOTICE.md).
 
 The source member contains `SKILL.md`, `Intents/Audit.md` and `Intents/QuickCheck.md`, with no executable tools. This port combines the single-file workflow and judgment rubric in one entry file. It needs only the invoking agent's file-reading capability; it has no model-service dependency, network operation, secrets or persistent state.
 
