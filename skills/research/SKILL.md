@@ -38,6 +38,7 @@ Route to the appropriate workflow based on the request.
 **CRITICAL:** For due diligence, company/person background checks, or vetting -> **INVOKE OSINT SKILL INSTEAD**
 
 ### Research Modes (Primary Workflows)
+- Pareto / vital few / zeitgeist / where is thinking on a topic heading (these requests override Quick/Standard/Extensive/Deep depth defaults) -> `Workflows/Pareto.md`
 - Quick/minor research (1 Perplexity, 1 query) -> `Workflows/QuickResearch.md`
 - Standard research - DEFAULT (4 agents: Claude + Gemini + Grok + Perplexity, cross-checked) -> `Workflows/StandardResearch.md`
 - Extensive research (7 explorers + 2 verifiers = 9 agents) -> `Workflows/ExtensiveResearch.md`
@@ -139,6 +140,14 @@ See `Workflows/DeepInvestigation.md` for full workflow details.
 
 ## File Organization
 
+### Pareto
+
+Save reports, working notes and `execution.jsonl` under
+`<soma-home>/memory/SKILLS/research/pareto/<date>-<topic-slug>/`, where `<soma-home>`
+is `SOMA_HOME` or `~/.soma`.
+
+### Other workflows
+
 **Working files (temporary work artifacts):** `~/.claude/PAI/MEMORY/WORK/{current_work}/`
 - Read `~/.claude/` to get the `work_dir` value
 - All iterative work artifacts go in the current work item directory
@@ -185,7 +194,9 @@ User: "do a deep investigation of the AI agent market"
 
 ## Execution Log
 
-After completing any workflow, append a single JSONL entry:
+After completing any workflow, append a single JSONL entry. For Pareto, append to
+`execution.jsonl` in the run directory defined in [File Organization](#file-organization).
+Use the fields shown below. For other workflows, use the destination in this command:
 
 ```bash
 echo '{"ts":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","skill":"Research","workflow":"WORKFLOW_USED","input":"8_WORD_SUMMARY","status":"ok|error","duration_s":SECONDS}' >> ~/.claude/PAI/MEMORY/SKILLS/execution.jsonl
