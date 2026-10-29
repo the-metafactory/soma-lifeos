@@ -1,0 +1,33 @@
+# Static local paths and fixed service hosts only. These mechanical copies retain
+# source integrations; a capability-enforcing host must separately grant selected
+# input/output paths, legacy context/data paths, and research or lookup hosts.
+schema: arc/v1
+name: story-explanation
+version: 0.1.0
+type: skill
+tier: custom
+description: Explain complex topics through narrative summaries in several lengths and formats.
+license: MIT
+author:
+  name: The MetaFactory
+  github: the-metafactory
+upstream:
+  repo: danielmiessler/PAI
+  path: LifeOS/install/skills/StoryExplanation
+  commit: fb9aef4640a73feae4c2e6483b26f58491ce2665
+capabilities:
+  filesystem:
+    read:
+      - ./**
+      - /tmp/**
+    write:
+      - ./**
+      - /tmp/**
+      - "${SOMA_HOME}/memory/SKILLS/story-explanation/**"
+      - "${SOMA_HOME}/memory/SKILLS/execution.jsonl"
+  network:
+    []
+  bash:
+    allowed: true
+  secrets:
+    []

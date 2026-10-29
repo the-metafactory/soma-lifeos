@@ -1,0 +1,39 @@
+# Static local paths and fixed service hosts only. These mechanical copies retain
+# source integrations; a capability-enforcing host must separately grant selected
+# input/output paths, legacy context/data paths, and research or lookup hosts.
+schema: arc/v1
+name: us-metrics
+version: 0.1.0
+type: skill
+tier: custom
+description: Fetch and analyze US economic and social indicators from public data sources.
+license: MIT
+author:
+  name: The MetaFactory
+  github: the-metafactory
+upstream:
+  repo: danielmiessler/PAI
+  path: Packs/USMetrics/src
+  commit: 2fde1bbe9e8f280cd4998e244b53e3c66f3dc8b9
+capabilities:
+  filesystem:
+    read:
+      - ./**
+      - /tmp/**
+    write:
+      - ./**
+      - /tmp/**
+      - "${SOMA_HOME}/memory/SKILLS/us-metrics/**"
+      - "${SOMA_HOME}/memory/SKILLS/execution.jsonl"
+  network:
+    - host: api.stlouisfed.org
+      reason: Fetch economic indicator observations from FRED.
+    - host: api.eia.gov
+      reason: Fetch energy price observations from EIA.
+    - host: api.fiscaldata.treasury.gov
+      reason: Fetch public federal debt observations.
+  bash:
+    allowed: true
+  secrets:
+    - FRED_API_KEY
+    - EIA_API_KEY

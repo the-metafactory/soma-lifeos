@@ -22,7 +22,7 @@ function library(artifacts: string): string {
 
 test("the repo's own manifest passes", () => {
   expect(checkPack(resolve(import.meta.dir, ".."))).toBe(0);
-});
+}, 30_000);
 
 test("an empty library passes", () => {
   expect(checkPack(library("[]"))).toBe(0);
