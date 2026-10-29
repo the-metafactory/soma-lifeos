@@ -1,0 +1,33 @@
+schema: arc/v1
+name: bright-data
+version: 0.1.0
+type: skill
+tier: custom
+description: Scrape URLs and crawl sites with progressive escalation to Bright Data.
+license: MIT
+author:
+  name: The MetaFactory
+  github: the-metafactory
+upstream:
+  repo: danielmiessler/PAI
+  path: Packs/BrightData/src
+  commit: 2fde1bbe9e8f280cd4998e244b53e3c66f3dc8b9
+capabilities:
+  filesystem:
+    read:
+      - ./**
+      - /tmp/**
+      - ~/.soma/UNMAPPED/.env
+    write:
+      - ./**
+      - /tmp/**
+      - ~/.soma/memory/SKILLS/execution.jsonl
+  # Fixed service hosts; browsing and scraping also contact user-selected target hosts.
+  network:
+    - host: api.brightdata.com
+      reason: Trigger crawls and retrieve crawl status and results.
+  bash:
+    allowed: true
+  secrets:
+    - BRIGHT_DATA_API_KEY
+    - BRIGHTDATA_API_KEY

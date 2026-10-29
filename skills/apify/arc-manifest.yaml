@@ -1,0 +1,29 @@
+schema: arc/v1
+name: apify
+version: 0.1.0
+type: skill
+tier: custom
+description: "Scrape social media, business data, ecommerce, and websites with Apify actor wrappers."
+license: MIT
+author:
+  name: The MetaFactory
+  github: the-metafactory
+upstream:
+  repo: danielmiessler/PAI
+  path: Packs/Apify/src
+  commit: 2fde1bbe9e8f280cd4998e244b53e3c66f3dc8b9
+capabilities:
+  filesystem:
+    read:
+      - ./**
+    write:
+      - ./**
+      - ~/.soma/memory/SKILLS/execution.jsonl
+  network:
+    - host: api.apify.com
+      reason: Run scraping actors and retrieve their datasets.
+  bash:
+    allowed: true
+  secrets:
+    - APIFY_TOKEN
+    - APIFY_API_KEY

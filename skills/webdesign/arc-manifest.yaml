@@ -1,0 +1,34 @@
+schema: arc/v1
+name: webdesign
+version: 0.1.0
+type: skill
+tier: custom
+description: "Create, refine, export, integrate, and verify web interfaces through Claude Design."
+license: MIT
+author:
+  name: The MetaFactory
+  github: the-metafactory
+upstream:
+  repo: danielmiessler/PAI
+  path: Packs/Webdesign/src
+  commit: 2fde1bbe9e8f280cd4998e244b53e3c66f3dc8b9
+capabilities:
+  filesystem:
+    read:
+      - ./**
+      - /tmp/**
+      - ~/Downloads/**
+    write:
+      - ./**
+      - /tmp/**
+      - ~/.soma/memory/SKILLS/execution.jsonl
+  # Fixed service hosts; browsing and scraping also contact user-selected target hosts.
+  network:
+    - host: claude.ai
+      reason: Drive the authenticated Claude Design interface.
+    - host: localhost
+      reason: Verify prototypes and integrated designs in the local application.
+  bash:
+    allowed: true
+  secrets:
+    []

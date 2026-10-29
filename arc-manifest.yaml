@@ -9,4 +9,16 @@ license: MIT
 author:
   name: The MetaFactory
   github: the-metafactory
-artifacts: []
+artifacts:
+  - path: skills/apify
+    description: "Scrape social media, business data, ecommerce, and websites with Apify actor wrappers."
+  - path: skills/bright-data
+    description: Scrape URLs and crawl sites with progressive escalation to Bright Data.
+  - path: skills/scraping
+    description: Route web scraping to Bright Data workflows and Apify platform actors.
+  - path: skills/browser
+    description: "Automate headless browsing, screenshots, stories, and data extraction with agent-browser."
+  - path: skills/interceptor
+    description: "Automate real Chrome sessions and record, replay, and verify browser workflows."
+  - path: skills/webdesign
+    description: "Create, refine, export, integrate, and verify web interfaces through Claude Design."
