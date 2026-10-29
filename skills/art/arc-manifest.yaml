@@ -1,0 +1,48 @@
+schema: arc/v1
+name: art
+version: 0.1.0
+type: skill
+tier: custom
+description: Create static illustrations, diagrams, thumbnails, icons, and wallpapers.
+license: MIT
+author:
+  name: The MetaFactory
+  github: the-metafactory
+upstream:
+  repo: danielmiessler/PAI
+  path: Packs/Art/src
+  commit: 2fde1bbe9e8f280cd4998e244b53e3c66f3dc8b9
+capabilities:
+  filesystem:
+    read:
+      - ./**
+      - /tmp/**
+      - ~/Downloads/**
+    write:
+      - ./**
+      - /tmp/**
+      - ~/Downloads/**
+  network:
+    - host: api.openai.com
+      reason: Generate images with OpenAI.
+    - host: generativelanguage.googleapis.com
+      reason: Generate images with Google models.
+    - host: api.replicate.com
+      reason: Generate images with Replicate models.
+    - host: replicate.delivery
+      reason: Download generated images.
+    - host: discord.com
+      reason: Submit Midjourney image requests.
+    - host: gateway.discord.gg
+      reason: Receive Midjourney job updates.
+    - host: cdn.discordapp.com
+      reason: Download Midjourney images.
+    - host: registry.npmjs.org
+      reason: Install image tool dependencies.
+  bash:
+    allowed: true
+  secrets:
+    - OPENAI_API_KEY
+    - GOOGLE_API_KEY
+    - REPLICATE_API_TOKEN
+    - DISCORD_BOT_TOKEN
