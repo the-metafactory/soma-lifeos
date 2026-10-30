@@ -1,0 +1,34 @@
+# Static local paths and fixed service hosts only. These mechanical copies retain
+# source integrations; a capability-enforcing host must separately grant selected
+# input/output paths, legacy context/data paths, and research or lookup hosts.
+schema: arc/v1
+name: osint
+version: 0.1.0
+type: skill
+tier: custom
+description: "Research people, companies, domains, and threat actors through public sources."
+license: MIT
+author:
+  name: The MetaFactory
+  github: the-metafactory
+upstream:
+  repo: danielmiessler/PAI
+  path: Packs/Investigation/src
+  commit: 2fde1bbe9e8f280cd4998e244b53e3c66f3dc8b9
+capabilities:
+  filesystem:
+    read:
+      - ./**
+      - /tmp/**
+    write:
+      - ./**
+      - /tmp/**
+      - "${SOMA_HOME}/memory/SKILLS/osint/**"
+      - "${SOMA_HOME}/memory/SKILLS/execution.jsonl"
+  network:
+    - host: localhost
+      reason: Send workflow notifications to the local voice service.
+  bash:
+    allowed: true
+  secrets:
+    []

@@ -1,0 +1,27 @@
+schema: arc/v1
+name: speaking
+version: 0.1.0
+type: skill
+tier: custom
+description: Find open calls for papers by topic and region and draft speaking proposals.
+license: MIT
+author:
+  name: The MetaFactory
+  github: the-metafactory
+upstream:
+  repo: danielmiessler/PAI
+  path: LifeOS/install/skills/Speaking
+  commit: fb9aef4640a73feae4c2e6483b26f58491ce2665
+capabilities:
+  filesystem:
+    read:
+      - ./**
+      - "${SOMA_HOME}/memory/SKILLS/speaking/**"
+    write:
+      - "${SOMA_HOME}/memory/SKILLS/speaking/**"
+  network:
+    - host: www.iese.fraunhofer.de
+      reason: Read the organizer's call for papers and deadline.
+  bash:
+    allowed: true
+  secrets: []

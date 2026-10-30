@@ -10,6 +10,14 @@ author:
   name: The MetaFactory
   github: the-metafactory
 artifacts:
+  - path: skills/art
+    description: Create static illustrations, diagrams, thumbnails, icons, and wallpapers.
+  - path: skills/media
+    description: Create visual content and render videos with Art and Remotion.
+  - path: skills/bitter-lesson-engineering
+    description: Audit an explicitly supplied instruction file with a CUT or KEEP verdict and reason for every rule.
+  - path: skills/broadcast
+    description: "Preview LinkedIn and Mastodon posts; --post requires a terminal and yes per channel."
   - path: skills/apify
     description: "Scrape social media, business data, ecommerce, and websites with Apify actor wrappers."
   - path: skills/bright-data
@@ -34,3 +42,69 @@ artifacts:
     description: "Route reconnaissance, web assessments, prompt injection testing, and security intelligence."
   - path: skills/utilities
     description: "Route document processing, parsing, audio editing, Fabric patterns, and developer tools."
+  - path: skills/security-updates
+    description: Collect ranked security news, research and breach reports with persistent deduplication.
+  - path: skills/speaking
+    description: Find open calls for papers by topic and region and draft speaking proposals.
+  - path: skills/annual-reports
+    description: List, refresh and compare vendor security annual reports with cited evidence.
+  - path: skills/unify
+    description: Check harmony across Soma skills, policy and purpose or explicitly selected paths.
+  - path: skills/research
+    description: Research topics at selectable depths and extract cited knowledge from web and media sources.
+  - path: skills/extract-wisdom
+    description: Extract structured wisdom and actionable insights from articles, videos, podcasts, and interviews.
+  - path: skills/content-analysis
+    description: Route content analysis and wisdom extraction for articles, videos, and podcasts.
+  - path: skills/story-explanation
+    description: Explain complex topics through narrative summaries in several lengths and formats.
+  - path: skills/write-story
+    description: Develop fiction through interviews, story bibles, exploration, chapter writing, and revision.
+  - path: skills/interview
+    description: Conduct phased interviews to review and fill personal context, preferences, and goals.
+  - path: skills/private-investigator
+    description: Find and verify people ethically through public records, social media, and reverse lookups.
+  - path: skills/osint
+    description: Research people, companies, domains, and threat actors through public sources.
+  - path: skills/us-metrics
+    description: Fetch and analyze US economic and social indicators from public data sources.
+  - path: skills/agents
+    description: "Compose custom agents and coordinate parallel agent teams."
+  - path: skills/delegation
+    description: "Delegate work with clear scope, context, and completion criteria."
+  - path: skills/create-cli
+    description: "Create and extend command-line tools with reusable design patterns."
+  - path: skills/create-skill
+    description: "Create, validate, improve, and maintain agent skills."
+  - path: skills/prompting
+    description: "Build and validate reusable prompts and structured templates."
+  - path: skills/evals
+    description: "Evaluate agent behavior with scenarios, graders, and regression suites."
+  - path: skills/loop
+    description: "Run iterative agent work against explicit completion criteria."
+  - path: skills/optimize
+    description: "Optimize prompts and agent workflows through measured iteration."
+  - path: skills/system
+    description: "Check system integrity, recall work context, and document updates."
+  - path: skills/aperture-oscillation
+    description: "Explore a problem at tactical and strategic scopes, then synthesize design tensions."
+  - path: skills/be-creative
+    description: "Generate diverse ideas through verbalized sampling and structured creativity workflows."
+  - path: skills/council
+    description: "Debate decisions through multiple expert perspectives and visible deliberation rounds."
+  - path: skills/first-principles
+    description: "Deconstruct assumptions and rebuild solutions from fundamental truths."
+  - path: skills/ideate
+    description: "Evolve and rank novel ideas across repeated generation and testing cycles."
+  - path: skills/iterative-depth
+    description: "Explore a problem through successive lenses to surface hidden requirements."
+  - path: skills/red-team
+    description: "Stress-test ideas and plans through adversarial analysis and validation."
+  - path: skills/root-cause-analysis
+    description: "Investigate incidents with structured, blameless causal analysis."
+  - path: skills/science
+    description: "Apply hypotheses, experiments and measured iteration to problem solving."
+  - path: skills/systems-thinking
+    description: "Analyze feedback loops, system archetypes and leverage points."
+  - path: skills/world-threat-model
+    description: "Stress-test ideas and strategies against multiple future time horizons."

@@ -1,0 +1,25 @@
+schema: arc/v1
+name: iterative-depth
+version: 0.1.0
+type: skill
+tier: custom
+description: "Explore a problem through successive lenses to surface hidden requirements."
+license: MIT
+author:
+  name: The MetaFactory
+  github: the-metafactory
+upstream:
+  repo: danielmiessler/PAI
+  path: Packs/IterativeDepth/src
+  commit: 2fde1bbe9e8f280cd4998e244b53e3c66f3dc8b9
+capabilities:
+  filesystem:
+    read:
+      - "./**"
+    write:
+      - "./**"
+      - ~/.soma/memory/SKILLS/execution.jsonl
+  network: []
+  bash:
+    allowed: true
+  secrets: []

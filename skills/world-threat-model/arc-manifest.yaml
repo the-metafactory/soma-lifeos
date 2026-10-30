@@ -1,0 +1,29 @@
+schema: arc/v1
+name: world-threat-model
+version: 0.1.0
+type: skill
+tier: custom
+description: "Stress-test ideas and strategies against multiple future time horizons."
+license: MIT
+author:
+  name: The MetaFactory
+  github: the-metafactory
+upstream:
+  repo: danielmiessler/PAI
+  path: Packs/WorldThreatModel/src
+  commit: 2fde1bbe9e8f280cd4998e244b53e3c66f3dc8b9
+capabilities:
+  filesystem:
+    read:
+      - "./**"
+      - ~/.soma/skills/world-threat-model/**
+      - ~/.soma/memory/RESEARCH/WorldModels/**
+    write:
+      - "./**"
+      - ~/.soma/memory/SKILLS/execution.jsonl
+      - ~/.soma/memory/RESEARCH/WorldModels/**
+  # UpdateModels researches through the host's WebSearch tool; the hosts it contacts depend on the query.
+  network: []
+  bash:
+    allowed: true
+  secrets: []

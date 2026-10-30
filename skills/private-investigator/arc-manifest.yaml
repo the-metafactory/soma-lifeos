@@ -1,0 +1,33 @@
+# Static local paths and fixed service hosts only. These mechanical copies retain
+# source integrations; a capability-enforcing host must separately grant selected
+# input/output paths, legacy context/data paths, and research or lookup hosts.
+schema: arc/v1
+name: private-investigator
+version: 0.1.0
+type: skill
+tier: custom
+description: "Find and verify people ethically through public records, social media, and reverse lookups."
+license: MIT
+author:
+  name: The MetaFactory
+  github: the-metafactory
+upstream:
+  repo: danielmiessler/PAI
+  path: Packs/PrivateInvestigator/src
+  commit: 2fde1bbe9e8f280cd4998e244b53e3c66f3dc8b9
+capabilities:
+  filesystem:
+    read:
+      - ./**
+      - /tmp/**
+    write:
+      - ./**
+      - /tmp/**
+      - "${SOMA_HOME}/memory/SKILLS/private-investigator/**"
+      - "${SOMA_HOME}/memory/SKILLS/execution.jsonl"
+  network:
+    []
+  bash:
+    allowed: true
+  secrets:
+    []
