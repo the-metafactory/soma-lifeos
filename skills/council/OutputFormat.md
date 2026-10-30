@@ -9,9 +9,9 @@ All council members are custom-composed via ComposeAgent. Agent names and trait 
 ## Full Debate Transcript
 
 ```markdown
-## Council Debate: [Topic]
+## council Debate: [Topic]
 
-**Council Members:** [Composed agent names with trait summaries]
+**council Members:** [Composed agent names with trait summaries]
 
 ### Round 1: Initial Positions
 
@@ -44,7 +44,7 @@ All council members are custom-composed via ComposeAgent. Agent names and trait 
 
 [...]
 
-### Council Synthesis
+### council Synthesis
 
 **Areas of Convergence:**
 - [Points where multiple agents agreed]
@@ -56,10 +56,10 @@ All council members are custom-composed via ComposeAgent. Agent names and trait 
 [Synthesized recommendation]
 ```
 
-## Quick Council Format
+## Quick council Format
 
 ```markdown
-## Quick Council: [Topic]
+## Quick council: [Topic]
 
 ### Perspectives
 

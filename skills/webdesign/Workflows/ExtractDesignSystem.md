@@ -26,7 +26,7 @@ Optional:
 ### 1. Preflight
 
 ```bash
-interceptor --version || echo "ABORT: Interceptor not installed"
+interceptor --version || echo "ABORT: interceptor not installed"
 ls "$INPUT_PATH" || echo "ABORT: input path not readable"
 ```
 
@@ -53,7 +53,7 @@ TMP="$BRAND_FOLDER"
 ### 3. Open Claude Design Onboarding
 
 ```bash
-bun ~/.soma/skills/Webdesign/Tools/DriveClaudeDesign.ts open
+bun ~/.soma/skills/webdesign/Tools/DriveClaudeDesign.ts open
 ```
 
 Then navigate to the design system section. The skill sends a prompt like:
@@ -63,7 +63,7 @@ Then navigate to the design system section. The skill sends a prompt like:
 ### 4. Upload Files
 
 ```bash
-bun ~/.soma/skills/Webdesign/Tools/DriveClaudeDesign.ts upload "$TMP"
+bun ~/.soma/skills/webdesign/Tools/DriveClaudeDesign.ts upload "$TMP"
 ```
 
 ### 5. Wait for System Extraction
@@ -79,7 +79,7 @@ Claude Design takes 30s-3min depending on codebase size. Output appears in the d
 
 Screenshot the extracted system:
 ```bash
-bun ~/.soma/skills/Webdesign/Tools/DriveClaudeDesign.ts screenshot "$OUT/extracted-system.png"
+bun ~/.soma/skills/webdesign/Tools/DriveClaudeDesign.ts screenshot "$OUT/extracted-system.png"
 ```
 
 If Claude Design flagged conflicts (e.g., "three different button styles in codebase — pick canonical"), resolve in the conversational UI. The adjustment-knob UX lets you tweak tokens live.
@@ -89,7 +89,7 @@ If Claude Design flagged conflicts (e.g., "three different button styles in code
 Claude Design persists the system server-side on your account. It will be auto-applied to every subsequent prototype generated in this workspace. You can also export the tokens as JSON:
 
 ```bash
-bun ~/.soma/skills/Webdesign/Tools/DriveClaudeDesign.ts export tokens "$OUT/tokens.json"
+bun ~/.soma/skills/webdesign/Tools/DriveClaudeDesign.ts export tokens "$OUT/tokens.json"
 ```
 
 ## Output

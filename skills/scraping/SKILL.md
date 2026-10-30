@@ -7,9 +7,17 @@ description: Web scraping via progressive escalation (Bright Data proxy) and soc
 
 Unified skill for web scraping workflows.
 
+## Optional Integrations
+
+Check availability before using these integrations in any workflow:
+
+- `research` is optional. If unavailable, gather and cite sources with the host's web tools.
+
+Report any fallback used in the result.
+
 ## Workflow Routing
 
 | Request Pattern | Route To |
 |---|---|
-| Bright Data, scrape URL, proxy, crawl, progressive scraping, Chrome headers | `BrightData/SKILL.md` |
-| Twitter, Instagram, LinkedIn, TikTok, YouTube, Facebook, Google Maps, Amazon scraping, Apify | `Apify/SKILL.md` |
+| Bright Data, scrape URL, proxy, crawl, progressive scraping, Chrome headers | `../bright-data/SKILL.md` |
+| Twitter, Instagram, LinkedIn, TikTok, YouTube, Facebook, Google Maps, Amazon scraping, Apify | `../apify/SKILL.md` |

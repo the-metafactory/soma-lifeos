@@ -26,14 +26,14 @@ OUT=~/Downloads/webdesign/redesign/$(date +%Y%m%d-%H%M%S)
 mkdir -p "$OUT"
 
 # Full-page screenshot
-bun ~/.soma/skills/Interceptor/Tools/Open.ts "$URL"
-bun ~/.soma/skills/Interceptor/Tools/Screenshot.ts --full-page "$OUT/original.png"
+bun ~/.soma/skills/interceptor/Tools/Open.ts "$URL"
+bun ~/.soma/skills/interceptor/Tools/Screenshot.ts --full-page "$OUT/original.png"
 
 # HTML snapshot
 curl -sL "$URL" > "$OUT/original.html"
 
 # Extract tokens from the live site
-bun ~/.soma/skills/Webdesign/Tools/VerifyDesign.ts "$URL" "$OUT/original-verify"
+bun ~/.soma/skills/webdesign/Tools/VerifyDesign.ts "$URL" "$OUT/original-verify"
 ```
 
 ### 2. Critique Pass
@@ -75,9 +75,9 @@ The one memorable element: $DIFFERENTIATOR
 ### 4. Submit to Claude Design
 
 ```bash
-bun ~/.soma/skills/Webdesign/Tools/DriveClaudeDesign.ts open
-bun ~/.soma/skills/Webdesign/Tools/DriveClaudeDesign.ts upload "$OUT/original.png"
-bun ~/.soma/skills/Webdesign/Tools/DriveClaudeDesign.ts prompt "$(cat $OUT/brief.md)"
+bun ~/.soma/skills/webdesign/Tools/DriveClaudeDesign.ts open
+bun ~/.soma/skills/webdesign/Tools/DriveClaudeDesign.ts upload "$OUT/original.png"
+bun ~/.soma/skills/webdesign/Tools/DriveClaudeDesign.ts prompt "$(cat $OUT/brief.md)"
 ```
 
 ### 5. Iterate
@@ -94,8 +94,8 @@ Use `RefinePrototype.md` workflow for refinements. Common redesign iterations:
 Before export, capture the new design and compare:
 
 ```bash
-bun ~/.soma/skills/Webdesign/Tools/DriveClaudeDesign.ts screenshot "$OUT/redesigned.png"
-bun ~/.soma/skills/Webdesign/Tools/VerifyDesign.ts --compare "$OUT/original.png" "$OUT/redesigned.png" "$OUT/compare"
+bun ~/.soma/skills/webdesign/Tools/DriveClaudeDesign.ts screenshot "$OUT/redesigned.png"
+bun ~/.soma/skills/webdesign/Tools/VerifyDesign.ts --compare "$OUT/original.png" "$OUT/redesigned.png" "$OUT/compare"
 ```
 
 ### 7. Export + Integrate

@@ -4,14 +4,6 @@
 
 **Phase set:** CONSUME → STEAL → MATE → TEST. Skips DREAM, DAYDREAM, CONTEMPLATE (the perturbation phases) and EVOLVE/META-LEARN (the iteration phases). Output is a single batch of scored candidates.
 
-## Voice Notification
-
-```bash
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the QuickCycle workflow in the Ideate skill to fast-generate novel candidates"}' \
-  > /dev/null 2>&1 &
-```
-
 ## Inputs
 
 - **Problem statement** (required)
@@ -21,13 +13,13 @@
 ## Steps
 
 ### 1. CONSUME
-- Invoke `Skill("Research")` in standard mode (NOT extensive — speed matters)
+- When installed, invoke `Skill("research")` in standard mode (NOT extensive — speed matters)
 - Pull from 2-3 domains (default for QuickCycle): direct domain + 1-2 distant domains
 - Extract atomic ideas, tag with source domain
 - Output: 10-20 raw input items
 
 ### 2. STEAL
-- Invoke `Skill("Research")` targeting 2 foreign domains via random lottery from the standard 50+ domain pool
+- When installed, invoke `Skill("research")` targeting 2 foreign domains via random lottery from the standard 50+ domain pool
 - For each foreign domain, find 2-3 patterns/solutions
 - Map each foreign pattern onto the problem
 - Output: 4-6 borrowed pattern mappings
@@ -43,7 +35,7 @@
 - 3 judge agents independently score each offspring on 4 dimensions: Feasibility, Novelty, Impact, Elegance
 - Final score = average; confidence = inverse of variance
 - Each judge: score + 1-sentence supporting argument + 1-sentence counterargument
-- Skip RedTeam adversarial pass (FullCycle has it; QuickCycle trades depth for speed)
+- Skip red-team adversarial pass (FullCycle has it; QuickCycle trades depth for speed)
 - Skip external validation hooks
 - Drop bottom 25%; return top `target_count` ranked by composite score
 
@@ -60,10 +52,6 @@ No Insight Extractor (single cycle has no cross-cycle pattern to extract). No Lo
 
 - Need genuinely novel ideas (no DREAM/DAYDREAM = bounded creativity) → use FullCycle
 - Need adaptive strategy (no META-LEARN = no learning across cycles) → use FullCycle
-- Just need divergent ideas without scoring → use `Skill("BeCreative")` instead
+- Just need divergent ideas without scoring → use `Skill("be-creative")` instead
 
-## Execution Log
-
-```bash
-echo '{"ts":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","skill":"Ideate","workflow":"QuickCycle","input":"8_WORD_SUMMARY","status":"ok|error","duration_s":SECONDS}' >> ~/.soma/memory/SKILLS/execution.jsonl
-```
+For execution logging, follow [the skill's Execution Log](../SKILL.md#execution-log).

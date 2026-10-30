@@ -1,6 +1,6 @@
 ---
-name: BrightData
-description: Progressive URL scraping. USE WHEN Bright Data, scrape URL, web scraping tiers. SkillSearch('brightdata') for docs.
+name: bright-data
+description: Progressive URL scraping. Use for Bright Data, URL scraping, and escalation across scraping tiers. Read the bright-data skill for docs.
 context: fork
 ---
 ## Workflow Routing
@@ -75,7 +75,7 @@ Examples: "scrape this URL", "fetch this page", "get content from [URL]", "pull 
 
 **four-tier-scrape.md** - Complete URL content scraping with four-tier fallback strategy
 - **When to use:** Any URL content retrieval request
-- **Process:** Start with WebFetch → If fails, use curl with Chrome headers → If fails, use Browser Automation → If fails, use Bright Data MCP
+- **Process:** Start with WebFetch → If fails, use curl with Chrome headers → If fails, use browser Automation → If fails, use Bright Data MCP
 - **Output:** URL content in markdown format
 
 ---
@@ -150,7 +150,5 @@ Skill Response:
 ---
 
 **Related Documentation:**
-- `~/.soma/skills/PAI/SkillSystem.md` - Canonical structure guide
-- `~/.soma/skills/PAI/CONSTITUTION.md` - Overall PAI philosophy
 
 **Last Updated:** 2025-11-23

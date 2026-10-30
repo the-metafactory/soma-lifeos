@@ -1,14 +1,6 @@
 # ReviewStories Workflow — Parallel User Story Validation
 
-## Voice Notification
-
-```bash
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the ReviewStories workflow in the Browser skill to validate user stories"}' \
-  > /dev/null 2>&1 &
-```
-
-Running **ReviewStories** in **Browser**...
+Running **ReviewStories** in **browser**...
 
 ---
 
@@ -36,10 +28,10 @@ Either:
 
 ```
 # Specific file
-Read the specified .yaml file from skills/Browser/Stories/
+Read the specified .yaml file from skills/browser/Stories/
 
 # All stories
-Glob: skills/Browser/Stories/*.yaml
+Glob: skills/browser/Stories/*.yaml
 ```
 
 ### 2. Parse YAML

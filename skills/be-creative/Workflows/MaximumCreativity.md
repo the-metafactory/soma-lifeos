@@ -1,14 +1,6 @@
 # MaximumCreativity Workflow
 
-## Voice Notification
-
-```bash
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the MaximumCreativity workflow in the BeCreative skill to explore unconventional ideas"}' \
-  > /dev/null 2>&1 &
-```
-
-Running **MaximumCreativity** in **BeCreative**...
+Running **MaximumCreativity** in **be-creative**...
 
 ---
 

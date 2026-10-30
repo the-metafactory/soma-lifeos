@@ -4,7 +4,7 @@ description: "Structured incident investigation (TPS, Ishikawa, Swiss Cheese, Ap
 effort: high
 context: fork
 ---
-# RootCauseAnalysis Skill
+# root-cause-analysis Skill
 
 Structured investigation of *why* something failed — beyond the proximate cause, down to the contributing factors and latent conditions that actually made the failure possible. Grounded in Toyota Production System (Sakichi Toyoda), Kaoru Ishikawa, James Reason's Swiss Cheese model, Dean Gano's Apollo method, and Google SRE / Etsy blameless-postmortem culture.
 
@@ -85,10 +85,10 @@ For non-trivial incidents: **Postmortem wraps the others.** Start with a Postmor
 **Depends on:** nothing — standalone analytical skill.
 
 **Works well with:**
-- **SystemsThinking** — RCA stops at contributing factors; SystemsThinking continues down to structure and mental models. Pair them when patterns repeat across incidents.
-- **FirstPrinciples** — decompose a contributing factor to its fundamental truths before fixing.
-- **RedTeam** — "how would we cause this again?" is adversarial RCA. Use RedTeam to stress-test remediations.
-- **Science** — RCA *is* the scientific method applied to failures. Use Science for hypothesis generation during investigation.
+- **systems-thinking** — RCA stops at contributing factors; systems-thinking continues down to structure and mental models. Pair them when patterns repeat across incidents.
+- **first-principles** — decompose a contributing factor to its fundamental truths before fixing.
+- **red-team** — "how would we cause this again?" is adversarial RCA. Use red-team to stress-test remediations.
+- **science** — RCA *is* the scientific method applied to failures. Use science for hypothesis generation during investigation.
 
 ## Examples
 
@@ -144,8 +144,10 @@ User: "this flaky test only fails in CI, not locally"
 
 ## Execution Log
 
-After completing any workflow, append a single JSONL entry:
+After each workflow, build a record with the actual UTC timestamp, workflow name, brief input summary, status (`ok` or `error`), and elapsed seconds:
 
-```bash
-echo '{"ts":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","skill":"RootCauseAnalysis","workflow":"WORKFLOW_USED","input":"8_WORD_SUMMARY","status":"ok|error","duration_s":SECONDS}' >> ~/.soma/memory/SKILLS/execution.jsonl
+```json
+{"ts":"ISO8601","skill":"root-cause-analysis","workflow":"WORKFLOW_USED","input":"brief summary","status":"ok","duration_s":0}
 ```
+
+Serialize the record with `JSON.stringify(record) + "\n"`. Use the host's file-write tool to append it to `memory/SKILLS/root-cause-analysis/execution.jsonl` under the Soma home, creating the parent directory if needed. If the tool only replaces files, read the existing log and preserve its contents before adding the serialized line. Keep all user-derived values in the JSON data, outside shell commands. Logging is complete when the new line parses as one JSON object and prior entries are preserved.

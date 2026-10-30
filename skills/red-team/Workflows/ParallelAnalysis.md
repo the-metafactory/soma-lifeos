@@ -1,14 +1,6 @@
 # Red Team Parallel Analysis Workflow
 
-## Voice Notification
-
-```bash
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the ParallelAnalysis workflow in the RedTeam skill to red team arguments"}' \
-  > /dev/null 2>&1 &
-```
-
-Running the **ParallelAnalysis** workflow in the **RedTeam** skill to red team arguments...
+Running the **ParallelAnalysis** workflow in the **red-team** skill to red team arguments...
 
 ## Overview
 
@@ -40,10 +32,10 @@ Produce an 8-point story explanation (12-16 words each) representing the stronge
 ## PHASE 1: Decomposition Protocol
 
 ### Step 1.0: First Principles Deconstruction (NEW)
-**Before traditional decomposition, invoke FirstPrinciples/Deconstruct:**
+**Before traditional decomposition, invoke first-principles/Deconstruct:**
 
 ```
-→ FirstPrinciples/Deconstruct on the argument
+→ first-principles/Deconstruct on the argument
 ```
 
 This surfaces:
@@ -279,10 +271,10 @@ If the author had made their case PERFECTLY, what would it look like?
 
 ### First Principles Analysis
 
-Before finalizing the counter-argument, **invoke FirstPrinciples/Challenge:**
+Before finalizing the counter-argument, **invoke first-principles/Challenge:**
 
 ```
-→ FirstPrinciples/Challenge on all stated constraints and assumptions
+→ first-principles/Challenge on all stated constraints and assumptions
 ```
 
 This classifies every constraint as:
@@ -301,7 +293,7 @@ Then apply these additional checks:
 - Predictive ("X will lead to Y")
 - Normative ("We should/shouldn't do X")
 
-**Step 2: Surface hidden assumptions (from FirstPrinciples/Challenge output):**
+**Step 2: Surface hidden assumptions (from first-principles/Challenge output):**
 - What must be true for this argument to work?
 - What does the author take for granted?
 - What evidence is assumed but not provided?
@@ -373,7 +365,7 @@ The 8-point sequence should:
 
 ```
 □ PHASE 1: Decomposition
-  □ Invoke FirstPrinciples/Deconstruct on the argument (NEW)
+  □ Invoke first-principles/Deconstruct on the argument (NEW)
   □ Read and understand the full argument
   □ Extract central thesis
   □ Identify supporting claims
@@ -402,7 +394,7 @@ The 8-point sequence should:
   □ Present the STRONGEST case FOR the argument
 
 □ PHASE 5: Counter-Argument
-  □ Invoke FirstPrinciples/Challenge on all constraints (NEW)
+  □ Invoke first-principles/Challenge on all constraints (NEW)
   □ Classify constraints as HARD/SOFT/ASSUMPTION
   □ Apply first-principles analysis (claim type, assumptions, precedent, validity)
   □ Draft 8-point counter-argument
@@ -453,11 +445,11 @@ The 8-point sequence should:
 - Task tool for launching parallel agents
 - Ability to launch 32+ agents simultaneously
 - Synthesis capability to process multiple agent outputs
-- **FirstPrinciples skill** for Deconstruct (Phase 1) and Challenge (Phase 5)
+- **first-principles skill** for Deconstruct (Phase 1) and Challenge (Phase 5)
 
 **Pairs well with:**
-- `FirstPrinciples/Deconstruct` - breaks argument into fundamental parts (Phase 1)
-- `FirstPrinciples/Challenge` - classifies constraints as HARD/SOFT/ASSUMPTION (Phase 5)
+- `first-principles/Deconstruct` - breaks argument into fundamental parts (Phase 1)
+- `first-principles/Challenge` - classifies constraints as HARD/SOFT/ASSUMPTION (Phase 5)
 - `storyexplanation` skill for initial decomposition
 - `extractalpha` for finding highest-signal critiques
 - `research` skill for finding counterexamples and precedents

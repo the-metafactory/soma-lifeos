@@ -62,7 +62,7 @@ Skills don't import Science. They declare compliance through structure and behav
 ### Development (TDD)
 
 ```yaml
-skill: Development
+skill: development
 implements: Science
 mapping:
   goal: Test assertion defines expected behavior
@@ -82,14 +82,14 @@ Run Test (MEASURE) → Pass/Fail? (ANALYZE) →
 Refactor or Continue (ITERATE)
 ```
 
-### Evals (Prompt Optimization)
+### evals (Prompt Optimization)
 
-**Evals is the canonical Science implementation for prompts.**
+**evals is the canonical Science implementation for prompts.**
 
-When doing prompt experiments, DO NOT build ad-hoc evaluation. Invoke Evals directly.
+When doing prompt experiments, DO NOT build ad-hoc evaluation. Invoke evals directly.
 
 ```yaml
-skill: Evals
+skill: evals
 implements: Science
 mapping:
   goal: Eval criteria (threshold, metrics) - pre-committed before running
@@ -109,7 +109,7 @@ Collect Scores (MEASURE) → Statistical Analysis (ANALYZE) →
 Pick Winner or Refine (ITERATE)
 ```
 
-**Evals adds domain-specific rigor:**
+**evals adds domain-specific rigor:**
 - **Position swapping** - mitigates LLM positional bias
 - **Multi-judge panels** - reduces model quirks (7x cheaper than single large judge)
 - **Reasoning-first scoring** - 13%+ accuracy improvement
@@ -118,7 +118,7 @@ Pick Winner or Refine (ITERATE)
 ### Research (Investigation)
 
 ```yaml
-skill: Research
+skill: research
 implements: Science
 mapping:
   goal: Research question to answer
@@ -130,10 +130,10 @@ mapping:
   iterate: Deeper questions emerge
 ```
 
-### Council (Debate)
+### council (Debate)
 
 ```yaml
-skill: Council
+skill: council
 implements: Science
 mapping:
   goal: Decision to make
@@ -148,7 +148,7 @@ mapping:
 ### Worktree (Parallel Experiments)
 
 ```yaml
-skill: Development/Worktree
+skill: development/Worktree
 implements: Science
 mapping:
   goal: Find best implementation approach
@@ -160,10 +160,10 @@ mapping:
   iterate: Pick winner, merge, cleanup
 ```
 
-### RedTeam (Adversarial Analysis)
+### red-team (Adversarial Analysis)
 
 ```yaml
-skill: RedTeam
+skill: red-team
 implements: Science
 mapping:
   goal: Strongest possible argument/product
@@ -212,15 +212,15 @@ User: "Figure out best auth approach"
 │           SCIENCE ORCHESTRATES           │
 └─────────────────────────────────────────┘
            │
-           ├──► Goal: Research Skill helps define success criteria
+           ├──► Goal: optional research skill helps define success criteria
            │
-           ├──► Observe: Research Skill gathers context
+           ├──► Observe: optional research skill gathers context
            │
-           ├──► Hypothesize: Council Skill generates approaches
+           ├──► Hypothesize: council skill generates approaches
            │
            ├──► Experiment: Worktree runs parallel implementations
            │
-           ├──► Measure: Evals Skill compares approaches
+           ├──► Measure: optional evals skill compares approaches
            │
            ├──► Analyze: Science synthesizes results
            │
@@ -235,20 +235,20 @@ User: "Figure out best auth approach"
 
 | To Skill | Science Provides |
 |----------|------------------|
-| Development | Hypothesis to test, success criteria |
-| Evals | What to measure, baseline comparison |
-| Research | Research questions, scope |
-| Council | Options to debate, judgment criteria |
+| development | Hypothesis to test, success criteria |
+| evals | What to measure, baseline comparison |
+| research | Research questions, scope |
+| council | Options to debate, judgment criteria |
 | Worktree | Variant names, comparison criteria |
 
 ### What Skills Provide to Science
 
 | From Skill | Skill Provides |
 |------------|----------------|
-| Development | Test results, coverage metrics |
-| Evals | Scores, statistical analysis |
-| Research | Findings, evidence quality |
-| Council | Synthesis, convergence points |
+| development | Test results, coverage metrics |
+| evals | Scores, statistical analysis |
+| research | Findings, evidence quality |
+| council | Synthesis, convergence points |
 | Worktree | Diff analysis, recommendations |
 
 ---
@@ -270,7 +270,7 @@ User: "Figure out best auth approach"
 
 Science applies to itself.
 
-The Science skill MUST be able to improve its own methodology using the scientific method:
+The science skill MUST be able to improve its own methodology using the scientific method:
 
 1. **Goal:** Improve problem-solving effectiveness
 2. **Observe:** Track experiment outcomes across domains
@@ -286,27 +286,27 @@ This is tracked in `Meta/` directory.
 
 ## Bidirectional Skill Integration
 
-### Science → Evals
+### Science → evals
 
 When Science encounters prompt optimization:
 
 1. **Recognize the domain** - "This is a prompt experiment"
-2. **Delegate to specialist** - Invoke Evals skill directly
-3. **Use Evals infrastructure** - Don't reinvent position swapping, multi-judge, etc.
-4. **Accept Evals output** - Scores, statistics, recommendations
+2. **Delegate to specialist** - Invoke optional evals skill directly
+3. **Use evals infrastructure** - Don't reinvent position swapping, multi-judge, etc.
+4. **Accept evals output** - Scores, statistics, recommendations
 
-**The directive:** If experimenting with prompts, use Evals. Period.
+**The directive:** If experimenting with prompts, use evals. Period.
 
-### Evals → Science
+### evals → Science
 
-When Evals gets stuck or needs broader framing:
+When evals gets stuck or needs broader framing:
 
 1. **Paradigm check trigger** - 3+ iterations without improvement
-2. **Invoke Science explicitly** - `Science/Workflows/StructuredInvestigation.md`
+2. **Invoke science explicitly** - `Science/Workflows/StructuredInvestigation.md`
 3. **Question the frame** - Is the use case defined correctly? Are we measuring the right thing?
 4. **Return with clarity** - New hypothesis, new direction, or confirmation to continue
 
-**The escalation path:** Evals runs implicitly as Science. When implicit fails, go explicit.
+**The escalation path:** evals runs implicitly as Science. When implicit fails, go explicit.
 
 ### When Science Orchestrates Across Skills
 
@@ -325,7 +325,7 @@ User: "Improve the summarization pipeline"
            ├──► Observe: Current performance across dimensions
            │
            ├──► Hypothesize: Multiple improvement paths
-           │    ├─ Better prompt (→ Evals)
+           │    ├─ Better prompt (→ evals)
            │    ├─ Better code (→ Development/Worktree)
            │    └─ Better architecture (→ Research)
            │
@@ -349,5 +349,5 @@ Science orchestrates; specialist skills execute.
 - Science orchestrates only for cross-domain coordination
 - Scale determines formality level
 - The protocol improves itself through its own application
-- **Evals is the canonical implementation for prompts**
-- **When Evals stalls, escalate to explicit Science workflows**
+- **evals is the canonical implementation for prompts**
+- **When evals stalls, escalate to explicit Science workflows**

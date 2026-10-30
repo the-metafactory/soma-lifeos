@@ -142,7 +142,7 @@ Ask:
 
 ### Code Experiments
 
-**Tool:** Worktrees for parallel experiments
+**Tool:** Git worktrees for parallel experiments, optionally managed by the development skill.
 
 ```markdown
 ## Code Experiment Design
@@ -167,20 +167,20 @@ Ask:
 
 ### Prompt Experiments
 
-**Tool:** Evals Skill (MANDATORY)
+**Tool:** optional evals skill; otherwise use the host's tools for the comparison design below.
 
-**For ALL prompt experiments, invoke the Evals skill directly.**
+For prompt experiments, use the optional evals skill when installed; otherwise use the comparison design below with the host's tools.
 
-Evals implements the Science Protocol for prompt engineering. Don't reinvent evaluation - use the battle-tested methodology.
+When installed, evals implements the Science Protocol for prompt engineering.
 
 **Invocation:**
 ```
-→ Invoke Evals skill, ComparePrompts workflow
-→ Follow Evals' Science Protocol Alignment checklist
-→ Use Evals' statistical rigor (SEM, confidence intervals)
+→ Invoke optional evals skill, ComparePrompts workflow
+→ Follow evals' Science Protocol Alignment checklist
+→ Use evals' statistical rigor (SEM, confidence intervals)
 ```
 
-**What Evals Provides:**
+**What evals Provides:**
 - Position swapping (mitigates LLM positional bias)
 - Multi-judge panels (reduces individual model quirks)
 - Statistical significance testing
@@ -199,7 +199,7 @@ Evals implements the Science Protocol for prompt engineering. Don't reinvent eva
 - variant-2: [Modified prompt B]
 - variant-3: [Modified prompt C - different direction]
 
-**Eval Method (via Evals skill):**
+**Eval Method (via optional evals skill):**
 - Run eval suite with each variant
 - N=100 samples per variant
 - Position swapping enabled
@@ -213,7 +213,7 @@ Evals implements the Science Protocol for prompt engineering. Don't reinvent eva
 
 **CLI Quick Reference:**
 ```bash
-# Run prompt comparison via Evals skill
+# Run prompt comparison via optional evals skill
 bun run ~/.soma/skills/evals/EvalServer/cli-run.ts \
   --use-case <name> \
   --compare prompts/baseline.md prompts/variant-1.md \

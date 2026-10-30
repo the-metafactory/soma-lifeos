@@ -3,11 +3,21 @@ name: be-creative
 description: "Divergent ideation and corpus expansion using Verbalized Sampling. Single-shot generates 5 diverse candidates, surfaces strongest. Multi-turn expands seed corpus into diverse dataset. Seven workflows: StandardCreativity, MaximumCreativity, IdeaGeneration, TreeOfThoughts, DomainSpecific, TechnicalCreativity, SyntheticDataExpansion. USE WHEN be creative, brainstorm, divergent ideas, maximum creativity, tree of thoughts, creative angle, unconventional approach, expand corpus, synthetic data, generate diverse examples."
 effort: medium
 ---
-# BeCreative Skill
+# be-creative Skill
 
 Enhance AI creativity using deep thinking + Verbalized Sampling. Combines research-backed techniques (Zhang et al., 2024) for 1.6-2.1x diversity increase and extended thinking for quality.
 
 ---
+
+## Optional Integrations
+
+Check availability before using these integrations in any workflow:
+
+- `evals` is optional. If unavailable, compare variants against precommitted criteria and record the measurements.
+- `research` is optional. If unavailable, gather and cite sources with the host's web tools.
+- `art` is optional. If unavailable, return Mermaid diagram source or image prompts.
+
+Report any fallback used in the result.
 
 ## Workflow Routing
 
@@ -15,7 +25,7 @@ Route to the appropriate workflow based on the request.
 
 **When executing a workflow, output this notification:**
 ```
-Running the **WorkflowName** workflow in the **BeCreative** skill to ACTION...
+Running the **WorkflowName** workflow in the **be-creative** skill to ACTION...
 ```
 
 | Workflow | Triggers | Description |
@@ -58,12 +68,12 @@ Running the **WorkflowName** workflow in the **BeCreative** skill to ACTION...
 ## Integration with Other Skills
 
 **Works well with:**
-- **XPost** / **LinkedInPost** - Generate creative social media content
-- **Blogging** - Creative blog post ideas and narrative approaches
-- **Development** - Creative technical solutions
-- **Art** - Diverse image prompt ideas and creative directions
-- **Business** - Creative offer frameworks and business models
-- **Research** - Creative research angles and synthesis approaches
+- **XPost** (optional) / **LinkedInPost** (optional) - Generate creative social media content
+- **Blogging** (optional) - Creative blog post ideas and narrative approaches
+- **development** (optional) - Creative technical solutions
+- **art** (optional) - Diverse image prompt ideas and creative directions
+- **Business** (optional) - Creative offer frameworks and business models
+- **research** (optional) - Creative research angles and synthesis approaches
 
 ---
 
@@ -99,16 +109,16 @@ User: "deep thinking this architecture problem"
 
 ## Gotchas
 
-- **This is for QUICK divergent brainstorming.** For deep multi-cycle evolutionary ideation, use Ideate instead.
+- **This is for QUICK divergent brainstorming.** For deep multi-cycle evolutionary ideation, use ideate instead.
 - **Verbalized Sampling requires extended thinking to work.** Don't disable extended thinking when using this skill.
 - **1.6-2.1x diversity claims come from specific benchmark conditions.** Real-world diversity improvement varies with prompt type.
 
 ## Execution Log
 
-After completing any workflow, append a single JSONL entry:
+After each workflow, build a record with the actual UTC timestamp, workflow name, brief input summary, status (`ok` or `error`), and elapsed seconds:
 
-```bash
-echo '{"ts":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","skill":"BeCreative","workflow":"WORKFLOW_USED","input":"8_WORD_SUMMARY","status":"ok|error","duration_s":SECONDS}' >> ~/.soma/memory/SKILLS/execution.jsonl
+```json
+{"ts":"ISO8601","skill":"be-creative","workflow":"WORKFLOW_USED","input":"brief summary","status":"ok","duration_s":0}
 ```
 
-Replace `WORKFLOW_USED` with the workflow executed, `8_WORD_SUMMARY` with a brief input description, and `SECONDS` with approximate wall-clock time. Log `status: "error"` if the workflow failed.
+Serialize the record with `JSON.stringify(record) + "\n"`. Use the host's file-write tool to append it to `memory/SKILLS/be-creative/execution.jsonl` under the Soma home, creating the parent directory if needed. If the tool only replaces files, read the existing log and preserve its contents before adding the serialized line. Keep all user-derived values in the JSON data, outside shell commands. Logging is complete when the new line parses as one JSON object and prior entries are preserved.

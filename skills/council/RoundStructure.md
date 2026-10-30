@@ -4,7 +4,7 @@ How council debates progress through rounds.
 
 ## CRITICAL: Custom Agents Only
 
-All council members are custom-composed via the Agents skill's ComposeAgent. NEVER use built-in agent types. See `CouncilMembers.md`.
+Compose council members with the optional agents skill's ComposeAgent when installed, or write role-and-trait prompts directly. NEVER use built-in agent types. See `CouncilMembers.md`.
 
 ## Three-Round Debate Structure
 

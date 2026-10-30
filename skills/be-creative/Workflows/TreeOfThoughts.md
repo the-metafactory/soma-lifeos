@@ -1,14 +1,6 @@
 # TreeOfThoughts Workflow
 
-## Voice Notification
-
-```bash
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the TreeOfThoughts workflow in the BeCreative skill to explore solution paths"}' \
-  > /dev/null 2>&1 &
-```
-
-Running **TreeOfThoughts** in **BeCreative**...
+Running **TreeOfThoughts** in **be-creative**...
 
 ---
 

@@ -2,15 +2,7 @@
 
 Fast single-round perspective check. Use for sanity checks and quick feedback.
 
-## Voice Notification
-
-```bash
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the Quick workflow in the Council skill to get fast perspectives"}' \
-  > /dev/null 2>&1 &
-```
-
-Running the **Quick** workflow in the **Council** skill to get fast perspectives...
+Running the **Quick** workflow in the **council** skill to get fast perspectives...
 
 ## Prerequisites
 
@@ -19,20 +11,20 @@ Running the **Quick** workflow in the **Council** skill to get fast perspectives
 
 ## CRITICAL: Agent Composition
 
-**ALL council members MUST be custom-composed agents via the Agents skill's ComposeAgent tool. NEVER use built-in agent types (Architect, Designer, Engineer, PerplexityResearcher, Silas, etc.).**
+**Compose each council member with the optional agents skill's ComposeAgent tool when installed; otherwise write a role-and-trait prompt directly. NEVER use built-in agent types (Architect, Designer, Engineer, PerplexityResearcher, Silas, etc.).**
 
 See `CouncilMembers.md` for full instructions.
 
 ## Execution
 
-### Step 1: Compose & Announce Quick Council
+### Step 1: Compose & Announce Quick council
 
 Compose 4 agents with topic-specific traits via ComposeAgent, then announce:
 
 ```markdown
-## Quick Council: [Topic]
+## Quick council: [Topic]
 
-**Council Members:** [List composed agent names]
+**council Members:** [List composed agent names]
 **Mode:** Single round (fast perspectives)
 ```
 
@@ -86,7 +78,7 @@ If the quick check reveals significant disagreement or complex trade-offs, recom
 
 ```
 This topic has enough complexity for a full council debate.
-Run: "Council: [topic]" for 3-round structured discussion.
+Run: "council: [topic]" for 3-round structured discussion.
 ```
 
 ## Timing

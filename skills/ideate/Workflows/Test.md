@@ -2,27 +2,19 @@
 
 **Use when:** you have a pool of candidate ideas and want them scored on the standard 4 dimensions (Feasibility, Novelty, Impact, Elegance). No breeding, no selection, no iteration — just scoring.
 
-**Phase invoked:** TEST only. Optionally invokes RedTeam for adversarial pass.
-
-## Voice Notification
-
-```bash
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the Test workflow in the Ideate skill to score candidate ideas"}' \
-  > /dev/null 2>&1 &
-```
+**Phase invoked:** TEST only. Optionally invokes red-team for adversarial pass.
 
 ## Inputs
 
 - **Candidates** (required): list of idea texts to score
 - **Problem statement** (required): defines the fitness function
 - **Judge count** (optional, default 3): number of judge agents per candidate
-- **RedTeam pass** (optional, default true): adversarial attack on candidates before scoring
+- **red-team pass** (optional, default true): adversarial attack on candidates before scoring
 - **External validation hooks** (optional): see `../SKILL.md` § External Validation Hooks
 
 ## Steps
 
-1. **Optional adversarial pass:** if `redteam_pass` is true, invoke `Skill("RedTeam")` to attack each candidate. Surfaced fatal flaws are appended to the candidate metadata before scoring (judges see them).
+1. **Optional adversarial pass:** if `redteam_pass` is true, invoke `Skill("red-team")` to attack each candidate. Surfaced fatal flaws are appended to the candidate metadata before scoring (judges see them).
 
 2. **Spawn `judge_count` Judge agents in parallel** via Task tool. Each judge independently scores ALL candidates. Trait composition: `critical + analytical + skeptical`.
 
@@ -82,8 +74,4 @@
 - **Variance IS information.** High inter-judge variance means the idea is polarizing — judges legitimately disagree. Low variance means consensus. Both are signal.
 - **Skip external validation for fast iteration.** Hooks add real-world signal but cost latency. For brainstorming, internal scoring alone is fine.
 
-## Execution Log
-
-```bash
-echo '{"ts":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","skill":"Ideate","workflow":"Test","input":"8_WORD_SUMMARY","status":"ok|error","duration_s":SECONDS}' >> ~/.soma/memory/SKILLS/execution.jsonl
-```
+For execution logging, follow [the skill's Execution Log](../SKILL.md#execution-log).

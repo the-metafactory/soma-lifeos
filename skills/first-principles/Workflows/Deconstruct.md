@@ -2,15 +2,7 @@
 
 **Purpose**: Break down any problem, system, or concept into its fundamental constituent parts and irreducible truths.
 
-## Voice Notification
-
-```bash
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the Deconstruct workflow in the FirstPrinciples skill to break down components"}' \
-  > /dev/null 2>&1 &
-```
-
-Running the **Deconstruct** workflow in the **FirstPrinciples** skill to break down components...
+Running the **Deconstruct** workflow in the **first-principles** skill to break down components...
 
 ---
 
@@ -194,5 +186,5 @@ After Deconstruct, typically flow to:
 
 Other skills can invoke:
 ```
-→ FirstPrinciples/Deconstruct on [security model / architecture / cost structure]
+→ first-principles/Deconstruct on [security model / architecture / cost structure]
 ```

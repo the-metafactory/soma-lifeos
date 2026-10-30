@@ -25,8 +25,8 @@ Optional (strongly recommended):
 Confirm all prerequisites from `SKILL.md` → Prerequisites. If any fail, halt with remediation.
 
 ```bash
-# Verify Interceptor available
-interceptor --version || echo "ABORT: Interceptor skill not installed"
+# Verify interceptor available
+interceptor --version || echo "ABORT: interceptor skill not installed"
 ```
 
 ### 2. Construct the Brief
@@ -44,15 +44,15 @@ Use the prompt patterns in `References/InputFormats.md`.
 ### 3. Open Claude Design
 
 ```bash
-bun ~/.soma/skills/Webdesign/Tools/DriveClaudeDesign.ts open
+bun ~/.soma/skills/webdesign/Tools/DriveClaudeDesign.ts open
 ```
 
-This opens `claude.ai/design` in the authenticated Interceptor-controlled Chrome session. First-run may require a headed login; subsequent runs are headless.
+This opens `claude.ai/design` in the authenticated interceptor-controlled Chrome session. First-run may require a headed login; subsequent runs are headless.
 
 ### 4. Submit the Brief
 
 ```bash
-bun ~/.soma/skills/Webdesign/Tools/DriveClaudeDesign.ts prompt "$(cat /tmp/brief.md)"
+bun ~/.soma/skills/webdesign/Tools/DriveClaudeDesign.ts prompt "$(cat /tmp/brief.md)"
 ```
 
 Wait for Claude Design to produce the first version (typically 20-60 seconds on Opus 4.7).
@@ -62,7 +62,7 @@ Wait for Claude Design to produce the first version (typically 20-60 seconds on 
 ```bash
 OUT=~/Downloads/webdesign/$(date +%Y%m%d-%H%M%S)
 mkdir -p "$OUT"
-bun ~/.soma/skills/Webdesign/Tools/DriveClaudeDesign.ts screenshot "$OUT/v1.png"
+bun ~/.soma/skills/webdesign/Tools/DriveClaudeDesign.ts screenshot "$OUT/v1.png"
 ```
 
 Review the screenshot. If it matches the brief, proceed to step 6. If not, hand to `RefinePrototype.md`.
@@ -80,13 +80,13 @@ Choose based on next step:
 | Static one-off page | `html` |
 
 ```bash
-bun ~/.soma/skills/Webdesign/Tools/DriveClaudeDesign.ts export bundle "$OUT"
+bun ~/.soma/skills/webdesign/Tools/DriveClaudeDesign.ts export bundle "$OUT"
 ```
 
 ### 7. Verify
 
 ```bash
-bun ~/.soma/skills/Webdesign/Tools/VerifyDesign.ts "$OUT/index.html" "$OUT/verify"
+bun ~/.soma/skills/webdesign/Tools/VerifyDesign.ts "$OUT/index.html" "$OUT/verify"
 ```
 
 Produces a screenshot at the expected viewport plus an axe-core accessibility report. Fix any critical issues before declaring done.
@@ -96,7 +96,7 @@ Produces a screenshot at the expected viewport plus an axe-core accessibility re
 If this prototype feeds into larger site work:
 
 ```
-Skill("Webdesign") → Workflows/IntegrateIntoApp.md
+Skill("webdesign") → Workflows/IntegrateIntoApp.md
 ```
 
 Pass the bundle path + target project path.

@@ -1,4 +1,4 @@
-# KepnerTregoe Workflow — RootCauseAnalysis
+# KepnerTregoe Workflow — root-cause-analysis
 
 ## Purpose
 

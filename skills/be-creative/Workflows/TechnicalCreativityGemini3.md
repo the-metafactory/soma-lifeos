@@ -1,14 +1,6 @@
 # Technical Creativity with Gemini 3 Pro
 
-## Voice Notification
-
-```bash
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the TechnicalCreativityGemini3 workflow in the BeCreative skill to generate technical solutions"}' \
-  > /dev/null 2>&1 &
-```
-
-Running **TechnicalCreativityGemini3** in **BeCreative**...
+Running **TechnicalCreativityGemini3** in **be-creative**...
 
 ---
 
@@ -360,7 +352,7 @@ This workflow is part of the be-creative skill ecosystem but serves a specialize
 ```markdown
 For technical creativity challenges, use the technical-creativity-gemini-3 workflow:
 
-1. Load workflow: `read ~/.soma/skills/BeCreative/Workflows/TechnicalCreativityGemini3.md`
+1. Load workflow: `read ~/.soma/skills/be-creative/Workflows/TechnicalCreativityGemini3.md`
 2. Follow the workflow structure (Problem → Constraints → Generation → Evaluation)
 3. Use Gemini 3 Pro via llm CLI for creative technical solutions
 4. Return diverse technical approaches with trade-off analysis

@@ -1,4 +1,4 @@
-# Iceberg Workflow — SystemsThinking
+# Iceberg Workflow — systems-thinking
 
 ## Purpose
 
@@ -10,8 +10,8 @@ The Iceberg Model (popularized by Michael Goodman and the Academy for Systemic C
 
 This workflow is invoked:
 1. **Directly by the user:** "iceberg this", "walk down the iceberg", "why does this keep happening"
-2. **By the Algorithm** when OBSERVE capability scan selects SystemsThinking with a recurring-problem signal
-3. **By the RootCauseAnalysis skill** — its Postmortem workflow hands off to Iceberg when patterns repeat across incidents
+2. **By the Algorithm** when OBSERVE capability scan selects systems-thinking with a recurring-problem signal
+3. **By the root-cause-analysis skill** — its Postmortem workflow hands off to Iceberg when patterns repeat across incidents
 
 ## The Four Layers
 
@@ -62,7 +62,7 @@ PATTERNS:
 - Are there similar patterns in adjacent systems/teams?
 ```
 
-If no pattern exists — this was a one-time event. Iceberg is not the right tool; go to Postmortem (RootCauseAnalysis) for a single-incident analysis. If a pattern exists, continue down.
+If no pattern exists — this was a one-time event. Iceberg is not the right tool; go to Postmortem (root-cause-analysis) for a single-incident analysis. If a pattern exists, continue down.
 
 Common pattern shapes:
 - **Recurring** — same thing, same shape, intermittent frequency
@@ -215,13 +215,13 @@ RECOMMENDED: structural fix (post-deploy p99 gate + ownership). Patches alone ar
 - **Listing "people" as a structure.** Individuals are events. The structure is what the organization requires of them.
 - **Conflating mental models with opinions.** "Team members disagree about X" is noise. The mental model is what the organization's *structure* believes, which may differ from what individuals articulate.
 - **Naming a hero intervention at Layer 4 you can't actually make.** "We need to change the culture" is a cop-out if there's no concrete action. Culture-layer interventions must still have a specific first move.
-- **Skipping the pattern check.** If there's no pattern, this isn't an iceberg problem — it's an incident. Use RootCauseAnalysis/Postmortem.
+- **Skipping the pattern check.** If there's no pattern, this isn't an iceberg problem — it's an incident. Use root-cause-analysis/Postmortem.
 
 ## Integration
 
 - Feeds **CausalLoop** when Layer 3 structure is a feedback loop that deserves explicit diagramming.
 - Feeds **FindArchetype** when Layer 2 pattern matches a known systems archetype.
-- Handoffs to **RootCauseAnalysis/Postmortem** if the investigation reveals a single incident rather than a pattern.
+- Handoffs to **root-cause-analysis/Postmortem** if the investigation reveals a single incident rather than a pattern.
 - Output informs **ISC criteria** in OBSERVE — structural criteria, not just symptom criteria.
 
 ## Attribution

@@ -2,25 +2,25 @@
 
 ## Skill Integration Order
 
-**Use BEFORE RedTeam:**
+**Use BEFORE red-team:**
 - `research` - Gather context, find precedents
 
-**Use DURING RedTeam:**
+**Use DURING red-team:**
 - `storyexplanation` - Decomposition methodology
-- Custom Agents (via Agents skill) - Parallel assault
+- Custom Agents (via optional agents skill) - Parallel assault
 
-**Use AFTER RedTeam:**
+**Use AFTER red-team:**
 - `extractalpha` - Highest-signal critiques
 - `xpost` - Share findings
 
-## FirstPrinciples Integration
+## first-principles Integration
 
-RedTeam deeply integrates with FirstPrinciples skill:
+red-team deeply integrates with first-principles skill:
 
-- **Phase 1 Enhancement:** Use `FirstPrinciples/Deconstruct` to break arguments into fundamental parts
-- **Phase 5 Enhancement:** Use `FirstPrinciples/Challenge` to classify constraints as hard/soft/assumption
+- **Phase 1 Enhancement:** Use `first-principles/Deconstruct` to break arguments into fundamental parts
+- **Phase 5 Enhancement:** Use `first-principles/Challenge` to classify constraints as hard/soft/assumption
 - **Core Insight:** The most devastating critiques come from challenging hidden assumptions
-- **Invocation:** "Use FirstPrinciples/Challenge on the stated constraints before parallel analysis"
+- **Invocation:** "Use first-principles/Challenge on the stated constraints before parallel analysis"
 
 ## Output Format
 

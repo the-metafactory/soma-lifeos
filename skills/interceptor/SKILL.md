@@ -1,22 +1,22 @@
 ---
 name: interceptor
-description: "Real Chrome browser automation via the Interceptor extension — zero CDP fingerprint, passes bot detection, stays logged in. MANDATORY for visual verification; never use agent-browser for deploy confirmation. USE WHEN verify deploy, confirm UI, screenshot/visual QA, interceptor, debug web, authenticated pages, bot detection bypass, agent-browser failing, reproduce bug, record/replay flow, test form, regression check. NOT FOR batch headless automation (use Browser). NOT FOR large-scale crawling/scraping (use BrightData)."
+description: "Real Chrome browser automation via the interceptor extension — zero CDP fingerprint, passes bot detection, stays logged in. MANDATORY for visual verification; never use agent-browser for deploy confirmation. USE WHEN verify deploy, confirm UI, screenshot/visual QA, interceptor, debug web, authenticated pages, bot detection bypass, agent-browser failing, reproduce bug, record/replay flow, test form, regression check. NOT FOR batch headless automation (use browser). NOT FOR large-scale crawling/scraping (use bright-data)."
 version: 2.0.0
 effort: medium
 ---
-# Interceptor — Stealth Browser Automation
+# interceptor — Stealth Browser Automation
 
 **Tool:** `interceptor` CLI — Chrome extension that controls the real browser from the inside.
 **Repo:** https://github.com/Hacker-Valley-Media/slop-browser
 **Install:** `~/Projects/interceptor` (built from source — see `Workflows/Update.md`)
 
-### Why Interceptor?
+### Why interceptor?
 
-agent-browser (the Browser skill) uses CDP — sites can detect it. Interceptor is a Chrome extension that operates through the actual browser UI. No debugger, no automation flags, no separate browser instance. You stay logged in, you pass bot detection, the agent sees what you see.
+agent-browser (the browser skill) uses CDP — sites can detect it. interceptor is a Chrome extension that operates through the actual browser UI. No debugger, no automation flags, no separate browser instance. You stay logged in, you pass bot detection, the agent sees what you see.
 
 ### Prerequisites
 
-- Chrome or Brave running with the Interceptor extension loaded
+- Chrome or Brave running with the interceptor extension loaded
 - `interceptor` CLI in PATH (`/opt/homebrew/bin/interceptor`)
 - `interceptor-daemon` in PATH (`/opt/homebrew/bin/interceptor-daemon`)
 - Native messaging manifest registered (`bash ~/Projects/interceptor/scripts/install.sh --chrome --skip-extension`)
@@ -238,7 +238,7 @@ interceptor help
 
 ## Delegating to Agents
 
-When spawning agents for Interceptor work:
+When spawning agents for interceptor work:
 
 ```
 Agent(subagent_type="general-purpose", prompt="
@@ -287,8 +287,10 @@ Passes all major bot detection:
 
 ## Execution Log
 
-After completing any workflow, append a single JSONL entry:
+After each workflow, build a record with the actual UTC timestamp, workflow name, brief input summary, status (`ok` or `error`), and elapsed seconds:
 
-```bash
-echo '{"ts":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","skill":"Interceptor","workflow":"WORKFLOW_USED","input":"8_WORD_SUMMARY","status":"ok|error","duration_s":SECONDS}' >> ~/.soma/memory/SKILLS/execution.jsonl
+```json
+{"ts":"ISO8601","skill":"interceptor","workflow":"WORKFLOW_USED","input":"brief summary","status":"ok","duration_s":0}
 ```
+
+Serialize the record with `JSON.stringify(record) + "\n"`. Use the host's file-write tool to append it to `memory/SKILLS/interceptor/execution.jsonl` under the Soma home, creating the parent directory if needed. If the tool only replaces files, read the existing log and preserve its contents before adding the serialized line. Keep all user-derived values in the JSON data, outside shell commands. Logging is complete when the new line parses as one JSON object and prior entries are preserved.

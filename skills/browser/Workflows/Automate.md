@@ -1,14 +1,6 @@
 # Automate Workflow — Recipe Template Engine
 
-## Voice Notification
-
-```bash
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the Automate workflow in the Browser skill to execute a recipe template"}' \
-  > /dev/null 2>&1 &
-```
-
-Running **Automate** in **Browser**...
+Running **Automate** in **browser**...
 
 ---
 
@@ -35,7 +27,7 @@ Load a parameterized recipe template, resolve its parameters, and execute it thr
 ### 1. Find Recipe
 
 ```
-Glob: skills/Browser/Recipes/*.md
+Glob: skills/browser/Recipes/*.md
 ```
 
 Match the user's input against recipe filenames. If ambiguous, list available recipes and ask.

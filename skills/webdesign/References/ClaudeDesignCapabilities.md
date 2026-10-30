@@ -103,4 +103,4 @@ These are two separate products that form a pipeline:
 | Concept + design | **Claude Design** | claude.ai/design | Visual exploration, prototypes, design system |
 | Production code | **`frontend-design` plugin** | Claude Code (auto-activates) | Turns handoff bundles into production-grade code |
 
-The Webdesign skill orchestrates both.
+The webdesign skill orchestrates both.

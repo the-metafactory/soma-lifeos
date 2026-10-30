@@ -2,16 +2,7 @@
 
 Check Apify API and actor ecosystem for updates.
 
-## Voice Notification
-
-```bash
-curl -s -X POST http://localhost:8888/notify \
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the Update workflow in the Apify skill to check updates"}' \
-  > /dev/null 2>&1 &
-```
-
-Running **Update** in **Apify**...
+Running **Update** in **apify**...
 
 ---
 
@@ -57,7 +48,7 @@ Review commonly used actors for updates:
 
 ```bash
 # Verify API wrapper works
-bun run ~/.soma/skills/Apify/scrape-instagram.ts --help 2>/dev/null || echo "Check script"
+bun run ~/.soma/skills/apify/scrape-instagram.ts --help 2>/dev/null || echo "Check script"
 ```
 
 ### 4. Update Implementation

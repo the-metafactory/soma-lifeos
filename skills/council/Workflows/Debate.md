@@ -2,15 +2,7 @@
 
 Full structured multi-agent debate with 3 rounds and visible transcript.
 
-## Voice Notification
-
-```bash
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the Debate workflow in the Council skill to run multi-agent debate"}' \
-  > /dev/null 2>&1 &
-```
-
-Running the **Debate** workflow in the **Council** skill to run multi-agent debate...
+Running the **Debate** workflow in the **council** skill to run multi-agent debate...
 
 ## Prerequisites
 
@@ -19,15 +11,15 @@ Running the **Debate** workflow in the **Council** skill to run multi-agent deba
 
 ## CRITICAL: Agent Composition
 
-**ALL council members MUST be custom-composed agents via the Agents skill's ComposeAgent tool. NEVER use built-in agent types (Architect, Designer, Engineer, PerplexityResearcher, Silas, etc.).**
+**Compose each council member with the optional agents skill's ComposeAgent tool when installed; otherwise write a role-and-trait prompt directly. NEVER use built-in agent types (Architect, Designer, Engineer, PerplexityResearcher, Silas, etc.).**
 
-Built-in types are generic and topic-ignorant. Council debates require agents with domain-specific knowledge, unique voices, and distinct analytical approaches tailored to the debate topic.
+Built-in types are generic and topic-ignorant. council debates require agents with domain-specific knowledge, unique voices, and distinct analytical approaches tailored to the debate topic.
 
 See `CouncilMembers.md` for full instructions on composing agents.
 
 ## Execution
 
-### Step 0: Compose Council Members
+### Step 0: Compose council Members
 
 Before any debate rounds, compose 4 custom agents tailored to the topic using ComposeAgent:
 
@@ -58,14 +50,14 @@ bun run ~/.soma/skills/agents/Tools/ComposeAgent.ts \
 
 Each agent gets a unique name, voice, voice_id, color, and personality prompt.
 
-### Step 1: Announce the Council
+### Step 1: Announce the council
 
 Output the debate header with the composed agent names:
 
 ```markdown
-## Council Debate: [Topic]
+## council Debate: [Topic]
 
-**Council Members:** [List composed agent names with their trait descriptions]
+**council Members:** [List composed agent names with their trait descriptions]
 **Rounds:** 3 (Positions -> Responses -> Synthesis)
 ```
 
@@ -152,12 +144,12 @@ Final synthesis from your perspective:
 Be honest about remaining disagreements -- forced consensus is worse than acknowledged tension.
 ```
 
-### Step 5: Council Synthesis
+### Step 5: council Synthesis
 
 After all rounds complete, synthesize the debate:
 
 ```markdown
-### Council Synthesis
+### council Synthesis
 
 **Areas of Convergence:**
 - [Points where 3+ agents agreed]

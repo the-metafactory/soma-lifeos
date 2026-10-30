@@ -1,4 +1,4 @@
-# FaultTree Workflow — RootCauseAnalysis
+# FaultTree Workflow — root-cause-analysis
 
 ## Purpose
 
@@ -289,7 +289,7 @@ For simple trees (< 20 basic events), manual analysis is feasible.
 
 - **Entry from Postmortem** — when the incident has redundant defenses that all failed
 - **Pairs with FMEA** — FMEA enumerates failure modes; FTA traces consequences
-- **Feeds SystemsThinking** — if common-mode failures keep appearing, the structure is generating them; escalate to CausalLoop / Archetypes
+- **Feeds systems-thinking** — if common-mode failures keep appearing, the structure is generating them; escalate to CausalLoop / Archetypes
 
 ## Attribution
 

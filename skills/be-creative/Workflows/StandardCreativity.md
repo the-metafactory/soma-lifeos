@@ -1,14 +1,6 @@
 # StandardCreativity Workflow
 
-## Voice Notification
-
-```bash
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the StandardCreativity workflow in the BeCreative skill to apply creative thinking"}' \
-  > /dev/null 2>&1 &
-```
-
-Running **StandardCreativity** in **BeCreative**...
+Running **StandardCreativity** in **be-creative**...
 
 ---
 

@@ -139,7 +139,7 @@ If hypothesis was refuted, don't dismiss. Ask: "What can we learn from this fail
 
 ### 5. Red Team Your Analysis
 
-Use RedTeam skill to attack your conclusions.
+Use red-team skill to attack your conclusions.
 
 ---
 

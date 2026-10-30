@@ -139,10 +139,10 @@ Jumping to solutions without understanding the problem space leads to:
 
 | Tool | Use For |
 |------|---------|
-| **Research Skill** | External knowledge, precedent, best practices |
+| **optional research skill** | External knowledge, precedent, best practices |
 | **Grep/Glob** | Codebase exploration |
 | **Metrics/Analytics** | Performance baselines |
-| **Council** | Multi-perspective understanding |
+| **council** | Multi-perspective understanding |
 | **User Interviews** | Direct feedback (if applicable) |
 
 ---
@@ -217,9 +217,9 @@ Single-hypothesis thinking leads to:
 
 | Tool | Use For |
 |------|---------|
-| **Council Skill** | Multi-perspective brainstorming |
-| **RedTeam Skill** | Stress-testing hypotheses |
-| **Research Skill** | Finding what's worked elsewhere |
+| **council skill** | Multi-perspective brainstorming |
+| **red-team Skill** | Stress-testing hypotheses |
+| **optional research skill** | Finding what's worked elsewhere |
 | **Becreative Skill** | Exploring creative approaches |
 | **Parallel Agents** | Generating many ideas simultaneously |
 
@@ -310,8 +310,8 @@ Ask:
 | Domain | Tools |
 |--------|-------|
 | **Code** | Worktrees (parallel experiments), TDD, Feature flags |
-| **Prompts** | Evals skill, A/B testing |
-| **UI/UX** | Worktrees, Browser skill (`agent-browser`), Design variants |
+| **Prompts** | optional evals skill, A/B testing |
+| **UI/UX** | Worktrees, browser skill (`agent-browser`), Design variants |
 | **Business** | A/B tests, Small launches, Pilot programs |
 | **Ideas** | Small audience tests, Draft → feedback loops |
 
@@ -558,7 +558,7 @@ This methodology applies to itself.
 
 ## Integration with PAI Skills
 
-### Development Skill
+### development skill
 Science manifests as TDD:
 - **Goal** = Test (defines expected behavior)
 - **Hypothesize** = Implementation approach
@@ -567,7 +567,7 @@ Science manifests as TDD:
 - **Analyze** = All green?
 - **Iterate** = Refactor
 
-### Evals Skill
+### optional evals skill
 Science manifests as prompt evaluation:
 - **Goal** = Eval criteria
 - **Hypothesize** = Prompt variations
@@ -576,7 +576,7 @@ Science manifests as prompt evaluation:
 - **Analyze** = Compare to baseline
 - **Iterate** = Refine prompt
 
-### Research Skill
+### optional research skill
 Science manifests as investigation:
 - **Goal** = Research question
 - **Observe** = Literature review
@@ -586,7 +586,7 @@ Science manifests as investigation:
 - **Analyze** = Synthesize findings
 - **Iterate** = Deeper questions
 
-### Council Skill
+### council skill
 Science manifests as collaborative exploration:
 - **Observe** = Initial positions
 - **Hypothesize** = Multiple perspectives

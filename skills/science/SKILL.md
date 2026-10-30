@@ -7,6 +7,16 @@ effort: high
 
 **The scientific method applied to everything. The meta-skill that governs all other skills.**
 
+## Optional Integrations
+
+Check availability before using these integrations in any workflow:
+
+- `development` is optional. If unavailable, use the host's code tools and Git worktrees for isolated experiments.
+- `research` is optional. If unavailable, gather and cite sources with the host's web tools.
+- `evals` is optional. If unavailable, compare variants against precommitted criteria and record the measurements.
+
+Report any fallback used in the result.
+
 ## The Universal Cycle
 
 ```
@@ -33,7 +43,7 @@ ITERATE --> Adjust hypothesis and repeat
 
 ## Workflow Routing
 
-**Output when executing:** `Running the **WorkflowName** workflow in the **Science** skill to ACTION...`
+**Output when executing:** `Running the **WorkflowName** workflow in the **science** skill to ACTION...`
 
 ### Core Workflows
 
@@ -71,11 +81,11 @@ ITERATE --> Adjust hypothesis and repeat
 
 | Domain | Manifestation | Related Skill |
 |--------|---------------|---------------|
-| **Coding** | TDD (Red-Green-Refactor) | Development |
-| **Products** | MVP -> Measure -> Iterate | Development |
-| **Research** | Question -> Study -> Analyze | Research |
-| **Prompts** | Prompt -> Eval -> Iterate | Evals |
-| **Decisions** | Options -> Council -> Choose | Council |
+| **Coding** | TDD (Red-Green-Refactor) | development |
+| **Products** | MVP -> Measure -> Iterate | development |
+| **research** (optional) | Question -> Study -> Analyze | research |
+| **Prompts** | Prompt -> Eval -> Iterate | evals |
+| **Decisions** | Options -> council -> Choose | council |
 
 ---
 
@@ -93,12 +103,12 @@ ITERATE --> Adjust hypothesis and repeat
 
 | Phase | Skills to Invoke |
 |-------|-----------------|
-| **Goal** | Council for validation |
+| **Goal** | council for validation |
 | **Observe** | Research for context |
-| **Hypothesize** | Council for ideas, RedTeam for stress-test |
+| **Hypothesize** | council for ideas, red-team for stress-test |
 | **Experiment** | Development (Worktrees) for parallel tests |
-| **Measure** | Evals for structured measurement |
-| **Analyze** | Council for multi-perspective analysis |
+| **Measure** | evals for structured measurement |
+| **Analyze** | council for multi-perspective analysis |
 
 ---
 
@@ -169,10 +179,10 @@ User: "experiment with different prompt structures for better output"
 
 ## Execution Log
 
-After completing any workflow, append a single JSONL entry:
+After each workflow, build a record with the actual UTC timestamp, workflow name, brief input summary, status (`ok` or `error`), and elapsed seconds:
 
-```bash
-echo '{"ts":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","skill":"Science","workflow":"WORKFLOW_USED","input":"8_WORD_SUMMARY","status":"ok|error","duration_s":SECONDS}' >> ~/.soma/memory/SKILLS/execution.jsonl
+```json
+{"ts":"ISO8601","skill":"science","workflow":"WORKFLOW_USED","input":"brief summary","status":"ok","duration_s":0}
 ```
 
-Replace `WORKFLOW_USED` with the workflow executed, `8_WORD_SUMMARY` with a brief input description, and `SECONDS` with approximate wall-clock time. Log `status: "error"` if the workflow failed.
+Serialize the record with `JSON.stringify(record) + "\n"`. Use the host's file-write tool to append it to `memory/SKILLS/science/execution.jsonl` under the Soma home, creating the parent directory if needed. If the tool only replaces files, read the existing log and preserve its contents before adding the serialized line. Keep all user-derived values in the JSON data, outside shell commands. Logging is complete when the new line parses as one JSON object and prior entries are preserved.

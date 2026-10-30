@@ -4,14 +4,6 @@
 
 **Phase invoked:** STEAL only.
 
-## Voice Notification
-
-```bash
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the Steal workflow in the Ideate skill to map foreign-domain patterns onto the problem"}' \
-  > /dev/null 2>&1 &
-```
-
 ## Inputs
 
 - **Problem statement** (required): defines what to look for in foreign domains
@@ -31,7 +23,7 @@
    - Its assigned foreign domain
    - Trait composition: `resourceful + cross-domain + opportunistic`
    - Instruction: *"In your assigned domain, find 2-3 patterns/solutions/approaches that solve problems analogous to ours. For each, write the mapping: 'In [foreign domain], they solve [analogous problem] by [technique]. Applied to our problem: [mapping].'"*
-   - Each agent invokes `Skill("Research")` to gather domain-specific material
+   - Each agent uses the optional `Skill("research")` to gather domain-specific material
 
 3. **Aggregate the borrowed patterns** into a single output. Each pattern includes:
    - Foreign domain name
@@ -67,8 +59,4 @@
 - **The mapping IS the creative act.** The pattern exists in the foreign domain; the cross-domain application is novel. If a pattern can't be mapped, it's not borrowed — it's noise.
 - **No scoring here.** Steal produces raw cross-pollination material. Use Test (or FullCycle) to score these against fitness criteria.
 
-## Execution Log
-
-```bash
-echo '{"ts":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","skill":"Ideate","workflow":"Steal","input":"8_WORD_SUMMARY","status":"ok|error","duration_s":SECONDS}' >> ~/.soma/memory/SKILLS/execution.jsonl
-```
+For execution logging, follow [the skill's Execution Log](../SKILL.md#execution-log).

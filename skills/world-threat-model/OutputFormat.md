@@ -45,12 +45,12 @@ For EACH of the 11 horizons, present a clearly separated section:
 {2-4 paragraphs of substantive analysis. How does the world state at this horizon
 specifically interact with the idea? What thrives? What breaks? What adapts?}
 
-### Assumptions Tested (FirstPrinciples)
+### Assumptions Tested (first-principles)
 - **Hard constraint:** {constraint that cannot change}
 - **Soft constraint:** {constraint that could shift}
 - **Assumption challenged:** {assumption the idea relies on that may not hold}
 
-### Adversarial Findings (RedTeam)
+### Adversarial Findings (red-team)
 - **Attack vector:** {strongest argument against the idea at this horizon}
 - **Steelman:** {strongest defense of the idea at this horizon}
 ```
@@ -74,16 +74,16 @@ and what drives the transitions.}
 {If the idea needs to evolve to survive longer horizons, what should change and when?}
 ```
 
-## Council Debate Summary (Deep tier only)
+## council Debate Summary (Deep tier only)
 
 ```markdown
-## Council Deliberation
+## council Deliberation
 
 ### Strongest Argument FOR
-{Council's strongest bull case across all horizons}
+{council's strongest bull case across all horizons}
 
 ### Strongest Argument AGAINST
-{Council's strongest bear case across all horizons}
+{council's strongest bear case across all horizons}
 
 ### Points of Consensus
 {Where all perspectives agreed}
@@ -109,5 +109,5 @@ and what drives the transitions.}
 | Per-Horizon (abbreviated) | ✅ (verdict + 2-3 bullets only) | — | — |
 | Per-Horizon (full) | — | ✅ | ✅ |
 | Cross-Horizon Synthesis | — | ✅ | ✅ |
-| Council Deliberation | — | — | ✅ |
+| council Deliberation | — | — | ✅ |
 | Footer | ✅ | ✅ | ✅ |

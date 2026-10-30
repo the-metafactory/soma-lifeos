@@ -3,7 +3,7 @@ name: aperture-oscillation
 description: "3-pass scope oscillation — narrow/tactical, wide/strategic, then synthesis — to surface design tensions invisible at any single zoom level. Produces design tensions, scope recommendations, coherence assessments. USE WHEN aperture oscillation, oscillate scope, tactical vs strategic, scope framing, design tension, architecture decision, feature fits system, coherence check, wrong scope, design review."
 effort: medium
 ---
-# ApertureOscillation
+# aperture-oscillation
 
 **3-pass scope oscillation that varies the zoom level of how a question is framed — narrow tactical, wide strategic, then synthesis — to surface design tensions invisible at any single scope.**
 
@@ -11,7 +11,7 @@ Grounded in the observation that LLMs (and humans) produce fundamentally differe
 
 ## Core Concept
 
-Instead of rotating analytical lenses (IterativeDepth) or generating divergent ideas (BeCreative), ApertureOscillation holds the question constant but shifts the **scope envelope** around it across 3 structured passes:
+Instead of rotating analytical lenses (iterative-depth) or generating divergent ideas (be-creative), aperture-oscillation holds the question constant but shifts the **scope envelope** around it across 3 structured passes:
 
 1. **Narrow Aperture (Tactical-first):** The specific thing is primary. Big-picture context is background. This captures what the component naturally wants to be — its own internal logic and shape.
 
@@ -19,16 +19,16 @@ Instead of rotating analytical lenses (IterativeDepth) or generating divergent i
 
 3. **Oscillation (Synthesis):** Feed both outputs. Ask where the tactical and strategic views diverge. The tensions, gaps, and surprises between the two framings are the output — the things neither pass alone would surface.
 
-## How It Differs from IterativeDepth
+## How It Differs from iterative-depth
 
-| Dimension | IterativeDepth | ApertureOscillation |
+| Dimension | iterative-depth | aperture-oscillation |
 |-----------|---------------|---------------------|
 | **What varies** | Analytical lens (failure, stakeholder, temporal...) | Scope/zoom level (narrow, wide, synthesized) |
 | **Pass count** | 2-8 | 3 (fixed) |
 | **Input** | Single problem statement | Two inputs: tactical target + strategic context |
 | **Output** | Richer requirements from multiple angles | Design tensions between local and system-level views |
 | **Best for** | Requirement discovery, blind spot elimination | Architecture decisions, feature design, system coherence |
-| **When to combine** | Use IterativeDepth first (understand the problem), then ApertureOscillation (understand where the solution fits) |
+| **When to combine** | Use iterative-depth first (understand the problem), then aperture-oscillation (understand where the solution fits) |
 
 ## Use / Win
 
@@ -51,7 +51,7 @@ Concrete triggers:
 | Trigger | Workflow |
 |---------|----------|
 | "aperture oscillation", "oscillate scope", "zoom in/out", "tactical vs strategic" | `Workflows/Oscillate.md` |
-| Algorithm OBSERVE/THINK selects ApertureOscillation capability | `Workflows/Oscillate.md` |
+| Algorithm OBSERVE/THINK selects aperture-oscillation capability | `Workflows/Oscillate.md` |
 
 ## Quick Reference
 
@@ -62,8 +62,8 @@ Concrete triggers:
 
 ## Gotchas
 
-- **Requires two distinct inputs.** If the tactical target and strategic context are the same thing, ApertureOscillation adds no value — use IterativeDepth instead.
-- **3 passes is the right number.** Unlike IterativeDepth (2-8), the narrow/wide/synthesis structure is complete at 3. Adding passes would just be lens rotation, which is IterativeDepth's job.
+- **Requires two distinct inputs.** If the tactical target and strategic context are the same thing, aperture-oscillation adds no value — use iterative-depth instead.
+- **3 passes is the right number.** Unlike iterative-depth (2-8), the narrow/wide/synthesis structure is complete at 3. Adding passes would just be lens rotation, which is iterative-depth's job.
 - **The synthesis pass is where the value lives.** Passes 1 and 2 are setup. If the synthesis finds no divergence, that's a valid (and valuable) finding — it means the tactical and strategic views are already aligned.
 - **This is a BPE-fragile skill.** Monitor whether smarter models naturally oscillate scope without being prompted. Quarterly test recommended.
 
@@ -91,10 +91,10 @@ Pass 3 (Synthesis): Tension — standalone webhook service vs. Arbol action. Res
 
 ## Execution Log
 
-After completing any workflow, append a single JSONL entry:
+After each workflow, build a record with the actual UTC timestamp, workflow name, brief input summary, status (`ok` or `error`), and elapsed seconds:
 
-```bash
-echo '{"ts":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","skill":"ApertureOscillation","workflow":"Oscillate","input":"8_WORD_SUMMARY","status":"ok|error","duration_s":SECONDS}' >> ~/.soma/memory/SKILLS/execution.jsonl
+```json
+{"ts":"ISO8601","skill":"aperture-oscillation","workflow":"WORKFLOW_USED","input":"brief summary","status":"ok","duration_s":0}
 ```
 
-Replace `8_WORD_SUMMARY` with a brief input description, and `SECONDS` with approximate wall-clock time. Log `status: "error"` if the workflow failed.
+Serialize the record with `JSON.stringify(record) + "\n"`. Use the host's file-write tool to append it to `memory/SKILLS/aperture-oscillation/execution.jsonl` under the Soma home, creating the parent directory if needed. If the tool only replaces files, read the existing log and preserve its contents before adding the serialized line. Keep all user-derived values in the JSON data, outside shell commands. Logging is complete when the new line parses as one JSON object and prior entries are preserved.

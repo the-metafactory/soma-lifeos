@@ -1,4 +1,4 @@
-# SystemsThinking — Archetypes Reference
+# systems-thinking — Archetypes Reference
 
 The ten canonical systems archetypes (Senge, Goodman, Kiefer, Kemeny, codified in *The Fifth Discipline*, 1990; expanded by Braun, 2002). Each archetype is a **template** — recognizing the template suggests the intervention.
 

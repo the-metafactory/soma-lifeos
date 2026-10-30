@@ -1,6 +1,6 @@
 ---
-name: Apify
-description: Social media scraping, business data, e-commerce via Apify actors. USE WHEN Twitter, Instagram, LinkedIn, TikTok, YouTube, Facebook, Google Maps, Amazon scraping.
+name: apify
+description: Social media scraping, business data, e-commerce via apify actors. USE WHEN Twitter, Instagram, LinkedIn, TikTok, YouTube, Facebook, Google Maps, Amazon scraping.
 context: fork
 ---
 # Apify - Social Media & Web Scraping
@@ -13,7 +13,6 @@ This skill is a **file-based MCP** - a code-first API wrapper that replaces toke
 
 **Why file-based?** Filter data in code BEFORE returning to model context = 97.5% token savings.
 
-**Architecture:** See `~/.soma/skills/PAI/DOCUMENTATION/FileBasedMCPs.md`
 
 ## 🎯 Overview
 
@@ -44,7 +43,7 @@ Direct TypeScript access to the 9 most popular Apify actors without MCP overhead
 ### Basic Usage Pattern
 
 ```typescript
-import { scrapeInstagramProfile, searchGoogleMaps } from '~/.soma/skills/Apify/actors'
+import { scrapeInstagramProfile, searchGoogleMaps } from '~/.soma/skills/apify/actors'
 
 // 1. Call the actor wrapper
 const profile = await scrapeInstagramProfile({
@@ -65,7 +64,7 @@ console.log(viral) // ~10 posts instead of 50
 
 **Instagram - Track engagement:**
 ```typescript
-import { scrapeInstagramProfile, scrapeInstagramPosts } from '~/.soma/skills/Apify/actors'
+import { scrapeInstagramProfile, scrapeInstagramPosts } from '~/.soma/skills/apify/actors'
 
 // Get profile with recent posts
 const profile = await scrapeInstagramProfile({
@@ -88,7 +87,7 @@ const topRecent = profile.latestPosts
 
 **LinkedIn - Job search:**
 ```typescript
-import { searchLinkedInJobs } from '~/.soma/skills/Apify/actors'
+import { searchLinkedInJobs } from '~/.soma/skills/apify/actors'
 
 const jobs = await searchLinkedInJobs({
   keywords: 'AI engineer',
@@ -106,7 +105,7 @@ const topJobs = jobs.filter(j =>
 
 **TikTok - Trend analysis:**
 ```typescript
-import { scrapeTikTokHashtag } from '~/.soma/skills/Apify/actors'
+import { scrapeTikTokHashtag } from '~/.soma/skills/apify/actors'
 
 const videos = await scrapeTikTokHashtag({
   hashtag: 'ai',
@@ -124,7 +123,7 @@ const viral = videos
 
 **Google Maps - Local business leads:**
 ```typescript
-import { searchGoogleMaps } from '~/.soma/skills/Apify/actors'
+import { searchGoogleMaps } from '~/.soma/skills/apify/actors'
 
 // Search with contact info extraction
 const places = await searchGoogleMaps({
@@ -158,7 +157,7 @@ console.log(`Found ${qualifiedLeads.length} qualified leads`)
 
 **Google Maps - Review sentiment analysis:**
 ```typescript
-import { scrapeGoogleMapsReviews } from '~/.soma/skills/Apify/actors'
+import { scrapeGoogleMapsReviews } from '~/.soma/skills/apify/actors'
 
 const reviews = await scrapeGoogleMapsReviews({
   placeUrl: 'https://maps.google.com/maps?cid=12345',
@@ -184,7 +183,7 @@ const complaints = recentNegative.map(r => r.text)
 
 **Amazon - Price monitoring:**
 ```typescript
-import { scrapeAmazonProduct } from '~/.soma/skills/Apify/actors'
+import { scrapeAmazonProduct } from '~/.soma/skills/apify/actors'
 
 const product = await scrapeAmazonProduct({
   productUrl: 'https://www.amazon.com/dp/B08L5VT894',
@@ -211,7 +210,7 @@ console.log(`Recent issues: ${recentNegative?.length} complaints`)
 
 **Any Website - Custom extraction:**
 ```typescript
-import { scrapeWebsite } from '~/.soma/skills/Apify/actors'
+import { scrapeWebsite } from '~/.soma/skills/apify/actors'
 
 const products = await scrapeWebsite({
   startUrls: ['https://example.com/products'],
@@ -248,7 +247,7 @@ import {
   scrapeInstagramHashtag,
   scrapeTikTokHashtag,
   searchYouTube
-} from '~/.soma/skills/Apify/actors'
+} from '~/.soma/skills/apify/actors'
 
 // Run all platforms in parallel
 const [instagramPosts, tiktokVideos, youtubeVideos] = await Promise.all([
@@ -270,7 +269,7 @@ console.log(`Found ${allViral.length} viral posts across 3 platforms`)
 ### Pattern 2: Lead Enrichment Pipeline
 
 ```typescript
-import { searchGoogleMaps, scrapeLinkedInProfile } from '~/.soma/skills/Apify/actors'
+import { searchGoogleMaps, scrapeLinkedInProfile } from '~/.soma/skills/apify/actors'
 
 // 1. Find businesses on Google Maps
 const restaurants = await searchGoogleMaps({
@@ -303,7 +302,7 @@ import {
   scrapeInstagramProfile,
   scrapeYouTubeChannel,
   scrapeTikTokProfile
-} from '~/.soma/skills/Apify/actors'
+} from '~/.soma/skills/apify/actors'
 
 async function analyzeCompetitor(username: string) {
   // Gather data from all platforms

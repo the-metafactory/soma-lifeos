@@ -1,28 +1,31 @@
 ---
 name: webdesign
-description: "Web UI design via Claude Design. USE WHEN: web design, UI design, create prototype, design system, design tokens, brand extraction, redesign site, mockup, wireframe, landing page, dashboard design, component library, design-to-code, figma alternative, claude design, frontend design, polish UI, design audit, accessibility review. ALSO WHEN a sub-step of larger site work, integrates INTO existing apps not greenfield. NOT FOR: static illustrations or diagrams (use Art), logo/brand asset generation (use Art), video/motion graphics (use Remotion), arbitrary graphic design outside the web/UI domain."
+description: "Design and refine web interfaces through Claude Design: create prototypes, extract design systems, redesign sites, export code, integrate into existing apps, and deploy designs. For static graphics or video, use the optional art or media skill."
 license: Complete terms in LICENSE.txt
 effort: medium
 ---
 
-## Voice Notification (REQUIRED FIRST ACTION)
+## Optional Integrations
 
-```bash
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the Webdesign skill", "voice_enabled": true}' > /dev/null
-```
+Check availability before using these integrations in any workflow:
+
+- `media` is optional for video and motion graphics outside web UI work.
+- `frontend-design` is an optional code-generation plugin. If unavailable, implement the handoff with the host's code tools.
+- `art` is optional. If unavailable, return Mermaid diagram source or image prompts.
+
+Report any fallback used in the result.
 
 ## What This Skill Is
 
-Webdesign is the PAI orchestration layer around **Claude Design** — Anthropic's web-based visual design product launched in April 2026 at `claude.ai/design`. Claude Design is not a CLI tool or plugin; it is a surface on claude.ai powered by Claude Opus 4.7 vision. This skill bridges the gap by:
+webdesign is the PAI orchestration layer around **Claude Design** — Anthropic's web-based visual design product launched in April 2026 at `claude.ai/design`. Claude Design is not a CLI tool or plugin; it is a surface on claude.ai powered by Claude Opus 4.7 vision. This skill bridges the gap by:
 
-1. **Driving Claude Design programmatically** through the Interceptor skill (real-Chrome automation of the authenticated claude.ai session).
+1. **Driving Claude Design programmatically** through the interceptor skill (real-Chrome automation of the authenticated claude.ai session).
 2. **Processing handoff bundles** that Claude Design produces, feeding them into local codebases.
-3. **Delegating production code generation** to the `frontend-design` plugin (Anthropic, auto-activates in Claude Code) when the output is code.
+3. **Generating production code** with the optional `frontend-design` plugin when available, or the host's code tools.
 4. **Integrating designs INTO existing applications** — framework-aware diff/patch flow, not greenfield-only.
-5. **Verifying and deploying** the result via Interceptor + the project's chosen host.
+5. **Verifying and deploying** the result via interceptor + the project's chosen host.
 
-Claude Design is the engine. Webdesign is the cockpit.
+Claude Design is the engine. webdesign is the cockpit.
 
 ## Integration-Aware Operation (CRITICAL)
 
@@ -39,7 +42,7 @@ When invoked standalone for a greenfield design, the skill produces a self-conta
 **When executing a workflow, output this notification:**
 
 ```
-Running **WorkflowName** in **Webdesign**...
+Running **WorkflowName** in **webdesign**...
 ```
 
 | Workflow | Trigger | File |
@@ -56,8 +59,8 @@ Running **WorkflowName** in **Webdesign**...
 
 Before running any workflow, confirm:
 
-1. **Interceptor skill available** — `which interceptor` returns a path. If not, instruct user to invoke `Skill("Interceptor")` setup first.
-2. **Authenticated claude.ai session** — Interceptor must have a logged-in claude.ai profile. First-run is headed; subsequent runs are headless.
+1. **interceptor skill available** — `which interceptor` returns a path. If not, instruct user to invoke `Skill("interceptor")` setup first.
+2. **Authenticated claude.ai session** — interceptor must have a logged-in claude.ai profile. First-run is headed; subsequent runs are headless.
 3. **Claude Design access** — User's Claude subscription must include Claude Design (Pro, Max, Team, or Enterprise with admin opt-in).
 4. **For `IntegrateIntoApp`**: parent-project path + framework identifier (next, astro, vitepress, vite-react, vue, vanilla) passed in context.
 
@@ -67,10 +70,10 @@ Missing prerequisites → halt with a clear remediation step. Never silently fal
 
 Accumulate lessons here. Information density is highest in gotchas.
 
-- **Claude Design is web-only.** There is no API, no MCP server, no plugin. Interceptor is the only programmatic path.
-- **Real Chrome required.** Use the Interceptor skill — it is the only sanctioned browser automation in PAI. Claude Design's UI depends on claude.ai's full session state; CDP-based automation trips bot detection and drops session cookies.
+- **Claude Design is web-only.** There is no API, no MCP server, no plugin. interceptor is the only programmatic path.
+- **Real Chrome required.** Use the interceptor skill — it is the only sanctioned browser automation in PAI. Claude Design's UI depends on claude.ai's full session state; CDP-based automation trips bot detection and drops session cookies.
 - **Handoff bundles are directories, not single files.** A bundle contains `PROMPT.md`, optional `tokens.json`, `components/`, `assets/`, and framework-specific scaffolding. Treat the whole directory as the unit.
-- **`frontend-design` plugin auto-activates.** When the handoff bundle is fed to Claude Code, the plugin (already installed in the official marketplace) picks up the frontend work automatically — do NOT manually invoke it.
+- **Check `frontend-design` availability.** When installed in Claude Code, the plugin picks up frontend work automatically. Otherwise implement the handoff with the host's code tools.
 - **Claude Design's design-system extraction runs during onboarding.** For a new codebase you want Claude Design to understand, run `ExtractDesignSystem` FIRST before `CreatePrototype` — otherwise Claude Design uses generic defaults and overrides your tokens.
 - **Integration ≠ overwrite.** `IntegrateIntoApp` produces diffs on top of existing code. If the user wants a full redesign that replaces existing UI, explicitly flag this and get confirmation.
 - **Canva exports are editable.** If the user wants a non-developer (marketer, founder) to refine the design, route through `Workflows/ExportToCode.md` with `--format canva`.
@@ -86,7 +89,7 @@ Accumulate lessons here. Information density is highest in gotchas.
 ```
 User: "Design a pricing page for an AI security startup — editorial aesthetic, dark only"
 → Invokes CreatePrototype workflow
-→ Preflight: Interceptor + authenticated claude.ai session
+→ Preflight: interceptor + authenticated claude.ai session
 → Composes brief with explicit aesthetic, constraints, differentiation
 → Drives claude.ai/design via Tools/DriveClaudeDesign.ts
 → Screenshots output, verifies a11y via Tools/VerifyDesign.ts
@@ -120,7 +123,7 @@ User: "Redesign example.com — modernize, keep the copy, make it brutalist"
 ## File Organization
 
 ```
-skills/Webdesign/
+skills/webdesign/
 ├── SKILL.md                          # This file — routing + gotchas
 ├── README.md                         # Public-facing intro
 ├── Workflows/
@@ -132,7 +135,7 @@ skills/Webdesign/
 │   ├── IntegrateIntoApp.md
 │   └── DeployDesign.md
 ├── Tools/
-│   ├── DriveClaudeDesign.ts          # Interceptor wrapper for claude.ai/design
+│   ├── DriveClaudeDesign.ts          # interceptor wrapper for claude.ai/design
 │   ├── ProcessHandoffBundle.ts       # Parse bundle → structured brief
 │   └── VerifyDesign.ts               # Screenshot + a11y probe
 └── References/
@@ -144,8 +147,10 @@ skills/Webdesign/
 
 ## Execution Log
 
+After each workflow, build a record with the actual UTC timestamp, workflow name, brief input summary, status (`ok` or `error`), and elapsed seconds:
+
 ```json
-{"ts":"ISO8601","workflow":"CreatePrototype","brief":"one-line","outputs":["path1","path2"],"duration_s":42}
+{"ts":"ISO8601","skill":"webdesign","workflow":"WORKFLOW_USED","input":"brief summary","status":"ok","duration_s":0}
 ```
 
-This log is read-only metadata; it is not part of the public skill distribution.
+Serialize the record with `JSON.stringify(record) + "\n"`. Use the host's file-write tool to append it to `memory/SKILLS/webdesign/execution.jsonl` under the Soma home, creating the parent directory if needed. If the tool only replaces files, read the existing log and preserve its contents before adding the serialized line. Keep all user-derived values in the JSON data, outside shell commands. Logging is complete when the new line parses as one JSON object and prior entries are preserved.

@@ -1,4 +1,4 @@
-# RootCauseAnalysis — Method Selection Guide
+# root-cause-analysis — Method Selection Guide
 
 When to use which workflow. The method matters — using 5 Whys on a safety-critical problem or FTA on a simple defect both produce bad outcomes.
 
@@ -106,7 +106,7 @@ RCA methods nest and combine — they are not mutually exclusive.
 
 ## Integration With Other Skills
 
-- **SystemsThinking** — When multiple postmortems reveal the same structural cause, escalate to Iceberg / FindArchetype. RCA stops at contributing factors; SystemsThinking continues to structure and mental models.
-- **FirstPrinciples** — Decompose a contributing factor to its fundamental truths before designing a fix.
-- **RedTeam** — "How would we cause this again?" is adversarial RCA. Stress-test remediations.
-- **Science** — RCA *is* the scientific method applied to failures. Use Science for hypothesis generation during investigation.
+- **systems-thinking** — When multiple postmortems reveal the same structural cause, escalate to Iceberg / FindArchetype. RCA stops at contributing factors; systems-thinking continues to structure and mental models.
+- **first-principles** — Decompose a contributing factor to its fundamental truths before designing a fix.
+- **red-team** — "How would we cause this again?" is adversarial RCA. Stress-test remediations.
+- **science** — RCA *is* the scientific method applied to failures. Use science for hypothesis generation during investigation.

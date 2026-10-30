@@ -1,14 +1,6 @@
 # Adversarial Validation Pattern (Battle of Bots)
 
-## Voice Notification
-
-```bash
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the AdversarialValidation workflow in the RedTeam skill to validate decisions"}' \
-  > /dev/null 2>&1 &
-```
-
-Running the **AdversarialValidation** workflow in the **RedTeam** skill to validate decisions...
+Running the **AdversarialValidation** workflow in the **red-team** skill to validate decisions...
 
 **Purpose:** Use competing agents + critic to produce superior synthesis through adversarial refinement.
 
@@ -165,7 +157,7 @@ OUTPUT:
 
 ---
 
-## Integration with Existing RedTeam
+## Integration with Existing red-team
 
 **Relationship to 32-Agent Protocol:**
 - The 32-agent parallel analysis (parallelAnalysis.md) is for DEPTH - attacking one argument from 32 perspectives

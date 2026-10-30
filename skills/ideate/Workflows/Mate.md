@@ -4,14 +4,6 @@
 
 **Phase invoked:** MATE only.
 
-## Voice Notification
-
-```bash
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the Mate workflow in the Ideate skill to recombine ideas into offspring"}' \
-  > /dev/null 2>&1 &
-```
-
 ## Inputs
 
 - **Idea pool** (required): list of existing ideas to breed (typically 8-30 items)
@@ -80,8 +72,4 @@
 - **Cross-phase enforcement is the convergence brake.** Without it, the gene pool narrows to one phase's flavor. The 20% floor is empirical.
 - **Bad offspring are wanted here.** Selection is downstream. Filtering at MATE collapses diversity.
 
-## Execution Log
-
-```bash
-echo '{"ts":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","skill":"Ideate","workflow":"Mate","input":"8_WORD_SUMMARY","status":"ok|error","duration_s":SECONDS}' >> ~/.soma/memory/SKILLS/execution.jsonl
-```
+For execution logging, follow [the skill's Execution Log](../SKILL.md#execution-log).

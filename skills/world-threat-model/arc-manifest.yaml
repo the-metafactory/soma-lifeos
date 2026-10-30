@@ -15,13 +15,14 @@ upstream:
 capabilities:
   filesystem:
     read:
+      - ~/.soma/memory/SKILLS/world-threat-model/execution.jsonl
       - "./**"
       - ~/.soma/skills/world-threat-model/**
-      - ~/.soma/memory/RESEARCH/WorldModels/**
+      - ~/.soma/memory/SKILLS/world-threat-model/WorldModels/**
     write:
       - "./**"
-      - ~/.soma/memory/SKILLS/execution.jsonl
-      - ~/.soma/memory/RESEARCH/WorldModels/**
+      - ~/.soma/memory/SKILLS/world-threat-model/execution.jsonl
+      - ~/.soma/memory/SKILLS/world-threat-model/WorldModels/**
   # UpdateModels researches through the host's WebSearch tool; the hosts it contacts depend on the query.
   network: []
   bash:

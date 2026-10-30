@@ -1,17 +1,17 @@
-# Council Members
+# council Members
 
-Council members are ALWAYS custom-composed agents created via the Agents skill's ComposeAgent tool. They are NEVER built-in agent types.
+Compose each council member with the optional agents skill's ComposeAgent tool when installed; otherwise write a role-and-trait prompt directly. They are NEVER built-in agent types.
 
 ## CRITICAL: No Built-In Agent Types
 
 **NEVER use built-in agent types (Architect, Designer, Engineer, PerplexityResearcher, Silas, etc.) for council members.** Built-in types are generic — they have no knowledge of the debate topic and produce shallow, generic perspectives.
 
-Council members MUST be composed using ComposeAgent with topic-specific traits so they have:
+council members need topic-specific role-and-trait prompts so they have:
 - Unique personalities and voices matched to the debate
 - Domain expertise relevant to the specific topic
 - Distinct analytical approaches that create genuine friction
 
-## How to Create Council Members
+## How to Create council Members
 
 ### Step 1: Analyze the Topic
 
@@ -31,6 +31,8 @@ Before composing agents, determine what perspectives would create the most produ
 
 ### Step 2: Compose Each Agent via ComposeAgent
 
+When the optional agents skill is installed, run the command below. Otherwise write the prompt directly using the selected role, traits, and debate question, then continue to Step 3.
+
 ```bash
 bun run ~/.soma/skills/agents/Tools/ComposeAgent.ts \
   --traits "technical,analytical,systematic" \
@@ -46,7 +48,7 @@ Each call returns: name, voice, voice_id, color, traits, and a full prompt with 
 
 ```typescript
 Agent({
-  description: "Council member 1 - systems architect",
+  description: "council member 1 - systems architect",
   prompt: <composedAgentPrompt + round instructions + topic context>,
   subagent_type: "general-purpose",
   model: "sonnet"

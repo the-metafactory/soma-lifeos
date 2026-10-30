@@ -1,14 +1,6 @@
 # DomainSpecific Workflow
 
-## Voice Notification
-
-```bash
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the DomainSpecific workflow in the BeCreative skill to apply domain creativity"}' \
-  > /dev/null 2>&1 &
-```
-
-Running **DomainSpecific** in **BeCreative**...
+Running **DomainSpecific** in **be-creative**...
 
 ---
 

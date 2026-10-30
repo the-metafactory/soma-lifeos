@@ -4,14 +4,6 @@
 
 **Phase invoked:** DREAM only (noise=0.9). No CONSUME (caller supplies inputs), no scoring, no iteration.
 
-## Voice Notification
-
-```bash
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the Dream workflow in the Ideate skill to free-associate inputs"}' \
-  > /dev/null 2>&1 &
-```
-
 ## Inputs
 
 - **Input pool** (required): a list of atomic ideas, facts, patterns. 10-30 items recommended.
@@ -26,7 +18,7 @@
    - Its random subset
    - The instruction: *"Forget any problem context. Just combine these inputs freely. What connections do you see that nobody has made? What if X was Y? What if you turned Z inside out?"*
    - Trait composition: `creative + visionary + unconventional`
-   - Invoke `Skill("BeCreative")` MaximumCreativity workflow inside each agent
+   - Invoke `Skill("be-creative")` MaximumCreativity workflow inside each agent
 
 3. **Each agent produces 3-5 dream fragments**. Output is markdown with:
    - Fragment text (1-3 sentences each)
@@ -55,12 +47,8 @@
 
 ## Distinguishing Notes
 
-- **DREAM has NO awareness of the problem.** If you want gentle problem-tethering, use `Daydream.md` instead (noise=0.5, problem held loosely).
+- **DREAM has NO awareness of the problem.** For gentle problem-tethering, use [FullCycle's DAYDREAM phase](FullCycle.md#phase-3-daydream-perturb-at-noise05) (noise=0.5, problem held loosely).
 - **Structural randomness is the point.** Two agents with the same input will produce more similar output than two agents with genuinely different random subsets. The randomness comes from WHICH ideas they see, not from LLM temperature.
 - **Output is raw material, not solutions.** Downstream consumers (Mate, Test, or a human reviewer) judge applicability.
 
-## Execution Log
-
-```bash
-echo '{"ts":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","skill":"Ideate","workflow":"Dream","input":"8_WORD_SUMMARY","status":"ok|error","duration_s":SECONDS}' >> ~/.soma/memory/SKILLS/execution.jsonl
-```
+For execution logging, follow [the skill's Execution Log](../SKILL.md#execution-log).

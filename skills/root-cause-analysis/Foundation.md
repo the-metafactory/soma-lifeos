@@ -1,4 +1,4 @@
-# RootCauseAnalysis — Foundation
+# root-cause-analysis — Foundation
 
 Canonical reference on the methods and theorists behind this skill. Load on demand when depth is needed beyond the workflows.
 

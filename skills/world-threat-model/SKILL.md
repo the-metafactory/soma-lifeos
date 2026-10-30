@@ -1,6 +1,6 @@
 ---
 name: world-threat-model
-description: "Stress-test ideas against 11 time horizons (6 months to 50 years). Three tiers: Fast, Standard (11 parallel agents), Deep. Four workflows: TestIdea, UpdateModels, ViewModels, TestScenario. USE WHEN threat model, world model, test idea, test strategy, future analysis, time horizon, stress test against future, long-term risk, what could go wrong over time, view models."
+description: "Stress-test an idea or strategy against future time horizons (TestIdea), refresh world models (UpdateModels), or inspect their current state (ViewModels). Use for temporal threat modeling and long-term risk analysis."
 effort: high
 ---
 
@@ -9,7 +9,15 @@ effort: high
 A system of 11 persistent world models spanning 6 months to 50 years. Each model is a deep (~10 page)
 analysis of geopolitics, technology, economics, society, environment, security, and wildcards for that
 time horizon. Ideas, strategies, and investments are tested against ALL horizons simultaneously using
-adversarial analysis (RedTeam, FirstPrinciples, Council).
+adversarial analysis (red-team, first-principles, council).
+
+## Optional Integrations
+
+Check availability before using these integrations in any workflow:
+
+- `research` is optional. If unavailable, gather and cite sources with the host's web tools.
+
+Report any fallback used in the result.
 
 ## Workflow Routing
 
@@ -26,14 +34,16 @@ All workflows support three execution tiers:
 | Tier | Target Time | Strategy | When to Use |
 |------|-------------|----------|-------------|
 | **Fast** | ~2 min | Single agent synthesizes across all models | Quick gut-check, casual exploration |
-| **Standard** | ~10 min | 11 parallel agents + RedTeam + FirstPrinciples | Most use cases, good depth/speed balance |
-| **Deep** | Up to 1 hr | 11 parallel agents + per-horizon Research + RedTeam + Council + FirstPrinciples | High-stakes decisions, major investments |
+| **Standard** | ~10 min | 11 parallel agents + red-team + first-principles | Most use cases, good depth/speed balance |
+| **Deep** | Up to 1 hr | 11 parallel agents + per-horizon research + red-team + council + first-principles | High-stakes decisions, major investments |
 
 **Default tier:** Standard. User specifies with "fast", "deep", or tier defaults to Standard.
 
 ## World Model Storage
 
-Models are stored at: `$PAI_DIR/MEMORY/RESEARCH/WorldModels/`
+Resolve all `memory/SKILLS/world-threat-model/` paths relative to the Soma home.
+
+Models are stored at: `memory/SKILLS/world-threat-model/WorldModels/`
 
 ### Horizon Models (base views)
 
@@ -54,7 +64,7 @@ Models are stored at: `$PAI_DIR/MEMORY/RESEARCH/WorldModels/`
 
 ### Scenario Models (alternative futures)
 
-Stored at: `$PAI_DIR/MEMORY/RESEARCH/WorldModels/Scenarios/`
+Stored at: `memory/SKILLS/world-threat-model/WorldModels/Scenarios/`
 
 | File | Scenario |
 |------|----------|
@@ -71,23 +81,10 @@ Stored at: `$PAI_DIR/MEMORY/RESEARCH/WorldModels/Scenarios/`
 
 This skill orchestrates multiple PAI capabilities:
 
-- **RedTeam** — Adversarial stress testing of ideas against each horizon
-- **FirstPrinciples** — Decompose idea assumptions into hard/soft/assumption constraints
-- **Council** — Multi-perspective debate on idea viability across horizons
-- **Research** — Deep research for model creation and updates
-
-## Voice Notification
-
-Before any workflow execution:
-```bash
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running WORKFLOW_NAME in the World Threat Model Harness", "voice_id": "fTtv3eikoepIosk8dTZ5"}'
-```
-
-## Customization Check
-
-Before execution, check for user customizations at:
-`~/.soma/UNMAPPED/PAI/USER/SKILLCUSTOMIZATIONS/WorldThreatModelHarness/`
+- **red-team** — Adversarial stress testing of ideas against each horizon
+- **first-principles** — Decompose idea assumptions into hard/soft/assumption constraints
+- **council** — Multi-perspective debate on idea viability across horizons
+- **research** (optional) — Deep research for model creation and updates
 
 ## Gotchas
 
@@ -114,10 +111,10 @@ User: "what could go wrong with our newsletter business model?"
 
 ## Execution Log
 
-After completing any workflow, append a single JSONL entry:
+After each workflow, build a record with the actual UTC timestamp, workflow name, brief input summary, status (`ok` or `error`), and elapsed seconds:
 
-```bash
-echo '{"ts":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","skill":"WorldThreatModel","workflow":"WORKFLOW_USED","input":"8_WORD_SUMMARY","status":"ok|error","duration_s":SECONDS}' >> ~/.soma/memory/SKILLS/execution.jsonl
+```json
+{"ts":"ISO8601","skill":"world-threat-model","workflow":"WORKFLOW_USED","input":"brief summary","status":"ok","duration_s":0}
 ```
 
-Replace `WORKFLOW_USED` with the workflow executed, `8_WORD_SUMMARY` with a brief input description, and `SECONDS` with approximate wall-clock time. Log `status: "error"` if the workflow failed.
+Serialize the record with `JSON.stringify(record) + "\n"`. Use the host's file-write tool to append it to `memory/SKILLS/world-threat-model/execution.jsonl` under the Soma home, creating the parent directory if needed. If the tool only replaces files, read the existing log and preserve its contents before adding the serialized line. Keep all user-derived values in the JSON data, outside shell commands. Logging is complete when the new line parses as one JSON object and prior entries are preserved.

@@ -1,11 +1,19 @@
 ---
 name: apify
-description: "Apify-based scraping for social media, business data, e-commerce, and general web crawling via TypeScript actor wrappers that filter results for major token savings. USE WHEN scraping Instagram, LinkedIn, TikTok, YouTube, Facebook, Google Maps leads, Amazon reviews, business intel, multi-platform social listening, competitive analysis, lead generation, social monitoring, Apify actors, web crawl, or contact extraction. SKIP: X/Twitter bookmarks (use X-API skill) and progressive scraping (use BrightData)."
+description: "Apify-based scraping for social media, business data, e-commerce, and general web crawling via TypeScript actor wrappers that filter results for major token savings. USE WHEN scraping Instagram, LinkedIn, TikTok, YouTube, Facebook, Google Maps leads, Amazon reviews, business intel, multi-platform social listening, competitive analysis, lead generation, social monitoring, Apify actors, web crawl, or contact extraction. SKIP: X/Twitter bookmarks (use X-API skill) and progressive scraping (use bright-data)."
 effort: medium
 ---
 # Apify - Social Media & Web Scraping
 
 Direct TypeScript access to 9 popular Apify actors with 99% token savings.
+
+## Optional Integrations
+
+Check availability before using these integrations in any workflow:
+
+- `research` is optional. If unavailable, gather and cite sources with the host's web tools.
+
+Report any fallback used in the result.
 
 ## 🔌 File-Based MCP
 
@@ -475,10 +483,10 @@ User: "scrape this company's LinkedIn page"
 
 ## Execution Log
 
-After completing any workflow, append a single JSONL entry:
+After each workflow, build a record with the actual UTC timestamp, workflow name, brief input summary, status (`ok` or `error`), and elapsed seconds:
 
-```bash
-echo '{"ts":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","skill":"Apify","workflow":"WORKFLOW_USED","input":"8_WORD_SUMMARY","status":"ok|error","duration_s":SECONDS}' >> ~/.soma/memory/SKILLS/execution.jsonl
+```json
+{"ts":"ISO8601","skill":"apify","workflow":"WORKFLOW_USED","input":"brief summary","status":"ok","duration_s":0}
 ```
 
-Replace `WORKFLOW_USED` with the workflow executed, `8_WORD_SUMMARY` with a brief input description, and `SECONDS` with approximate wall-clock time. Log `status: "error"` if the workflow failed.
+Serialize the record with `JSON.stringify(record) + "\n"`. Use the host's file-write tool to append it to `memory/SKILLS/apify/execution.jsonl` under the Soma home, creating the parent directory if needed. If the tool only replaces files, read the existing log and preserve its contents before adding the serialized line. Keep all user-derived values in the JSON data, outside shell commands. Logging is complete when the new line parses as one JSON object and prior entries are preserved.

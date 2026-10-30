@@ -2,15 +2,7 @@
 
 **Purpose**: Systematically challenge every assumption and constraint, classifying each as hard constraint (physics), soft constraint (choice), or unvalidated assumption.
 
-## Voice Notification
-
-```bash
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the Challenge workflow in the FirstPrinciples skill to test assumptions"}' \
-  > /dev/null 2>&1 &
-```
-
-Running the **Challenge** workflow in the **FirstPrinciples** skill to test assumptions...
+Running the **Challenge** workflow in the **first-principles** skill to test assumptions...
 
 ---
 
@@ -18,7 +10,7 @@ Running the **Challenge** workflow in the **FirstPrinciples** skill to test assu
 - After Deconstruct, to evaluate what's actually fixed
 - When requirements feel overly restrictive
 - When "we can't do X" is stated without evidence
-- For adversarial analysis (RedTeam, pentesting)
+- For adversarial analysis (red-team, pentesting)
 - Before major architecture or strategy decisions
 
 ---
@@ -217,22 +209,22 @@ The most dangerous constraints are the ones so assumed they're never stated.
 
 ## Integration with Other Skills
 
-**RedTeam**: Use Challenge to attack the assumptions behind any idea
+**red-team**: Use Challenge to attack the assumptions behind any idea
 ```
-→ FirstPrinciples/Challenge on stated security controls
-→ FirstPrinciples/Challenge on business model assumptions
+→ first-principles/Challenge on stated security controls
+→ first-principles/Challenge on business model assumptions
 ```
 
 **Pentester**: Use Challenge to find real vs. assumed security boundaries
 ```
-→ FirstPrinciples/Challenge on "the firewall protects us"
-→ FirstPrinciples/Challenge on trust boundaries
+→ first-principles/Challenge on "the firewall protects us"
+→ first-principles/Challenge on trust boundaries
 ```
 
 **Architect**: Use Challenge before accepting any requirement
 ```
-→ FirstPrinciples/Challenge on NFRs (non-functional requirements)
-→ FirstPrinciples/Challenge on technology choices
+→ first-principles/Challenge on NFRs (non-functional requirements)
+→ first-principles/Challenge on technology choices
 ```
 
 ---

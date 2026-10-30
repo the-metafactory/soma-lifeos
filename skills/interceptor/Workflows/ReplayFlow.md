@@ -1,14 +1,6 @@
 # ReplayFlow Workflow
 
-## Voice Notification
-
-```bash
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the ReplayFlow workflow in the Interceptor skill to replay a recorded flow"}' \
-  > /dev/null 2>&1 &
-```
-
-Running **ReplayFlow** in **Interceptor**...
+Running **ReplayFlow** in **interceptor**...
 
 ---
 
@@ -25,10 +17,10 @@ Replay a previously recorded user flow to verify it still works after a deploy o
 
 ### 1. Locate the Flow Plan
 
-Recorded flows live in `skills/Interceptor/Flows/`. List available flows:
+Recorded flows live in `skills/interceptor/Flows/`. List available flows:
 
 ```bash
-ls ~/.soma/skills/Interceptor/Flows/
+ls ~/.soma/skills/interceptor/Flows/
 ```
 
 Or regenerate from a monitor session:

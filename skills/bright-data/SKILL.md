@@ -1,6 +1,6 @@
 ---
 name: bright-data
-description: "4-tier progressive scraping (WebFetch, curl+Chrome headers, agent-browser, Bright Data MCP) with auto-escalation; single-URL or multi-page crawl, outputs markdown. USE WHEN Bright Data, scrape URL, bot detection, CAPTCHA, site blocking, crawl site, extract page content, spider domain, URL to markdown. NOT FOR headless batch automation without scraping need (use Browser), simple public content (use WebFetch directly), or logged-in real-browser bypass/zero-CDP-fingerprint (use Interceptor)."
+description: "4-tier progressive scraping (WebFetch, curl+Chrome headers, agent-browser, Bright Data MCP) with auto-escalation; single-URL or multi-page crawl, outputs markdown. USE WHEN Bright Data, scrape URL, bot detection, CAPTCHA, site blocking, crawl site, extract page content, spider domain, URL to markdown. NOT FOR headless batch automation without scraping need (use browser), simple public content (use WebFetch directly), or logged-in real-browser bypass/zero-CDP-fingerprint (use interceptor)."
 effort: medium
 ---
 ## Workflow Routing
@@ -89,7 +89,7 @@ Examples: "crawl this site", "crawl all pages under /docs", "spider this domain"
 
 **FourTierScrape.md** - Complete URL content scraping with four-tier fallback strategy
 - **When to use:** Any single URL content retrieval request
-- **Process:** Start with WebFetch → If fails, use curl with Chrome headers → If fails, use Browser Automation → If fails, use Bright Data MCP
+- **Process:** Start with WebFetch → If fails, use curl with Chrome headers → If fails, use browser Automation → If fails, use Bright Data MCP
 - **Output:** URL content in markdown format
 
 **Crawl.md** - Multi-page crawling with link discovery and site mapping
@@ -184,10 +184,10 @@ Skill Response:
 
 ## Execution Log
 
-After completing any workflow, append a single JSONL entry:
+After each workflow, build a record with the actual UTC timestamp, workflow name, brief input summary, status (`ok` or `error`), and elapsed seconds:
 
-```bash
-echo '{"ts":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","skill":"BrightData","workflow":"WORKFLOW_USED","input":"8_WORD_SUMMARY","status":"ok|error","duration_s":SECONDS}' >> ~/.soma/memory/SKILLS/execution.jsonl
+```json
+{"ts":"ISO8601","skill":"bright-data","workflow":"WORKFLOW_USED","input":"brief summary","status":"ok","duration_s":0}
 ```
 
-Replace `WORKFLOW_USED` with the workflow executed, `8_WORD_SUMMARY` with a brief input description, and `SECONDS` with approximate wall-clock time. Log `status: "error"` if the workflow failed.
+Serialize the record with `JSON.stringify(record) + "\n"`. Use the host's file-write tool to append it to `memory/SKILLS/bright-data/execution.jsonl` under the Soma home, creating the parent directory if needed. If the tool only replaces files, read the existing log and preserve its contents before adding the serialized line. Keep all user-derived values in the JSON data, outside shell commands. Logging is complete when the new line parses as one JSON object and prior entries are preserved.

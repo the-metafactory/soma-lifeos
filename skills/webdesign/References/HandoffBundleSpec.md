@@ -199,7 +199,7 @@ Claude Design emits framework-specific files depending on the `framework` field:
 Before feeding a bundle to Claude Code, validate structure:
 
 ```bash
-bun ~/.soma/skills/Webdesign/Tools/ProcessHandoffBundle.ts <bundle-dir>
+bun ~/.soma/skills/webdesign/Tools/ProcessHandoffBundle.ts <bundle-dir>
 ```
 
 The tool checks:

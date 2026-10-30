@@ -1,18 +1,10 @@
 # TestForm Workflow
 
-## Voice Notification
-
-```bash
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the TestForm workflow in the Interceptor skill to test a form"}' \
-  > /dev/null 2>&1 &
-```
-
-Running **TestForm** in **Interceptor**...
+Running **TestForm** in **interceptor**...
 
 ---
 
-Discover, fill, submit, and verify a form on any page. Uses Interceptor's semantic element finding to locate form fields by role and name, fills them with test data, submits, and verifies the result.
+Discover, fill, submit, and verify a form on any page. Uses interceptor's semantic element finding to locate form fields by role and name, fills them with test data, submits, and verifies the result.
 
 ## When to Use
 
