@@ -1,14 +1,6 @@
 # Update Workflow
 
-## Voice Notification
-
-```bash
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the Update workflow in the Browser skill to sync capabilities"}' \
-  > /dev/null 2>&1 &
-```
-
-Running **Update** in **Browser**...
+Running **Update** in **browser**...
 
 ---
 
@@ -51,8 +43,8 @@ Agent(subagent_type="BrowserAgent", prompt="Navigate to https://example.com. Tak
 ### 5. Verify Stories and Recipes
 
 ```bash
-ls ~/.soma/skills/Browser/Stories/*.yaml
-ls ~/.soma/skills/Browser/Recipes/*.md
+ls ~/.soma/skills/browser/Stories/*.yaml
+ls ~/.soma/skills/browser/Recipes/*.md
 ```
 
 ## Version Tracking

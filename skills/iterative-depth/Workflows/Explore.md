@@ -8,7 +8,7 @@ Run N structured exploration passes over the same problem, each from a different
 
 This workflow is invoked:
 1. **Directly** by the user: "use iterative depth on this problem"
-2. **By the Algorithm** during OBSERVE phase when the Capability Audit selects IterativeDepth
+2. **By the Algorithm** during OBSERVE phase when the Capability Audit selects iterative-depth
 3. **By other skills** that need enhanced requirement extraction
 
 ## Inputs
@@ -141,7 +141,7 @@ SLA: Complete within 30 seconds.
 
 ## Integration with Algorithm OBSERVE Phase
 
-When the Capability Audit selects IterativeDepth (#4 Skills match), it runs AFTER the initial Reverse Engineering block but BEFORE ISC CREATION. The flow becomes:
+When the Capability Audit selects iterative-depth (#4 Skills match), it runs AFTER the initial Reverse Engineering block but BEFORE ISC CREATION. The flow becomes:
 
 ```
 OBSERVE Phase:

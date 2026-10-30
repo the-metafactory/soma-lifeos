@@ -3,7 +3,7 @@ name: first-principles
 description: "Deconstruct problems to irreducible truths. Three steps: DECONSTRUCT (constituent parts), CHALLENGE (hard/soft/assumption classification), RECONSTRUCT (build from fundamentals). Four workflows: Deconstruct, Challenge, Reconstruct, Superior. USE WHEN first principles, challenge assumptions, is this a real constraint, rebuild from scratch, what are we paying for, start over, physics first, question everything, is this really necessary, Superior, how would a far more capable mind build this."
 effort: high
 ---
-# FirstPrinciples Skill
+# first-principles Skill
 
 Foundational reasoning methodology based on Elon Musk's physics-based thinking framework. Deconstructs problems to fundamental truths rather than reasoning by analogy.
 
@@ -23,7 +23,7 @@ Foundational reasoning methodology based on Elon Musk's physics-based thinking f
 
 - **Architects**: Challenge "is this actually a constraint or just how we've always done it?"
 - **Pentesters**: Identify actual attack surfaces vs. assumed security boundaries
-- **RedTeam**: Sharpen adversarial analysis by deconstructing assumptions
+- **red-team**: Sharpen adversarial analysis by deconstructing assumptions
 - **Engineers**: When stuck, rebuild from fundamentals
 - **Any skill**: When inherited assumptions may be limiting the solution space
 
@@ -34,7 +34,7 @@ Route to the appropriate workflow based on the request.
 **When executing a workflow, output this notification directly:**
 
 ```
-Running the **WorkflowName** workflow in the **FirstPrinciples** skill to ACTION...
+Running the **WorkflowName** workflow in the **first-principles** skill to ACTION...
 ```
 
   - Break problem into fundamental parts → `Workflows/Deconstruct.md`
@@ -98,20 +98,20 @@ When analyzing any system, classify constraints:
 
 ## Integration Pattern
 
-Other skills invoke FirstPrinciples like this:
+Other skills invoke first-principles like this:
 
 ```markdown
 ## Before Analysis
-→ Use FirstPrinciples/Challenge on all stated constraints
+→ Use first-principles/Challenge on all stated constraints
 → Classify each as hard/soft/assumption
 
 ## When Stuck
-→ Use FirstPrinciples/Deconstruct to break down the problem
-→ Use FirstPrinciples/Reconstruct to rebuild from fundamentals
+→ Use first-principles/Deconstruct to break down the problem
+→ Use first-principles/Reconstruct to rebuild from fundamentals
 
 ## For Adversarial Analysis
-→ RedTeam uses FirstPrinciples/Challenge to attack assumptions
-→ Pentester uses FirstPrinciples/Deconstruct on security model
+→ red-team uses first-principles/Challenge to attack assumptions
+→ An optional pentester skill uses first-principles/Deconstruct on the security model
 ```
 
 ## Examples
@@ -142,7 +142,7 @@ Other skills invoke FirstPrinciples like this:
 
 ## Output Format
 
-When using FirstPrinciples, output should include:
+When using first-principles, output should include:
 
 ```markdown
 ## First Principles Analysis: [Topic]
@@ -189,14 +189,14 @@ When using FirstPrinciples, output should include:
 
 - **Decompose to AXIOMS — fundamental truths, not just simpler components.** The value is in finding the irreducible elements.
 - **Challenge INHERITED assumptions specifically.** What does everyone assume that might be wrong?
-- **This is analysis/reasoning, not implementation.** "Analyze" = FirstPrinciples. "Fix" = do the work directly.
+- **This is analysis/reasoning, not implementation.** "Analyze" = first-principles. "Fix" = do the work directly.
 
 ## Execution Log
 
-After completing any workflow, append a single JSONL entry:
+After each workflow, build a record with the actual UTC timestamp, workflow name, brief input summary, status (`ok` or `error`), and elapsed seconds:
 
-```bash
-echo '{"ts":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","skill":"FirstPrinciples","workflow":"WORKFLOW_USED","input":"8_WORD_SUMMARY","status":"ok|error","duration_s":SECONDS}' >> ~/.soma/memory/SKILLS/execution.jsonl
+```json
+{"ts":"ISO8601","skill":"first-principles","workflow":"WORKFLOW_USED","input":"brief summary","status":"ok","duration_s":0}
 ```
 
-Replace `WORKFLOW_USED` with the workflow executed, `8_WORD_SUMMARY` with a brief input description, and `SECONDS` with approximate wall-clock time. Log `status: "error"` if the workflow failed.
+Serialize the record with `JSON.stringify(record) + "\n"`. Prefer the host's append-capable file-write tool to append it to `memory/SKILLS/first-principles/execution.jsonl` under the Soma home, creating the parent directory if needed. If only replacement writes are available, write this single record to a new `execution-<UTC timestamp>-<unique suffix>.jsonl` in the same directory without replacing any existing file. Use a filename-safe UTC timestamp and a fresh random suffix. Keep all user-derived values in the JSON data, outside shell commands. Logging is complete when the written line parses as one JSON object and prior files and entries are preserved.

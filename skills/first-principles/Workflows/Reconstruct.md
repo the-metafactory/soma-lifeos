@@ -2,15 +2,7 @@
 
 **Purpose**: Build an optimal solution from scratch using only the fundamental truths and hard constraints identified through Deconstruct and Challenge.
 
-## Voice Notification
-
-```bash
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the Reconstruct workflow in the FirstPrinciples skill to build optimal solution"}' \
-  > /dev/null 2>&1 &
-```
-
-Running the **Reconstruct** workflow in the **FirstPrinciples** skill to build optimal solution...
+Running the **Reconstruct** workflow in the **first-principles** skill to build optimal solution...
 
 ---
 
@@ -269,10 +261,10 @@ Deconstruct → Challenge → Reconstruct
 **Standalone Use**:
 Can use Reconstruct directly if you already know the hard constraints:
 ```
-→ FirstPrinciples/Reconstruct given constraints [X, Y, Z]
+→ first-principles/Reconstruct given constraints [X, Y, Z]
 ```
 
 **With Other Skills**:
 - Architect invokes after Challenge to generate alternatives
 - Engineer invokes when stuck to escape local maxima
-- RedTeam invokes to construct counter-proposals
+- red-team invokes to construct counter-proposals

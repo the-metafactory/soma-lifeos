@@ -1,4 +1,4 @@
-# Interceptor Recorded Flows
+# interceptor Recorded Flows
 
 This directory stores replay plan scripts exported from `interceptor monitor export <sid> --plan`.
 

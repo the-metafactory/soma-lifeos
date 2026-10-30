@@ -80,7 +80,7 @@ Each lens is a structured perspective that forces exploration of a problem from 
 
 | SLA | Lenses Used | Which Ones | Time Budget |
 |-----|-------------|------------|-------------|
-| **Instant** | 0 | Skip IterativeDepth entirely | 0s |
+| **Instant** | 0 | Skip iterative-depth entirely | 0s |
 | **Fast** | 2 | Literal + Failure | <30s |
 | **Standard** | 4 | Literal + Stakeholder + Failure + Experiential | <2min |
 | **Deep** | 8 | All 8 lenses | <5min |

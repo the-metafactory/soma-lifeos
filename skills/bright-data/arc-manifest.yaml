@@ -15,12 +15,15 @@ upstream:
 capabilities:
   filesystem:
     read:
+      - ~/.soma/memory/SKILLS/bright-data/execution.jsonl
+      - ~/.soma/memory/SKILLS/bright-data/execution-*.jsonl
       - ./**
       - /tmp/**
     write:
       - ./**
       - /tmp/**
-      - ~/.soma/memory/SKILLS/execution.jsonl
+      - ~/.soma/memory/SKILLS/bright-data/execution.jsonl
+      - ~/.soma/memory/SKILLS/bright-data/execution-*.jsonl
   # Fixed service hosts; browsing and scraping also contact user-selected target hosts.
   network:
     - host: api.brightdata.com

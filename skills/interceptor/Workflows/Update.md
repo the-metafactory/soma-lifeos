@@ -1,14 +1,6 @@
 # Update Workflow
 
-## Voice Notification
-
-```bash
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the Update workflow in the Interceptor skill to rebuild interceptor"}' \
-  > /dev/null 2>&1 &
-```
-
-Running **Update** in **Interceptor**...
+Running **Update** in **interceptor**...
 
 ---
 
@@ -77,7 +69,7 @@ with the current allowed extension IDs.
 
 ### 6. (Optional) Bridge — macOS Native Helper App
 
-The bridge is the macOS-native helper that gives Interceptor capabilities the
+The bridge is the macOS-native helper that gives interceptor capabilities the
 Chrome extension cannot provide on its own. Documented end-to-end here so the
 skill owns the full lifecycle — install, verify, security model, troubleshoot,
 uninstall — without referencing the upstream README.
@@ -194,7 +186,7 @@ removing the `interceptor-bridge` entry from each list.
 If `extension/dist/manifest.json` changed (especially `version` or `key`):
 
 1. Open `chrome://extensions`, enable Developer Mode
-2. **Delete** the existing Interceptor card (don't just hit reload — if the
+2. **Delete** the existing interceptor card (don't just hit reload — if the
    manifest `key` changed, the extension ID changed and the old card is dead)
 3. **Load unpacked** → `~/Projects/interceptor/extension/dist`
 4. Quit Chrome fully (⌘Q, not just close window) and relaunch — service worker

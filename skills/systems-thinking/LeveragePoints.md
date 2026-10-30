@@ -1,4 +1,4 @@
-# SystemsThinking — Meadows' 12 Leverage Points (Reference)
+# systems-thinking — Meadows' 12 Leverage Points (Reference)
 
 Donella Meadows, "Leverage Points: Places to Intervene in a System," *Whole Earth* 1999; expanded in *Thinking in Systems* (2008). Ordered from **least** leverage (12) to **most** (1). Reversed from how most people instinctively attack a problem — which is why most interventions fail.
 

@@ -1,17 +1,17 @@
-# Council Members
+# council Members
 
-Council members are ALWAYS custom-composed agents created via the Agents skill's ComposeAgent tool. They are NEVER built-in agent types.
+Compose each council member with the optional agents skill's ComposeAgent tool when installed; otherwise write a role-and-trait prompt directly. They are NEVER built-in agent types.
 
 ## CRITICAL: No Built-In Agent Types
 
 **NEVER use built-in agent types (Architect, Designer, Engineer, PerplexityResearcher, Silas, etc.) for council members.** Built-in types are generic — they have no knowledge of the debate topic and produce shallow, generic perspectives.
 
-Council members MUST be composed using ComposeAgent with topic-specific traits so they have:
+council members need topic-specific role-and-trait prompts so they have:
 - Unique personalities and voices matched to the debate
 - Domain expertise relevant to the specific topic
 - Distinct analytical approaches that create genuine friction
 
-## How to Create Council Members
+## How to Create council Members
 
 ### Step 1: Analyze the Topic
 
@@ -29,7 +29,9 @@ Before composing agents, determine what perspectives would create the most produ
 - Agent 3: Pragmatic engineer (traits: `technical,pragmatic,analytical`)
 - Agent 4: Evidence-based researcher (traits: `research,analytical,comparative`)
 
-### Step 2: Compose Each Agent via ComposeAgent
+### Step 2: Compose Each Agent
+
+When the optional agents skill is installed, run the command below. Otherwise write the prompt directly using the selected role, traits, and debate question, then continue to Step 3.
 
 ```bash
 bun run ~/.soma/skills/agents/Tools/ComposeAgent.ts \
@@ -46,7 +48,7 @@ Each call returns: name, voice, voice_id, color, traits, and a full prompt with 
 
 ```typescript
 Agent({
-  description: "Council member 1 - systems architect",
+  description: "council member 1 - systems architect",
   prompt: <composedAgentPrompt + round instructions + topic context>,
   subagent_type: "general-purpose",
   model: "sonnet"
@@ -70,7 +72,7 @@ The specific traits should be tailored to the topic, not generic.
 
 | Scenario | WRONG | RIGHT |
 |----------|-------|-------|
-| Any council debate | `Agent(subagent_type="Architect")` | ComposeAgent → `Agent(subagent_type="general-purpose")` |
-| Security topic | `Agent(subagent_type="Silas")` | ComposeAgent with `security,adversarial,bold` traits |
-| Design question | `Agent(subagent_type="Designer")` | ComposeAgent with `ux,enthusiastic,exploratory` traits |
-| Research needed | `Agent(subagent_type="PerplexityResearcher")` | ComposeAgent with `research,thorough,comparative` traits |
+| Any council debate | `Agent(subagent_type="Architect")` | Topic-specific prompt → `Agent(subagent_type="general-purpose")` |
+| Security topic | `Agent(subagent_type="Silas")` | Role prompt with `security,adversarial,bold` traits |
+| Design question | `Agent(subagent_type="Designer")` | Role prompt with `ux,enthusiastic,exploratory` traits |
+| Research needed | `Agent(subagent_type="PerplexityResearcher")` | Role prompt with `research,thorough,comparative` traits |

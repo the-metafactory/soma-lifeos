@@ -1,4 +1,4 @@
-# ConceptMap Workflow — SystemsThinking
+# ConceptMap Workflow — systems-thinking
 
 ## Purpose
 
@@ -14,7 +14,7 @@ Concept maps come from Joseph Novak's work on meaningful learning (Cornell, 1972
 - "Novak-style mapping"
 - Early-stage domain exploration, onboarding docs, architecture overviews, knowledge capture
 
-**Not for:** dynamic behavior (use CausalLoop), incident causation (use RootCauseAnalysis), hierarchical decomposition (use an outline or tree).
+**Not for:** dynamic behavior (use CausalLoop), incident causation (use root-cause-analysis), hierarchical decomposition (use an outline or tree).
 
 ## The Structure
 
@@ -104,10 +104,10 @@ Check:
 
 ### Step 7: Render
 
-Concept maps benefit enormously from visual rendering. Use the Art skill:
+Concept maps benefit enormously from visual rendering. Use the optional art skill:
 
 ```bash
-Skill("Art", "Mermaid concept map with focus question [Q], concepts: [list], labeled links: [list], cross-links: [list]")
+Skill("art", "Mermaid concept map with focus question [Q], concepts: [list], labeled links: [list], cross-links: [list]")
 ```
 
 Mermaid or graphviz both work. Mermaid renders inline in most editors; graphviz produces higher-quality static images.
@@ -153,14 +153,14 @@ CONCEPTS (general → specific):
 - Phases, ISC Quality System, ISA, Capabilities
 - OBSERVE, THINK, PLAN, BUILD, EXECUTE, VERIFY, LEARN
 - FeedbackMemoryConsult, Advisor, LiveProbe, ConflictSurfacing
-- IterativeDepth, ApertureOscillation, FirstPrinciples, Council, RedTeam, Science, SystemsThinking, RootCauseAnalysis
+- iterative-depth, aperture-oscillation, first-principles, council, red-team, Science, systems-thinking, root-cause-analysis
 
 PROPOSITIONS:
 - Algorithm → [has phases] → {OBSERVE, THINK, ..., LEARN}
 - Algorithm → [uses] → ISA
 - Algorithm → [enforces] → ISC Quality System
 - OBSERVE → [selects] → Capabilities
-- Capabilities → [include thinking skills] → {IterativeDepth, FirstPrinciples, ..., SystemsThinking, RootCauseAnalysis}
+- Capabilities → [include thinking skills] → {iterative-depth, first-principles, ..., systems-thinking, root-cause-analysis}
 - THINK → [invokes] → Thinking skills
 - VERIFY → [enforces] → Verification Doctrine
 - Verification Doctrine → [includes] → {LiveProbe, Advisor, ConflictSurfacing}
@@ -203,7 +203,7 @@ INSIGHTS:
 - Feeds **Iceberg** — Layer 3 (structure) often benefits from a concept map of the actors and relationships
 - Feeds **CausalLoop** — concepts and relationships from the map inform variables and arrows
 - Pairs with **Knowledge** skill — concept maps make excellent Knowledge Archive entries
-- Rendered via **Art** skill — Mermaid, Graphviz, or d2
+- Rendered via **art** (optional) skill — Mermaid, Graphviz, or d2
 
 ## Attribution
 

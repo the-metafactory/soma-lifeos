@@ -1,4 +1,4 @@
-# FindLeverage Workflow — SystemsThinking
+# FindLeverage Workflow — systems-thinking
 
 ## Purpose
 
@@ -308,7 +308,7 @@ TIMELINE: Re-evaluate in 8 weeks.
 
 - Runs after **CausalLoop** or **FindArchetype**
 - Reference material: `../LeveragePoints.md` for full treatment with more examples
-- Exits to **Ideate** or **BeCreative** for generating candidate interventions at the chosen level
+- Exits to **ideate** or **be-creative** for generating candidate interventions at the chosen level
 
 ## Attribution
 

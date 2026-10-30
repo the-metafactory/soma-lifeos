@@ -54,7 +54,7 @@ find "$TARGET/src" -type d -name "components" -o -name "ui" 2>/dev/null > "$OUT/
 If `ExtractDesignSystem.md` has not already been run on this project, run it NOW. This primes Claude Design with the app's real tokens and stops it from inventing a competing palette.
 
 ```bash
-Skill("Webdesign") → Workflows/ExtractDesignSystem.md --codebase "$TARGET"
+Skill("webdesign") → Workflows/ExtractDesignSystem.md --codebase "$TARGET"
 ```
 
 ### 3. Compose the Integration Brief
@@ -129,7 +129,7 @@ bun dev &
 DEV_PID=$!
 sleep 5
 
-bun ~/.soma/skills/Webdesign/Tools/VerifyDesign.ts "http://localhost:$DEV_PORT$INTEGRATION_TARGET" "$OUT/in-context"
+bun ~/.soma/skills/webdesign/Tools/VerifyDesign.ts "http://localhost:$DEV_PORT$INTEGRATION_TARGET" "$OUT/in-context"
 
 kill $DEV_PID
 ```

@@ -8,7 +8,7 @@ Run 3 structured passes over the same question at different scope levels — nar
 
 This workflow is invoked:
 1. **Directly** by the user: "use aperture oscillation on this", "oscillate scope on this"
-2. **By the Algorithm** during OBSERVE or THINK when ApertureOscillation capability is selected
+2. **By the Algorithm** during OBSERVE or THINK when aperture-oscillation capability is selected
 3. **By other skills** that need scope-coherence analysis before committing to an approach
 
 ## Inputs
@@ -33,7 +33,7 @@ Clearly state both inputs before beginning passes:
  🌐 Strategic Context: [the bigger picture — 1-2 sentences]
 ```
 
-If the tactical target and strategic context are essentially the same thing (no meaningful scope difference), abort and recommend IterativeDepth instead.
+If the tactical target and strategic context are essentially the same thing (no meaningful scope difference), abort and recommend iterative-depth instead.
 
 ### Step 2: Pass 1 — Narrow Aperture (Tactical-First)
 
@@ -150,7 +150,7 @@ Focus on:
 
 ## Integration with Algorithm Phases
 
-When the Algorithm selects ApertureOscillation, it runs at one of two integration points:
+When the Algorithm selects aperture-oscillation, it runs at one of two integration points:
 
 **During OBSERVE (before ISC):**
 ```
@@ -175,18 +175,18 @@ THINK Phase:
 3. Approach commitment
 ```
 
-## Combining with IterativeDepth
+## Combining with iterative-depth
 
-ApertureOscillation and IterativeDepth are complementary, not competing:
+aperture-oscillation and iterative-depth are complementary, not competing:
 
-- **IterativeDepth first** — understand the problem from multiple analytical angles
-- **ApertureOscillation second** — validate that the proposed solution serves both local and system needs
+- **iterative-depth first** — understand the problem from multiple analytical angles
+- **aperture-oscillation second** — validate that the proposed solution serves both local and system needs
 
-At Deep (E4) or Comprehensive (E5) effort, using both in sequence produces the richest requirement set: IterativeDepth discovers the full problem space, ApertureOscillation ensures the solution fits the system.
+At Deep (E4) or Comprehensive (E5) effort, using both in sequence produces the richest requirement set: iterative-depth discovers the full problem space, aperture-oscillation ensures the solution fits the system.
 
 ## Agent Mode (for Algorithm delegation)
 
-When spawning an agent to run ApertureOscillation:
+When spawning an agent to run aperture-oscillation:
 
 ```
 CONTEXT: You are performing Aperture Oscillation — examining a question at 

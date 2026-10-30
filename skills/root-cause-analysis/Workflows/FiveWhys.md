@@ -1,4 +1,4 @@
-# FiveWhys Workflow — RootCauseAnalysis
+# FiveWhys Workflow — root-cause-analysis
 
 ## Purpose
 
@@ -167,7 +167,7 @@ VALIDATION: Because migrations don't require query plans, the index was missed, 
 
 - **Nests inside Fishbone** — each major category bone gets its own 5 Whys for depth
 - **Nests inside Postmortem** — the "causes" section of a postmortem usually uses 5 Whys internally
-- **Feeds SystemsThinking/Iceberg** — if the chain keeps branching into structural causes, escalate to Iceberg analysis
+- **Feeds systems-thinking/Iceberg** — if the chain keeps branching into structural causes, escalate to Iceberg analysis
 
 ## Attribution
 

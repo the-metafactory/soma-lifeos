@@ -1,14 +1,6 @@
 # FullCycle — All 9 Phases via Loop Controller
 
-**Default Ideate workflow.** Runs the full evolutionary cycle through all 9 phases (CONSUME → DREAM → DAYDREAM → CONTEMPLATE → STEAL → MATE → TEST → EVOLVE → META-LEARN), with a Loop Controller that decides continue / pivot / stop after each cycle.
-
-## Voice Notification
-
-```bash
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the FullCycle workflow in the Ideate skill to evolve novel solutions"}' \
-  > /dev/null 2>&1 &
-```
+**Default ideate workflow.** Runs the full evolutionary cycle through all 9 phases (CONSUME → DREAM → DAYDREAM → CONTEMPLATE → STEAL → MATE → TEST → EVOLVE → META-LEARN), with a Loop Controller that decides continue / pivot / stop after each cycle.
 
 ## Inputs
 
@@ -20,14 +12,14 @@
 
 ## Phase Flow
 
-Phases run **sequentially within a cycle** (each phase consumes the previous phase's output). Agents within a phase run **in parallel** (Council pattern). Two mid-cycle checkpoints gate progression. The Loop Controller decides cycle-boundary actions.
+Phases run **sequentially within a cycle** (each phase consumes the previous phase's output). Agents within a phase run **in parallel** (council pattern). Two mid-cycle checkpoints gate progression. The Loop Controller decides cycle-boundary actions.
 
 ### Phase 1: CONSUME (Ingest)
 
 **Input:** Problem statement + optional seeds. On cycle 2+, also receives survivors from EVOLVE, research questions from META-LEARN, and domain weight adjustments.
 
 **How:**
-- Invoke `Skill("Research")` in standard or extensive mode across problem-adjacent and problem-distant domains
+- When installed, invoke `Skill("research")` in standard or extensive mode across problem-adjacent and problem-distant domains
 - Require minimum 3 distinct domains per cycle (prevents monoculture)
 - Domain selection is weighted by Meta-Learner output but includes a random lottery element
 - Extract atomic ideas (one concept per item); tag each with source domain, confidence, surprise factor
@@ -40,7 +32,7 @@ Phases run **sequentially within a cycle** (each phase consumes the previous pha
 **Input:** Raw Input Pool from CONSUME
 
 **How:**
-- Invoke `Skill("BeCreative")` MaximumCreativity workflow
+- Invoke `Skill("be-creative")` MaximumCreativity workflow
 - Each agent receives a random subset of the Input Pool (default N/3) selected by Fisher-Yates shuffle with cryptographic seed (NOT LLM-selected — structural randomness)
 - Instruction: "Forget the problem. Just combine these inputs freely. What connections do you see that nobody has made?"
 - 3 agents × 3-5 fragments = 9-15 dream fragments per cycle
@@ -69,7 +61,7 @@ Phases run **sequentially within a cycle** (each phase consumes the previous pha
 **Input:** Everything accumulated so far (Input Pool + Dream Fragments + Tangential Insights + Problem Statement front-and-center)
 
 **How:**
-- Invoke `Skill("IterativeDepth")` with 4 lenses: Literal, Failure, Analogical, Constraint Inversion
+- Invoke `Skill("iterative-depth")` with 4 lenses: Literal, Failure, Analogical, Constraint Inversion
 - Instruction: "Given everything you've seen — now think seriously. What patterns emerge? What would a structured approach look like?"
 - 2-4 agents × 2-4 structured analyses each
 
@@ -84,7 +76,7 @@ Phases run **sequentially within a cycle** (each phase consumes the previous pha
 **Input:** Problem Statement + Structured Analyses
 
 **How:**
-- Invoke `Skill("Research")` targeting domains selected via weighted random lottery from the 50+ candidate domain pool
+- When installed, invoke `Skill("research")` targeting domains selected via weighted random lottery from the 50+ candidate domain pool
 - Each cycle's STEAL must include at least 1 domain NOT used in the previous cycle (forced exploration)
 - For each foreign domain, find 2-3 patterns/solutions/approaches that solve analogous problems
 - Map each foreign pattern onto the problem: "In [foreign domain], they solve [analogous problem] by [technique]. Applied to our problem: [mapping]."
@@ -115,7 +107,7 @@ Phases run **sequentially within a cycle** (each phase consumes the previous pha
 **Scoring dimensions (each 0-100):** Feasibility, Novelty, Impact, Elegance
 
 **How:**
-- Invoke `Skill("RedTeam")` to adversarially attack each candidate
+- Invoke `Skill("red-team")` to adversarially attack each candidate
 - 3-5 judge agents independently score each candidate on all 4 dimensions
 - Final score = average across judges; confidence = inverse of variance
 - Each judge provides: score, 1-sentence supporting argument, 1-sentence counterargument
@@ -203,14 +195,10 @@ Runs once after the Loop Controller issues STOP. Analyzes the entire evolutionar
 
 ## State Persistence
 
-Each run persists to `~/.soma/memory/WORK/{slug}/ideate/`. See `../SKILL.md` § "State Persistence" for the full directory layout and idea data structure.
+Each run persists to `memory/SKILLS/ideate/runs/{slug}/` under the Soma home. See `../SKILL.md` § "State Persistence" for the full directory layout and idea data structure.
 
 ## Final Output
 
 See `../SKILL.md` § "Final Output Format" for the markdown template.
 
-## Execution Log
-
-```bash
-echo '{"ts":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","skill":"Ideate","workflow":"FullCycle","input":"8_WORD_SUMMARY","status":"ok|error","duration_s":SECONDS}' >> ~/.soma/memory/SKILLS/execution.jsonl
-```
+For execution logging, follow [the skill's Execution Log](../SKILL.md#execution-log).

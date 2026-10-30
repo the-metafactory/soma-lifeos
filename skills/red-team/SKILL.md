@@ -3,9 +3,17 @@ name: red-team
 description: "Adversarial analysis via 32 parallel expert agents. Stress-tests ideas, strategies, and plans — not systems. Two workflows: ParallelAnalysis (decompose → attack → synthesize → steelman) and AdversarialValidation. Goal: strengthen, not destroy. USE WHEN red team, attack idea, counterarguments, critique, stress test, devil's advocate, find weaknesses, break this, poke holes, what could go wrong, adversarial validation."
 effort: high
 ---
-# RedTeam Skill
+# red-team Skill
 
 Military-grade adversarial analysis using parallel agent deployment. Breaks arguments into atomic components, attacks from 32 expert perspectives (engineers, architects, pentesters, interns), synthesizes findings, and produces devastating counter-arguments with steelman representations.
+
+## Optional Integrations
+
+Check availability before using these integrations in any workflow:
+
+- `agents` is optional. If unavailable, compose role-and-trait prompts directly with the host's agent tools.
+
+Report any fallback used in the result.
 
 ## Workflow Routing
 
@@ -14,7 +22,7 @@ Route to the appropriate workflow based on the request.
 **When executing a workflow, output this notification directly:**
 
 ```
-Running the **WorkflowName** workflow in the **RedTeam** skill to ACTION...
+Running the **WorkflowName** workflow in the **red-team** skill to ACTION...
 ```
 
 | Trigger | Workflow |
@@ -43,7 +51,7 @@ Running the **WorkflowName** workflow in the **RedTeam** skill to ACTION...
 ## Context Files
 
 - `Philosophy.md` - Core philosophy, success criteria, agent types
-- `Integration.md` - Skill integration, FirstPrinciples usage, output format
+- `Integration.md` - Skill integration, first-principles usage, output format
 
 ---
 
@@ -76,17 +84,17 @@ User: "battle of bots - which approach is better for this feature?"
 
 ## Gotchas
 
-- **RedTeam is for attacking IDEAS, not systems.** This skill finds flaws in arguments, strategies, and plans — not network vulnerabilities.
+- **red-team is for attacking IDEAS, not systems.** This skill finds flaws in arguments, strategies, and plans — not network vulnerabilities.
 - **For an engineering approach, prototype first.** Red-team what the prototype found (the Algorithm's Prototype card), not the abstract plan: agents attacking an abstract plan invent theoretical risks. Strategy and business plans stay in scope.
 - **32 adversarial agents generate volume — not all findings are equal.** Rank by severity, discard noise.
 - **The goal is to strengthen, not destroy.** Present weaknesses constructively with remediation paths.
 
 ## Execution Log
 
-After completing any workflow, append a single JSONL entry:
+After each workflow, build a record with the actual UTC timestamp, workflow name, brief input summary, status (`ok` or `error`), and elapsed seconds:
 
-```bash
-echo '{"ts":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","skill":"RedTeam","workflow":"WORKFLOW_USED","input":"8_WORD_SUMMARY","status":"ok|error","duration_s":SECONDS}' >> ~/.soma/memory/SKILLS/execution.jsonl
+```json
+{"ts":"ISO8601","skill":"red-team","workflow":"WORKFLOW_USED","input":"brief summary","status":"ok","duration_s":0}
 ```
 
-Replace `WORKFLOW_USED` with the workflow executed, `8_WORD_SUMMARY` with a brief input description, and `SECONDS` with approximate wall-clock time. Log `status: "error"` if the workflow failed.
+Serialize the record with `JSON.stringify(record) + "\n"`. Prefer the host's append-capable file-write tool to append it to `memory/SKILLS/red-team/execution.jsonl` under the Soma home, creating the parent directory if needed. If only replacement writes are available, write this single record to a new `execution-<UTC timestamp>-<unique suffix>.jsonl` in the same directory without replacing any existing file. Use a filename-safe UTC timestamp and a fresh random suffix. Keep all user-derived values in the JSON data, outside shell commands. Logging is complete when the written line parses as one JSON object and prior files and entries are preserved.

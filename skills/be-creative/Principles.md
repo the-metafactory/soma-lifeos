@@ -1,4 +1,4 @@
-# BeCreative Key Principles
+# be-creative Key Principles
 
 ## Core Philosophy
 

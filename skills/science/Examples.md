@@ -142,7 +142,7 @@ Summarize the following document:
 - H3: Add key point extraction guidance
 - H4: Few-shot examples
 
-**Experiment (Evals):**
+**Experiment (evals):**
 
 | Variant | Length | KeyPts | Format | Overall |
 |---------|--------|--------|--------|---------|

@@ -1,4 +1,4 @@
-# BeCreative Quick Reference Templates
+# be-creative Quick Reference Templates
 
 ## Standard Template (deep thinking + VS)
 

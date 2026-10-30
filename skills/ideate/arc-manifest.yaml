@@ -15,11 +15,15 @@ upstream:
 capabilities:
   filesystem:
     read:
+      - ~/.soma/memory/SKILLS/ideate/execution.jsonl
+      - ~/.soma/memory/SKILLS/ideate/execution-*.jsonl
+      - ~/.soma/memory/SKILLS/ideate/runs/**
       - "./**"
     write:
       - "./**"
-      - ~/.soma/memory/SKILLS/execution.jsonl
-      - ~/.soma/memory/WORK/**
+      - ~/.soma/memory/SKILLS/ideate/execution.jsonl
+      - ~/.soma/memory/SKILLS/ideate/execution-*.jsonl
+      - ~/.soma/memory/SKILLS/ideate/runs/**
   network: []
   bash:
     allowed: true

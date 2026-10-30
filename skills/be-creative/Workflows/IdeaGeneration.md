@@ -1,14 +1,6 @@
 # IdeaGeneration Workflow
 
-## Voice Notification
-
-```bash
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the IdeaGeneration workflow in the BeCreative skill to brainstorm solutions"}' \
-  > /dev/null 2>&1 &
-```
-
-Running **IdeaGeneration** in **BeCreative**...
+Running **IdeaGeneration** in **be-creative**...
 
 ---
 

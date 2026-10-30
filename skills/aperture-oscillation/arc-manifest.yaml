@@ -15,10 +15,13 @@ upstream:
 capabilities:
   filesystem:
     read:
+      - ~/.soma/memory/SKILLS/aperture-oscillation/execution.jsonl
+      - ~/.soma/memory/SKILLS/aperture-oscillation/execution-*.jsonl
       - "./**"
     write:
       - "./**"
-      - ~/.soma/memory/SKILLS/execution.jsonl
+      - ~/.soma/memory/SKILLS/aperture-oscillation/execution.jsonl
+      - ~/.soma/memory/SKILLS/aperture-oscillation/execution-*.jsonl
   network: []
   bash:
     allowed: true

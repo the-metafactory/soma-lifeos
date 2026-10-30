@@ -1,18 +1,10 @@
 # RecordFlow Workflow
 
-## Voice Notification
-
-```bash
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the RecordFlow workflow in the Interceptor skill to record a user flow"}' \
-  > /dev/null 2>&1 &
-```
-
-Running **RecordFlow** in **Interceptor**...
+Running **RecordFlow** in **interceptor**...
 
 ---
 
-Record a user workflow by capturing browser actions into a replayable script. Uses Interceptor's monitor system to observe clicks, typing, navigation, and network requests, then exports a replay plan using semantic selectors.
+Record a user workflow by capturing browser actions into a replayable script. Uses interceptor's monitor system to observe clicks, typing, navigation, and network requests, then exports a replay plan using semantic selectors.
 
 ## When to Use
 
@@ -89,7 +81,7 @@ interceptor monitor export <SESSION_ID> --plan --with-bodies
 
 ### 6. Save the Plan
 
-Save the exported plan to `skills/Interceptor/Flows/<flow-name>.sh` for future replay via the ReplayFlow workflow.
+Save the exported plan to `skills/interceptor/Flows/<flow-name>.sh` for future replay via the ReplayFlow workflow.
 
 ### 7. Review the Plan
 

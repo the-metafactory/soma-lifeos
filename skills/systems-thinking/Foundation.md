@@ -1,4 +1,4 @@
-# SystemsThinking — Foundation
+# systems-thinking — Foundation
 
 Canonical reference on the theorists and frameworks behind this skill. Load on demand when depth is needed beyond the workflows.
 

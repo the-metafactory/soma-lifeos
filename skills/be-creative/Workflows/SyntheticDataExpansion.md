@@ -1,14 +1,6 @@
 # SyntheticDataExpansion Workflow
 
-## Voice Notification
-
-```bash
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the SyntheticDataExpansion workflow in the BeCreative skill to expand a seed corpus"}' \
-  > /dev/null 2>&1 &
-```
-
-Running **SyntheticDataExpansion** in **BeCreative**...
+Running **SyntheticDataExpansion** in **be-creative**...
 
 ---
 
@@ -29,7 +21,7 @@ Running **SyntheticDataExpansion** in **BeCreative**...
 
 ## Outputs
 
-Written to `~/.soma/memory/WORK/{slug}/synthetic-data/`:
+Written to `memory/SKILLS/be-creative/synthetic-data/{slug}/` under the Soma home:
 
 - `seed.json` — the original seed corpus
 - `schema.json` — the validation schema
@@ -101,7 +93,7 @@ When termination fires due to diversity collapse, write a clear note to `summary
 
 ## Best For
 
-- Eval set expansion (Evals skill consumes the output)
+- Eval set expansion (optional evals skill consumes the output)
 - Prompt-injection test corpora (_PROMPTINJECTION consumes the output)
 - Writing-style fine-tuning sets ({{PRINCIPAL_NAME}}'s voice samples → expanded corpus)
 - Synthetic Q&A pairs for retrieval evals

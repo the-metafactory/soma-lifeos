@@ -1,14 +1,6 @@
 # Reproduce Workflow
 
-## Voice Notification
-
-```bash
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the Reproduce workflow in the Interceptor skill to reproduce a bug"}' \
-  > /dev/null 2>&1 &
-```
-
-Running **Reproduce** in **Interceptor**...
+Running **Reproduce** in **interceptor**...
 
 ---
 
@@ -84,4 +76,4 @@ Only THEN proceed to code analysis with specific hypotheses grounded in the brow
 - This workflow exists because of real production incidents where hours were spent on code analysis and wrong-theory fixes were shipped to prod — when the actual cause (missing JS chunks, 404s on bundles, CORS errors) was visible in the browser console in under a minute. Reproduce first, theorize second.
 - "curl returns 200" is NOT reproduction. You must SEE the rendered page.
 - Code analysis without reproduction is speculation, not debugging.
-- For authenticated pages, Interceptor uses your real Chrome sessions automatically.
+- For authenticated pages, interceptor uses your real Chrome sessions automatically.

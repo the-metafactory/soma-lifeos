@@ -1,6 +1,6 @@
 ---
 name: browser
-description: "Headless browser automation via agent-browser: Rust CLI daemon with persistent per-site auth profiles for fast, scriptable, parallel browser work. Workflows: ReviewStories, Automate, Update. USE WHEN headless browser work, batch screenshots/scraping, dev server tests, parallel sessions, data extraction, story review, or recipe automation. NOT FOR deploy verification or real-Chrome UI confirmation (use Interceptor), simple single-URL fetches (use WebFetch), or CAPTCHA/bot-bypass (use BrightData or Interceptor)."
+description: "Headless browser automation via agent-browser: Rust CLI daemon with persistent per-site auth profiles for fast, scriptable, parallel browser work. Workflows: ReviewStories, Automate, Update. USE WHEN headless browser work, batch screenshots/scraping, dev server tests, parallel sessions, data extraction, story review, or recipe automation. NOT FOR deploy verification or real-Chrome UI confirmation (use interceptor), simple single-URL fetches (use WebFetch), or CAPTCHA/bot-bypass (use bright-data or interceptor)."
 version: 10.0.0
 effort: medium
 ---
@@ -8,7 +8,7 @@ effort: medium
 
 **Tool:** `agent-browser` — headless Rust CLI daemon with persistent auth profiles.
 
-**If agent-browser isn't working or a site has bot detection, use the Interceptor skill instead.** Interceptor is a Chrome extension with zero CDP fingerprint — passes all major bot detection checks.
+**If agent-browser isn't working or a site has bot detection, use the interceptor skill instead.** interceptor is a Chrome extension with zero CDP fingerprint — passes all major bot detection checks.
 
 ### Does the site need auth?
 
@@ -127,9 +127,9 @@ Agent 1: agent-browser --session scrape1 open https://site-a.com
 Agent 2: agent-browser --session scrape2 open https://site-b.com
 ```
 
-**Fallback:** If agent-browser fails or the site has bot detection, use the **Interceptor** skill instead.
+**Fallback:** If agent-browser fails or the site has bot detection, use the **interceptor** skill instead.
 
-**Legacy built-in agents — DEPRECATED, do not invoke.** BrowserAgent and UIReviewer are Claude Code built-ins whose internals cannot be modified; they run browser automation that PAI no longer uses. Route all browser work through the **Interceptor** skill (verification, authenticated flows) or **agent-browser** (headless scraping).
+**Legacy built-in agents — DEPRECATED, do not invoke.** BrowserAgent and UIReviewer are Claude Code built-ins whose internals cannot be modified; they run browser automation that PAI no longer uses. Route all browser work through the **interceptor** skill (verification, authenticated flows) or **agent-browser** (headless scraping).
 
 ---
 
@@ -147,7 +147,7 @@ Agent 2: agent-browser --session scrape2 open https://site-b.com
 
 Define user stories in YAML and validate them in parallel with UIReviewer agents.
 
-**Directory:** `skills/Browser/Stories/`
+**Directory:** `skills/browser/Stories/`
 
 ```yaml
 name: App Name
@@ -170,7 +170,7 @@ Run with: `"review stories"` or `"run stories in HackerNews.yaml"`
 
 Reusable Markdown templates with `{PROMPT}` injection.
 
-**Directory:** `skills/Browser/Recipes/`
+**Directory:** `skills/browser/Recipes/`
 
 | Recipe | Description | Tool |
 |--------|-------------|------|
@@ -184,8 +184,10 @@ Run with: `"automate SummarizePage for https://example.com"`
 
 ## Execution Log
 
-After completing any workflow, append a single JSONL entry:
+After each workflow, build a record with the actual UTC timestamp, workflow name, brief input summary, status (`ok` or `error`), and elapsed seconds:
 
-```bash
-echo '{"ts":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","skill":"Browser","workflow":"WORKFLOW_USED","input":"8_WORD_SUMMARY","status":"ok|error","duration_s":SECONDS}' >> ~/.soma/memory/SKILLS/execution.jsonl
+```json
+{"ts":"ISO8601","skill":"browser","workflow":"WORKFLOW_USED","input":"brief summary","status":"ok","duration_s":0}
 ```
+
+Serialize the record with `JSON.stringify(record) + "\n"`. Prefer the host's append-capable file-write tool to append it to `memory/SKILLS/browser/execution.jsonl` under the Soma home, creating the parent directory if needed. If only replacement writes are available, write this single record to a new `execution-<UTC timestamp>-<unique suffix>.jsonl` in the same directory without replacing any existing file. Use a filename-safe UTC timestamp and a fresh random suffix. Keep all user-derived values in the JSON data, outside shell commands. Logging is complete when the written line parses as one JSON object and prior files and entries are preserved.

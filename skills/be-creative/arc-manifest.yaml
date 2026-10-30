@@ -15,11 +15,15 @@ upstream:
 capabilities:
   filesystem:
     read:
+      - ~/.soma/memory/SKILLS/be-creative/execution.jsonl
+      - ~/.soma/memory/SKILLS/be-creative/execution-*.jsonl
+      - ~/.soma/memory/SKILLS/be-creative/synthetic-data/**
       - "./**"
     write:
       - "./**"
-      - ~/.soma/memory/SKILLS/execution.jsonl
-      - ~/.soma/memory/WORK/**
+      - ~/.soma/memory/SKILLS/be-creative/execution.jsonl
+      - ~/.soma/memory/SKILLS/be-creative/execution-*.jsonl
+      - ~/.soma/memory/SKILLS/be-creative/synthetic-data/**
   network:
     - host: generativelanguage.googleapis.com
       reason: Send the problem statement to Gemini through the llm CLI in the TechnicalCreativityGemini3 workflow.

@@ -1,4 +1,4 @@
-# Fishbone Workflow — RootCauseAnalysis
+# Fishbone Workflow — root-cause-analysis
 
 ## Purpose
 
@@ -249,7 +249,7 @@ CORRECTIVE ACTIONS:
 - **5 Whys nests inside** — each sub-bone can become its own 5 Whys chain
 - **Pareto nests inside** — quantitative prioritization step
 - **Postmortem wraps Fishbone** — Postmortem uses Fishbone for the "contributing factors" section
-- **Feeds SystemsThinking** — if multiple fishbone causes point to structural issues, escalate to Iceberg
+- **Feeds systems-thinking** — if multiple fishbone causes point to structural issues, escalate to Iceberg
 
 ## Attribution
 

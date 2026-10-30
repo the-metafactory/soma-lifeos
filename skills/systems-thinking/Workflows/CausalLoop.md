@@ -1,4 +1,4 @@
-# CausalLoop Workflow — SystemsThinking
+# CausalLoop Workflow — systems-thinking
 
 ## Purpose
 
@@ -199,13 +199,13 @@ This is Meadows' **"Limits to Growth"** archetype — see `FindArchetype` workfl
 - **Exogenous variables** (outside the model) drawn without incoming arrows, in a distinct color/shape
 - **Stocks** (accumulations) vs **Flows** (rates) — advanced stock-and-flow notation; use when the CLD underdetermines behavior
 
-## Rendering via Art Skill
+## Rendering via optional art skill
 
 To render a CLD as an actual diagram:
 
 ```bash
-# Use Art skill with Mermaid or diagram rendering
-Skill("Art", "Mermaid flowchart showing causal loop diagram with R1 and B1 loops, variables: [list], arrows with polarity: [list]")
+# Use optional art skill with Mermaid or diagram rendering
+Skill("art", "Mermaid flowchart showing causal loop diagram with R1 and B1 loops, variables: [list], arrows with polarity: [list]")
 ```
 
 ## Common Mistakes
@@ -222,7 +222,7 @@ Skill("Art", "Mermaid flowchart showing causal loop diagram with R1 and B1 loops
 - Feeds **FindLeverage** — once the CLD is drawn, Meadows' leverage points apply (which variable, arrow, loop, or boundary gives the most leverage).
 - Feeds **FindArchetype** — many CLDs match a named archetype; if so, use the canonical intervention.
 - Called from **Iceberg** when Layer 3 structure is a feedback loop.
-- Renderable via **Art** — Mermaid / diagram output.
+- Renderable via **art** (optional) — Mermaid / diagram output.
 
 ## Attribution
 

@@ -1,18 +1,10 @@
 # VerifyDeploy Workflow
 
-## Voice Notification
-
-```bash
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the VerifyDeploy workflow in the Interceptor skill to verify a deployment"}' \
-  > /dev/null 2>&1 &
-```
-
-Running **VerifyDeploy** in **Interceptor**...
+Running **VerifyDeploy** in **interceptor**...
 
 ---
 
-Verify a deployment by opening the target URL in real Chrome, checking for errors, and capturing screenshot evidence. Works with both authenticated and public pages since Interceptor uses your real browser sessions.
+Verify a deployment by opening the target URL in real Chrome, checking for errors, and capturing screenshot evidence. Works with both authenticated and public pages since interceptor uses your real browser sessions.
 
 ## When to Use
 
@@ -29,7 +21,7 @@ Verify a deployment by opening the target URL in real Chrome, checking for error
 interceptor open "<DEPLOY_URL>"
 ```
 
-This navigates, waits for DOM stability, and returns the element tree + visible text in one call. If the page requires authentication, Interceptor uses your real Chrome sessions automatically.
+This navigates, waits for DOM stability, and returns the element tree + visible text in one call. If the page requires authentication, interceptor uses your real Chrome sessions automatically.
 
 For pages that load slowly (heavy SPAs, SSR hydration):
 
@@ -83,7 +75,7 @@ If errors found: report the specific errors (console, network, visual) before at
 
 ## Notes
 
-- For authenticated pages, Interceptor uses your real Chrome login sessions. No profile setup needed.
-- For public pages where speed matters and auth isn't needed, agent-browser (Browser skill) is acceptable.
+- For authenticated pages, interceptor uses your real Chrome login sessions. No profile setup needed.
+- For public pages where speed matters and auth isn't needed, agent-browser (browser skill) is acceptable.
 - Always use `http://localhost:PORT` instead of `localhost:PORT` for local dev URLs.
-- If Chrome is not running, start it first. Interceptor requires an active Chrome instance with the extension loaded.
+- If Chrome is not running, start it first. interceptor requires an active Chrome instance with the extension loaded.

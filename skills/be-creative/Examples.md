@@ -1,4 +1,4 @@
-# BeCreative Examples
+# be-creative Examples
 
 ## Example 1: Creative Writing
 

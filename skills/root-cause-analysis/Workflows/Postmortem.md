@@ -1,4 +1,4 @@
-# Postmortem Workflow — RootCauseAnalysis
+# Postmortem Workflow — root-cause-analysis
 
 ## Purpose
 
@@ -233,7 +233,7 @@ Defensive layers that existed and the holes in each:
 
 - [ ] Action items tracked in [ticket system]
 - [ ] Re-review in 30 days to confirm action completion
-- [ ] Pattern check: are similar incidents occurring across other services? (escalate to SystemsThinking if yes)
+- [ ] Pattern check: are similar incidents occurring across other services? (escalate to systems-thinking if yes)
 ```
 
 ### Phase 7: Distribute and Track
@@ -256,7 +256,7 @@ Defensive layers that existed and the holes in each:
 ## Integration
 
 - **Wraps:** 5 Whys, Fishbone, Kepner-Tregoe, Fault Tree — use whichever fits each contributing thread
-- **Feeds SystemsThinking** — if the same postmortem-worthy pattern keeps recurring, escalate to Iceberg / FindArchetype
+- **Feeds systems-thinking** — if the same postmortem-worthy pattern keeps recurring, escalate to Iceberg / FindArchetype
 - **Feeds FMEA** — proactive sister tool; postmortem findings reveal failure modes that FMEA should anticipate going forward
 - **Tracked in incident system** — Google SRE pattern: postmortem linked to every incident
 

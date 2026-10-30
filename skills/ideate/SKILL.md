@@ -1,12 +1,21 @@
 ---
 name: ideate
-description: "Evolutionary ideation engine — loop-controlled multi-cycle idea generation across 9 phases, producing ranked novel candidates with provenance and fitness scoring; strategies evolve across cycles via a Lamarckian meta-learner. USE WHEN ideate, id8, evolve ideas, generate breakthrough solutions, novel approaches, idea evolution, multi-cycle creativity, creative solutions to hard problems, or need genuinely new approaches. NOT FOR quick single-pass brainstorming (use BeCreative)."
+description: "Evolutionary ideation engine — loop-controlled multi-cycle idea generation across 9 phases, producing ranked novel candidates with provenance and fitness scoring; strategies evolve across cycles via a Lamarckian meta-learner. USE WHEN ideate, id8, evolve ideas, generate breakthrough solutions, novel approaches, idea evolution, multi-cycle creativity, creative solutions to hard problems, or need genuinely new approaches. NOT FOR quick single-pass brainstorming (use be-creative)."
 effort: high
 context: fork
 ---
-# Ideate — The Cognitive Progress Engine
+# ideate — The Cognitive Progress Engine
 
-A loop-controlled evolutionary creativity engine that mirrors human cognitive processes to generate genuinely novel ideas. **This is NOT BeCreative** — BeCreative is a single-pass diversity tool. Ideate is an evolutionary *system*: multiple cycles of consuming, dreaming, stealing, breeding, and testing ideas over simulated time scales from hours to decades, driven by a first-class Loop Controller and a Lamarckian Meta-Learner.
+A loop-controlled evolutionary creativity engine that mirrors human cognitive processes to generate genuinely novel ideas. **This is NOT be-creative** — be-creative is a single-pass diversity tool. ideate is an evolutionary *system*: multiple cycles of consuming, dreaming, stealing, breeding, and testing ideas over simulated time scales from hours to decades, driven by a first-class Loop Controller and a Lamarckian Meta-Learner.
+
+## Optional Integrations
+
+Check availability before using these integrations in any workflow:
+
+- `research` is optional. If unavailable, gather and cite sources with the host's web tools.
+- `agents` is optional. If unavailable, compose role-and-trait prompts directly with the host's agent tools.
+
+Report any fallback used in the result.
 
 ## The Core Insight
 
@@ -81,7 +90,7 @@ ELSE:                                    CONTINUE
 
 ## Structural Randomness Engine
 
-LLM "temperature" is soft probability redistribution biased toward the training distribution. Ideate uses **structural randomness** at the data level instead:
+LLM "temperature" is soft probability redistribution biased toward the training distribution. ideate uses **structural randomness** at the data level instead:
 
 - **Input subsetting** (DREAM): Fisher-Yates shuffle picks each agent's input subset
 - **Domain lottery** (STEAL): weighted random sampling from the 50+ candidate domain pool
@@ -126,7 +135,7 @@ Loop Controller decides actual cycle count adaptively, not a fixed count.
 
 ## State Persistence
 
-Each run persists to `~/.soma/memory/WORK/{slug}/ideate/`:
+Each run persists to `memory/SKILLS/ideate/runs/{slug}/` under the Soma home:
 
 ```
 ideate/
@@ -168,7 +177,7 @@ ideate/
 ## Final Output Format
 
 ```markdown
-# Ideate Results: [Problem]
+# ideate Results: [Problem]
 
 **Time scale:** [scale] | **Budget used:** X of Y min | **Cycles:** N (adaptive)
 **Strategy pivots:** M | **Total ideas:** X | **Survived:** Y | **Kill rate:** Z%
@@ -225,13 +234,13 @@ ideate/
 
 | Skill | Phase | How |
 |-------|-------|-----|
-| Research | CONSUME, STEAL | Multi-agent parallel research, cross-domain patterns |
-| BeCreative | DREAM, DAYDREAM | MaximumCreativity workflow for high-noise recombination |
-| IterativeDepth | CONTEMPLATE | 4-lens analysis (Literal, Failure, Analogical, Constraint Inversion) |
-| FirstPrinciples | CONTEMPLATE | Decompose to axioms, challenge assumptions |
-| RedTeam | TEST | Adversarial attack on candidates to find fatal flaws |
-| Agents | ALL | ComposeAgent for unique cognitive personalities per phase |
-| Council | MATE (optional) | Debate between ideas before breeding |
+| research | CONSUME, STEAL | Multi-agent parallel research, cross-domain patterns |
+| be-creative | DREAM, DAYDREAM | MaximumCreativity workflow for high-noise recombination |
+| iterative-depth | CONTEMPLATE | 4-lens analysis (Literal, Failure, Analogical, Constraint Inversion) |
+| first-principles | CONTEMPLATE | Decompose to axioms, challenge assumptions |
+| red-team | TEST | Adversarial attack on candidates to find fatal flaws |
+| agents (optional) | ALL | ComposeAgent for unique cognitive personalities per phase |
+| council | MATE (optional) | Debate between ideas before breeding |
 
 ## Algorithm Integration
 
@@ -239,7 +248,7 @@ When the PAI Algorithm sets `mode: ideate` (via `PAI/ALGORITHM/ideate-loop.md`),
 
 ## Gotchas
 
-- **Ideate is for multi-cycle evolutionary ideation — not quick brainstorming.** For fast divergent ideas, use BeCreative.
+- **ideate is for multi-cycle evolutionary ideation — not quick brainstorming.** For fast divergent ideas, use be-creative.
 - **The Loop Controller manages cycle count — don't override it manually.** Trust the budget-based cycling.
 - **Meta-learner adjustments happen automatically within parameter bounds.** Don't manually tune mid-cycle.
 - **CONTEMPLATE is mandatory.** Skipping it degrades MATE quality because STEAL operates on disconnected material.
@@ -253,8 +262,10 @@ When the PAI Algorithm sets `mode: ideate` (via `PAI/ALGORITHM/ideate-loop.md`),
 
 ## Execution Log
 
-After completing any workflow, append a single JSONL entry:
+After each workflow, build a record with the actual UTC timestamp, workflow name, brief input summary, status (`ok` or `error`), and elapsed seconds:
 
-```bash
-echo '{"ts":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","skill":"Ideate","workflow":"WORKFLOW_USED","input":"8_WORD_SUMMARY","status":"ok|error","duration_s":SECONDS}' >> ~/.soma/memory/SKILLS/execution.jsonl
+```json
+{"ts":"ISO8601","skill":"ideate","workflow":"WORKFLOW_USED","input":"brief summary","status":"ok","duration_s":0}
 ```
+
+Serialize the record with `JSON.stringify(record) + "\n"`. Prefer the host's append-capable file-write tool to append it to `memory/SKILLS/ideate/execution.jsonl` under the Soma home, creating the parent directory if needed. If only replacement writes are available, write this single record to a new `execution-<UTC timestamp>-<unique suffix>.jsonl` in the same directory without replacing any existing file. Use a filename-safe UTC timestamp and a fresh random suffix. Keep all user-derived values in the JSON data, outside shell commands. Logging is complete when the written line parses as one JSON object and prior files and entries are preserved.

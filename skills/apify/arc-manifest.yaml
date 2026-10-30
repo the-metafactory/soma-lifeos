@@ -15,10 +15,13 @@ upstream:
 capabilities:
   filesystem:
     read:
+      - ~/.soma/memory/SKILLS/apify/execution.jsonl
+      - ~/.soma/memory/SKILLS/apify/execution-*.jsonl
       - ./**
     write:
       - ./**
-      - ~/.soma/memory/SKILLS/execution.jsonl
+      - ~/.soma/memory/SKILLS/apify/execution.jsonl
+      - ~/.soma/memory/SKILLS/apify/execution-*.jsonl
   network:
     - host: api.apify.com
       reason: Run scraping actors and retrieve their datasets.

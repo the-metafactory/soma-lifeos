@@ -15,10 +15,13 @@ upstream:
 capabilities:
   filesystem:
     read:
+      - ~/.soma/memory/SKILLS/root-cause-analysis/execution.jsonl
+      - ~/.soma/memory/SKILLS/root-cause-analysis/execution-*.jsonl
       - "./**"
     write:
       - "./**"
-      - ~/.soma/memory/SKILLS/execution.jsonl
+      - ~/.soma/memory/SKILLS/root-cause-analysis/execution.jsonl
+      - ~/.soma/memory/SKILLS/root-cause-analysis/execution-*.jsonl
   network: []
   bash:
     allowed: true

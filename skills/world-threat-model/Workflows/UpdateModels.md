@@ -17,23 +17,16 @@ Refresh or create world model documents using deep research and user-provided an
 ## Prerequisites
 
 - Model template at `~/.soma/skills/world-threat-model/ModelTemplate.md`
-- Research skill available for web research
+- optional research skill available for web research
 
 ## Workflow Steps
 
-### Step 0: Check Existing State
+### Step 1: Check Existing State
 
 ```
-Read ~/.soma/memory/RESEARCH/WorldModels/INDEX.md (if exists)
+Read memory/SKILLS/world-threat-model/WorldModels/INDEX.md (if exists)
 Inventory which models exist and their last_updated dates
 Determine: full creation vs. targeted update
-```
-
-### Step 1: Voice Notification
-
-```bash
-  -H "Content-Type: application/json" \
-  -d '{"message": "Updating world threat models. This will take several minutes as I research current state for each time horizon.", "voice_id": "fTtv3eikoepIosk8dTZ5"}'
 ```
 
 ### Step 2: Determine Update Scope
@@ -54,7 +47,7 @@ Determine: full creation vs. targeted update
 
 For each model being created or updated:
 
-1. **Invoke Research skill** (Standard or Extensive mode depending on scope):
+1. **Invoke optional research skill** (Standard or Extensive mode depending on scope):
    - Query: "Current global state and projections for {HORIZON} timeframe: geopolitics, AI/technology trajectory, economics, society, environment, security. Focus on developments since {last_updated or 'baseline'}."
    - For near-term (6mo-3yr): Focus on current events, immediate trends, specific forecasts
    - For mid-term (5yr-10yr): Focus on trend trajectories, structural shifts, emerging patterns
@@ -66,7 +59,7 @@ For each model being created or updated:
    - Near-term batch: 6mo, 1yr, 2yr, 3yr (4 agents)
    - Mid-term batch: 5yr, 7yr, 10yr (3 agents)
    - Long-term batch: 15yr, 20yr, 30yr, 50yr (4 agents)
-   - Each agent uses Research skill for its specific horizon
+   - Each agent uses optional research skill for its specific horizon
 
 ### Step 4: Write Model Documents
 
@@ -78,11 +71,11 @@ For each model, following `ModelTemplate.md`:
 4. Include specific data points, named entities, cited reasoning
 5. Write Wildcards section with probability estimates
 
-Save to: `~/.soma/memory/RESEARCH/WorldModels/{horizon}.md`
+Save to: `memory/SKILLS/world-threat-model/WorldModels/{horizon}.md`
 
 ### Step 5: Update INDEX
 
-Write/update `~/.soma/memory/RESEARCH/WorldModels/INDEX.md`:
+Write/update `memory/SKILLS/world-threat-model/WorldModels/INDEX.md`:
 
 ```markdown
 # World Threat Models — Index
@@ -98,13 +91,6 @@ Last full update: {date}
 ## Update History
 
 - YYYY-MM-DD: {what was updated and why}
-```
-
-### Step 6: Voice Completion
-
-```bash
-  -H "Content-Type: application/json" \
-  -d '{"message": "World models updated. N horizons refreshed with current research.", "voice_id": "fTtv3eikoepIosk8dTZ5"}'
 ```
 
 ## Agent Prompt Template (for parallel model creation)
@@ -142,12 +128,12 @@ Include the frontmatter with horizon, last_updated, version: 1, and confidence r
 
 | Skill | Purpose |
 |-------|---------|
-| **Research** | Primary data gathering for model content |
+| **research** (optional) | Primary data gathering for model content |
 | **WebSearch** | Current events and projections |
 
 ## State Management (Loop Compatibility)
 
 - Models on disk are the state
-- Step 0 reads existing state to determine what needs updating
+- Step 1 reads existing state to determine what needs updating
 - Each model is independently updatable
 - INDEX.md tracks aggregate state

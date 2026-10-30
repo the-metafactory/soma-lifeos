@@ -1,4 +1,4 @@
-# FindArchetype Workflow — SystemsThinking
+# FindArchetype Workflow — systems-thinking
 
 ## Purpose
 
