@@ -1,6 +1,6 @@
 ---
 name: first-principles
-description: "Deconstruct problems to irreducible truths. Three steps: DECONSTRUCT (constituent parts), CHALLENGE (hard/soft/assumption classification), RECONSTRUCT (build from fundamentals). Three workflows: Deconstruct, Challenge, Reconstruct. USE WHEN first principles, challenge assumptions, is this a real constraint, rebuild from scratch, what are we paying for, start over, physics first, question everything, is this really necessary."
+description: "Deconstruct problems to irreducible truths. Three steps: DECONSTRUCT (constituent parts), CHALLENGE (hard/soft/assumption classification), RECONSTRUCT (build from fundamentals). Four workflows: Deconstruct, Challenge, Reconstruct, Superior. USE WHEN first principles, challenge assumptions, is this a real constraint, rebuild from scratch, what are we paying for, start over, physics first, question everything, is this really necessary, Superior, how would a far more capable mind build this."
 effort: high
 ---
 # FirstPrinciples Skill
@@ -40,6 +40,7 @@ Running the **WorkflowName** workflow in the **FirstPrinciples** skill to ACTION
   - Break problem into fundamental parts → `Workflows/Deconstruct.md`
   - Challenge assumptions systematically → `Workflows/Challenge.md`
   - Rebuild solution from fundamentals → `Workflows/Reconstruct.md`
+  - Superior: how would a far more capable mind build this, and where does our design fall short? → `Workflows/Superior.md`
 
 ## The 3-Step Framework
 
