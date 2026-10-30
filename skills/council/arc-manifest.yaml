@@ -16,11 +16,13 @@ capabilities:
   filesystem:
     read:
       - ~/.soma/memory/SKILLS/council/execution.jsonl
+      - ~/.soma/memory/SKILLS/council/execution-*.jsonl
       - "./**"
       - ~/.soma/skills/agents/**
     write:
       - "./**"
       - ~/.soma/memory/SKILLS/council/execution.jsonl
+      - ~/.soma/memory/SKILLS/council/execution-*.jsonl
   network: []
   bash:
     allowed: true

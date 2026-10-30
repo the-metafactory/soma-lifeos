@@ -16,6 +16,7 @@ capabilities:
   filesystem:
     read:
       - ~/.soma/memory/SKILLS/interceptor/execution.jsonl
+      - ~/.soma/memory/SKILLS/interceptor/execution-*.jsonl
       - ./**
       - /tmp/**
       - ~/Projects/interceptor/**
@@ -25,6 +26,7 @@ capabilities:
       - ./**
       - /tmp/**
       - ~/.soma/memory/SKILLS/interceptor/execution.jsonl
+      - ~/.soma/memory/SKILLS/interceptor/execution-*.jsonl
       - ~/Projects/interceptor/**
       - ~/Library/Application Support/*/NativeMessagingHosts/**
       - ~/Library/LaunchAgents/com.interceptor.bridge.plist

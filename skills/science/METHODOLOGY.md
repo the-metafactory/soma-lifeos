@@ -220,7 +220,7 @@ Single-hypothesis thinking leads to:
 | **council skill** | Multi-perspective brainstorming |
 | **red-team Skill** | Stress-testing hypotheses |
 | **optional research skill** | Finding what's worked elsewhere |
-| **Becreative Skill** | Exploring creative approaches |
+| **be-creative skill** | Exploring creative approaches |
 | **Parallel Agents** | Generating many ideas simultaneously |
 
 ---

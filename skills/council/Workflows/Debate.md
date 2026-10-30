@@ -21,7 +21,7 @@ See `CouncilMembers.md` for full instructions on composing agents.
 
 ### Step 0: Compose council Members
 
-Before any debate rounds, compose 4 custom agents tailored to the topic using ComposeAgent:
+Before any debate rounds, compose 4 custom agents tailored to the topic. When the optional agents skill is installed, run the commands below. Otherwise write the prompt directly for each member using the selected role, traits, and debate question, then continue to Step 1.
 
 ```bash
 # Analyze the topic and determine what perspectives create productive friction
@@ -48,7 +48,7 @@ bun run ~/.soma/skills/agents/Tools/ComposeAgent.ts \
   --output json
 ```
 
-Each agent gets a unique name, voice, voice_id, color, and personality prompt.
+Give each agent a unique name and personality prompt. ComposeAgent also returns voice and color metadata when used.
 
 ### Step 1: Announce the council
 

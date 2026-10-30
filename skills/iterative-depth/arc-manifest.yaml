@@ -16,10 +16,12 @@ capabilities:
   filesystem:
     read:
       - ~/.soma/memory/SKILLS/iterative-depth/execution.jsonl
+      - ~/.soma/memory/SKILLS/iterative-depth/execution-*.jsonl
       - "./**"
     write:
       - "./**"
       - ~/.soma/memory/SKILLS/iterative-depth/execution.jsonl
+      - ~/.soma/memory/SKILLS/iterative-depth/execution-*.jsonl
   network: []
   bash:
     allowed: true

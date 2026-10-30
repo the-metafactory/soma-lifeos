@@ -19,7 +19,7 @@ See `CouncilMembers.md` for full instructions.
 
 ### Step 1: Compose & Announce Quick council
 
-Compose 4 agents with topic-specific traits via ComposeAgent, then announce:
+Compose 4 agents with topic-specific traits. When the optional agents skill is installed, use ComposeAgent as described in `../CouncilMembers.md`. Otherwise write the prompt directly for each member using the selected role, traits, and debate question. Give each member a unique name, then announce:
 
 ```markdown
 ## Quick council: [Topic]

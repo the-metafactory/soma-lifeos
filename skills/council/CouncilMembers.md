@@ -29,7 +29,7 @@ Before composing agents, determine what perspectives would create the most produ
 - Agent 3: Pragmatic engineer (traits: `technical,pragmatic,analytical`)
 - Agent 4: Evidence-based researcher (traits: `research,analytical,comparative`)
 
-### Step 2: Compose Each Agent via ComposeAgent
+### Step 2: Compose Each Agent
 
 When the optional agents skill is installed, run the command below. Otherwise write the prompt directly using the selected role, traits, and debate question, then continue to Step 3.
 
@@ -72,7 +72,7 @@ The specific traits should be tailored to the topic, not generic.
 
 | Scenario | WRONG | RIGHT |
 |----------|-------|-------|
-| Any council debate | `Agent(subagent_type="Architect")` | ComposeAgent → `Agent(subagent_type="general-purpose")` |
-| Security topic | `Agent(subagent_type="Silas")` | ComposeAgent with `security,adversarial,bold` traits |
-| Design question | `Agent(subagent_type="Designer")` | ComposeAgent with `ux,enthusiastic,exploratory` traits |
-| Research needed | `Agent(subagent_type="PerplexityResearcher")` | ComposeAgent with `research,thorough,comparative` traits |
+| Any council debate | `Agent(subagent_type="Architect")` | Topic-specific prompt → `Agent(subagent_type="general-purpose")` |
+| Security topic | `Agent(subagent_type="Silas")` | Role prompt with `security,adversarial,bold` traits |
+| Design question | `Agent(subagent_type="Designer")` | Role prompt with `ux,enthusiastic,exploratory` traits |
+| Research needed | `Agent(subagent_type="PerplexityResearcher")` | Role prompt with `research,thorough,comparative` traits |

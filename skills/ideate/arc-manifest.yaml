@@ -16,11 +16,13 @@ capabilities:
   filesystem:
     read:
       - ~/.soma/memory/SKILLS/ideate/execution.jsonl
+      - ~/.soma/memory/SKILLS/ideate/execution-*.jsonl
       - ~/.soma/memory/SKILLS/ideate/runs/**
       - "./**"
     write:
       - "./**"
       - ~/.soma/memory/SKILLS/ideate/execution.jsonl
+      - ~/.soma/memory/SKILLS/ideate/execution-*.jsonl
       - ~/.soma/memory/SKILLS/ideate/runs/**
   network: []
   bash:

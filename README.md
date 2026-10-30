@@ -26,6 +26,26 @@ bun scripts/check-pack.ts
 
 `check-pack.ts` checks the library manifest, that every member is `type: skill` with an `upstream:` pin to `danielmiessler/PAI` at a 40-hex commit, that each `SKILL.md` has a matching `name` and a description, and that `arc validate` passes on it.
 
+## Execution logs
+
+Paths in this section are relative to the configured Soma home. Moved thinking
+and web skills write records under `memory/SKILLS/<skill>/`. An append-capable
+file tool writes to `execution.jsonl`; a replacement-only tool creates a new
+single-record `execution-<UTC timestamp>-<unique suffix>.jsonl` instead of
+rewriting history. Collect both `execution.jsonl` and `execution-*.jsonl` and
+order records by their `ts` field.
+
+Earlier versions wrote all skills to `memory/SKILLS/execution.jsonl`. Existing
+history stays there; installation does not migrate it. Aggregators must read
+that shared file alongside the per-skill files for a complete history.
+
+To migrate manually, parse each legacy JSON line and use a file tool to write
+it to the directory identified by its `skill` field. Map earlier PascalCase
+skill names to the installed kebab-case names. Keep unrecognized or malformed
+records in the legacy file for inspection. Verify migrated record counts before
+archiving the legacy file, then update aggregators to read only the migrated
+copy to avoid counting records twice. Keep log data outside shell commands.
+
 ## Work
 
 The pack's work lives on its orienteer map (issue #1). Decisions about which LifeOS ideas Soma adopts beyond skills live on [soma#1114](https://github.com/the-metafactory/soma/issues/1114).

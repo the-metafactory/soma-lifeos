@@ -16,6 +16,7 @@ capabilities:
   filesystem:
     read:
       - ~/.soma/memory/SKILLS/browser/execution.jsonl
+      - ~/.soma/memory/SKILLS/browser/execution-*.jsonl
       - ./**
       - /tmp/**
       - ~/.agent-browser/**
@@ -23,6 +24,7 @@ capabilities:
       - ./**
       - /tmp/**
       - ~/.soma/memory/SKILLS/browser/execution.jsonl
+      - ~/.soma/memory/SKILLS/browser/execution-*.jsonl
       - ~/.agent-browser/**
   # Fixed service hosts; browsing and scraping also contact user-selected target hosts.
   network:

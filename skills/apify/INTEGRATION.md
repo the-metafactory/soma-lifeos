@@ -30,7 +30,9 @@ The social skill now uses code-based Apify scripts instead of `mcp__apify` MCP t
 4. System transforms tweet into LinkedIn format
 5. **Token savings: 98%** (vs fetching unfiltered profile data)
 
-### optional research skill Integration
+### Research Integration
+
+Use the optional `research` skill to interpret the collected posts, or analyze them directly with the host's tools.
 
 **Use Case:** Monitor influential developers' Twitter activity
 

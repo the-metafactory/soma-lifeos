@@ -1,6 +1,6 @@
 ---
 name: webdesign
-description: "Design and refine web interfaces through Claude Design: create prototypes, extract design systems, redesign sites, export code, integrate into existing apps, and deploy designs. For static graphics or video, use the optional art or media skill."
+description: "Design and refine web interfaces through Claude Design. USE WHEN webdesign, create a prototype, extract a design system, redesign a site, export code, integrate a design into an app, or deploy a design. For static graphics or video, use the optional art or media skill."
 license: Complete terms in LICENSE.txt
 effort: medium
 ---
@@ -153,4 +153,4 @@ After each workflow, build a record with the actual UTC timestamp, workflow name
 {"ts":"ISO8601","skill":"webdesign","workflow":"WORKFLOW_USED","input":"brief summary","status":"ok","duration_s":0}
 ```
 
-Serialize the record with `JSON.stringify(record) + "\n"`. Use the host's file-write tool to append it to `memory/SKILLS/webdesign/execution.jsonl` under the Soma home, creating the parent directory if needed. If the tool only replaces files, read the existing log and preserve its contents before adding the serialized line. Keep all user-derived values in the JSON data, outside shell commands. Logging is complete when the new line parses as one JSON object and prior entries are preserved.
+Serialize the record with `JSON.stringify(record) + "\n"`. Prefer the host's append-capable file-write tool to append it to `memory/SKILLS/webdesign/execution.jsonl` under the Soma home, creating the parent directory if needed. If only replacement writes are available, write this single record to a new `execution-<UTC timestamp>-<unique suffix>.jsonl` in the same directory without replacing any existing file. Use a filename-safe UTC timestamp and a fresh random suffix. Keep all user-derived values in the JSON data, outside shell commands. Logging is complete when the written line parses as one JSON object and prior files and entries are preserved.

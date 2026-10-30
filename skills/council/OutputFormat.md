@@ -4,7 +4,7 @@ Standard format for council debate transcripts.
 
 ## CRITICAL: Custom Agents Only
 
-All council members are custom-composed via ComposeAgent. Agent names and trait descriptions come from the ComposeAgent output. NEVER use generic labels like "Architect" or "Designer" — use the actual composed agent names.
+Use the names and trait descriptions assigned during composition, whether prompts were written directly or generated with the optional agents skill's ComposeAgent tool. Give every member a unique name rather than a generic built-in type label such as "Architect" or "Designer".
 
 ## Full Debate Transcript
 
@@ -84,4 +84,4 @@ All council members are custom-composed via ComposeAgent. Agent names and trait 
 - **Tone:** Professional but direct; genuine challenges
 - **Must Include:** Specific references to other agents' points in Round 2+
 - **Must Avoid:** Generic opinions, restating initial position without engagement
-- **Agent Names:** Use actual ComposeAgent names, never generic built-in type labels
+- **Agent Names:** Use the unique names assigned during composition

@@ -22,8 +22,9 @@ for (const member of members) {
       const content = readFileSync(path, "utf8");
       expect(content.match(/^#{2,3} .*Voice (?:Notification|Summary|Completion)/m), path).toBeNull();
       expect(content.match(/localhost:8888\/notify/), path).toBeNull();
-      expect(content.match(/\b(?:BeCreative|RedTeam|IterativeDepth|ApertureOscillation|FirstPrinciples|RootCauseAnalysis|SystemsThinking|WorldThreatModel)\b/), path).toBeNull();
+      expect(content.match(/\b(?:BeCreative|RedTeam|IterativeDepth|ApertureOscillation|FirstPrinciples|RootCauseAnalysis|SystemsThinking|WorldThreatModel)\b/i), path).toBeNull();
       expect(content.match(/skills\/(?:Browser|Interceptor|Webdesign|Apify|BrightData)\//), path).toBeNull();
+      expect(content.match(/Science\/Workflows\//), path).toBeNull();
       for (const invocation of content.matchAll(/Skill\("([a-z][a-z-]*)"/g)) {
         expect(statSync(join(root, invocation[1], "SKILL.md")).isFile(), path).toBe(true);
       }
@@ -43,14 +44,59 @@ for (const member of members) {
       expect(log).toContain("file-write tool");
       const destination = `memory/SKILLS/${member}/execution.jsonl`;
       expect(log).toContain(destination);
+      expect(log).toContain("append-capable");
+      expect(log).toContain("single record to a new");
+      expect(log).toContain("execution-<UTC timestamp>-<unique suffix>.jsonl");
+      expect(log).not.toMatch(/read the existing log|preserve its contents before adding/);
       const manifest = readFileSync(join(root, member, "arc-manifest.yaml"), "utf8");
       expect(manifest.split(destination).length - 1).toBe(2);
+      expect(manifest.split(`memory/SKILLS/${member}/execution-*.jsonl`).length - 1).toBe(2);
       const example = /```json\n([\s\S]*?)\n```/.exec(log)?.[1];
       expect(example).toBeDefined();
       if (example) expect(JSON.parse(example).skill).toBe(member);
     });
   }
 }
+
+test("moved members expose each skill name exactly once", () => {
+  const definitions = new Map<string, string>();
+  for (const member of members) {
+    for (const path of markdownFiles(join(root, member)).filter(path => path.endsWith("/SKILL.md"))) {
+      const name = /^name: (.+)$/m.exec(readFileSync(path, "utf8"))?.[1];
+      expect(name, path).toBeDefined();
+      if (!name) throw new Error(`Missing skill name: ${path}`);
+      expect(definitions.get(name), `Duplicate skill ${name}: ${path}`).toBeUndefined();
+      definitions.set(name, path);
+    }
+  }
+});
+
+test("council execution steps support composing prompts without agents", () => {
+  for (const [file, step] of [["Debate", "Step 0"], ["Quick", "Step 1"]]) {
+    const workflow = readFileSync(join(root, "council", "Workflows", `${file}.md`), "utf8");
+    const composition = workflow.split(`### ${step}:`)[1]?.split("### Step")[0] ?? "";
+    expect(composition).toContain("When the optional agents skill is installed");
+    expect(composition).toContain("Otherwise write the prompt directly");
+  }
+});
+
+test("model-invoked descriptions retain explicit routing triggers", () => {
+  for (const member of ["council", "webdesign", "world-threat-model"]) {
+    const content = readFileSync(join(root, member, "SKILL.md"), "utf8");
+    expect(/^description: .*USE WHEN .+$/m.test(content), member).toBe(true);
+  }
+});
+
+test("science protocol supports prompt experiments without evals", () => {
+  const protocol = readFileSync(join(root, "science", "Protocol.md"), "utf8");
+  expect(protocol).not.toMatch(/DO NOT build ad-hoc evaluation|use evals\. Period/);
+  const section = protocol.split("### Science → evals")[1]?.split("### evals → Science")[0] ?? "";
+  expect(section).toContain("If unavailable");
+  expect(section).toContain("precommitted criteria");
+  const route = /`(science\/Workflows\/StructuredInvestigation\.md)`/.exec(protocol)?.[1];
+  expect(route).toBeDefined();
+  if (route) expect(statSync(join(root, route)).isFile()).toBe(true);
+});
 
 test("scraping routes to the pack's kebab-case web members", () => {
   const skill = readFileSync(join(root, "scraping", "SKILL.md"), "utf8");

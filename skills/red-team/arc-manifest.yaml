@@ -16,10 +16,12 @@ capabilities:
   filesystem:
     read:
       - ~/.soma/memory/SKILLS/red-team/execution.jsonl
+      - ~/.soma/memory/SKILLS/red-team/execution-*.jsonl
       - "./**"
     write:
       - "./**"
       - ~/.soma/memory/SKILLS/red-team/execution.jsonl
+      - ~/.soma/memory/SKILLS/red-team/execution-*.jsonl
   network: []
   bash:
     allowed: true

@@ -84,9 +84,9 @@ Refactor or Continue (ITERATE)
 
 ### evals (Prompt Optimization)
 
-**evals is the canonical Science implementation for prompts.**
+**The optional evals skill implements the Science Protocol for prompts.**
 
-When doing prompt experiments, DO NOT build ad-hoc evaluation. Invoke evals directly.
+When installed, use evals for prompt experiments. Otherwise follow the comparison design in [DesignExperiment.md](Workflows/DesignExperiment.md#prompt-experiments) with the host's tools: precommit criteria, compare baseline and variants on the same samples, and record measurements and uncertainty.
 
 ```yaml
 skill: evals
@@ -291,18 +291,16 @@ This is tracked in `Meta/` directory.
 When Science encounters prompt optimization:
 
 1. **Recognize the domain** - "This is a prompt experiment"
-2. **Delegate to specialist** - Invoke optional evals skill directly
-3. **Use evals infrastructure** - Don't reinvent position swapping, multi-judge, etc.
-4. **Accept evals output** - Scores, statistics, recommendations
-
-**The directive:** If experimenting with prompts, use evals. Period.
+2. **Check availability** - Invoke evals when installed. If unavailable, use the comparison design in [DesignExperiment.md](Workflows/DesignExperiment.md#prompt-experiments) with the host's tools.
+3. **Compare consistently** - Apply precommitted criteria to the baseline and each variant on the same samples. Use evals infrastructure when available.
+4. **Record evidence** - Keep scores, uncertainty, and recommendations, and report which evaluation method was used.
 
 ### evals → Science
 
 When evals gets stuck or needs broader framing:
 
 1. **Paradigm check trigger** - 3+ iterations without improvement
-2. **Invoke science explicitly** - `Science/Workflows/StructuredInvestigation.md`
+2. **Invoke science explicitly** - `science/Workflows/StructuredInvestigation.md`
 3. **Question the frame** - Is the use case defined correctly? Are we measuring the right thing?
 4. **Return with clarity** - New hypothesis, new direction, or confirmation to continue
 
@@ -320,14 +318,14 @@ User: "Improve the summarization pipeline"
 │           SCIENCE ORCHESTRATES           │
 └─────────────────────────────────────────┘
            │
-           ├──► Goal: What does "better" mean? (Science/DefineGoal)
+           ├──► Goal: What does "better" mean? (science/Workflows/DefineGoal.md)
            │
            ├──► Observe: Current performance across dimensions
            │
            ├──► Hypothesize: Multiple improvement paths
-           │    ├─ Better prompt (→ evals)
+           │    ├─ Better prompt (→ optional evals, or host comparison tools)
            │    ├─ Better code (→ Development/Worktree)
-           │    └─ Better architecture (→ Research)
+           │    └─ Better architecture (→ optional research, or host web tools)
            │
            ├──► Experiment: Parallel experiments via appropriate skills
            │
@@ -349,5 +347,5 @@ Science orchestrates; specialist skills execute.
 - Science orchestrates only for cross-domain coordination
 - Scale determines formality level
 - The protocol improves itself through its own application
-- **evals is the canonical implementation for prompts**
+- **Use optional evals for prompts, or the host's tools with precommitted comparison criteria**
 - **When evals stalls, escalate to explicit Science workflows**

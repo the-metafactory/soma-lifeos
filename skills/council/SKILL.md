@@ -1,6 +1,6 @@
 ---
 name: council
-description: "Debate a decision through multiple expert perspectives and visible deliberation rounds. Use to weigh options, compare tradeoffs, or seek consensus. Use red-team for a purely adversarial critique and delegation for parallel task execution."
+description: "Debate a decision through multiple expert perspectives and visible deliberation rounds. USE WHEN council, debate, weigh options, compare tradeoffs, or seek consensus. Use red-team for a purely adversarial critique and delegation for parallel task execution."
 effort: high
 context: fork
 ---
@@ -23,7 +23,7 @@ Compose each member with topic-specific expertise, a distinct viewpoint, and a r
 
 Built-in types are generic and topic-ignorant. council debates require agents with:
 - Domain expertise tailored to the specific debate topic
-- Unique voices and personalities via ComposeAgent
+- Unique voices and personalities in each role-and-trait prompt
 - Distinct analytical approaches that create genuine friction
 
 See `CouncilMembers.md` for full agent composition instructions.
@@ -115,4 +115,4 @@ After each workflow, build a record with the actual UTC timestamp, workflow name
 {"ts":"ISO8601","skill":"council","workflow":"WORKFLOW_USED","input":"brief summary","status":"ok","duration_s":0}
 ```
 
-Serialize the record with `JSON.stringify(record) + "\n"`. Use the host's file-write tool to append it to `memory/SKILLS/council/execution.jsonl` under the Soma home, creating the parent directory if needed. If the tool only replaces files, read the existing log and preserve its contents before adding the serialized line. Keep all user-derived values in the JSON data, outside shell commands. Logging is complete when the new line parses as one JSON object and prior entries are preserved.
+Serialize the record with `JSON.stringify(record) + "\n"`. Prefer the host's append-capable file-write tool to append it to `memory/SKILLS/council/execution.jsonl` under the Soma home, creating the parent directory if needed. If only replacement writes are available, write this single record to a new `execution-<UTC timestamp>-<unique suffix>.jsonl` in the same directory without replacing any existing file. Use a filename-safe UTC timestamp and a fresh random suffix. Keep all user-derived values in the JSON data, outside shell commands. Logging is complete when the written line parses as one JSON object and prior files and entries are preserved.

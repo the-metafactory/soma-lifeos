@@ -1,6 +1,6 @@
 ---
 name: world-threat-model
-description: "Stress-test an idea or strategy against future time horizons (TestIdea), refresh world models (UpdateModels), or inspect their current state (ViewModels). Use for temporal threat modeling and long-term risk analysis."
+description: "Stress-test an idea or strategy against future time horizons (TestIdea), refresh world models (UpdateModels), or inspect their current state (ViewModels). USE WHEN world threat model, temporal threat modeling, long-term risk analysis, update world models, or view world models."
 effort: high
 ---
 
@@ -117,4 +117,4 @@ After each workflow, build a record with the actual UTC timestamp, workflow name
 {"ts":"ISO8601","skill":"world-threat-model","workflow":"WORKFLOW_USED","input":"brief summary","status":"ok","duration_s":0}
 ```
 
-Serialize the record with `JSON.stringify(record) + "\n"`. Use the host's file-write tool to append it to `memory/SKILLS/world-threat-model/execution.jsonl` under the Soma home, creating the parent directory if needed. If the tool only replaces files, read the existing log and preserve its contents before adding the serialized line. Keep all user-derived values in the JSON data, outside shell commands. Logging is complete when the new line parses as one JSON object and prior entries are preserved.
+Serialize the record with `JSON.stringify(record) + "\n"`. Prefer the host's append-capable file-write tool to append it to `memory/SKILLS/world-threat-model/execution.jsonl` under the Soma home, creating the parent directory if needed. If only replacement writes are available, write this single record to a new `execution-<UTC timestamp>-<unique suffix>.jsonl` in the same directory without replacing any existing file. Use a filename-safe UTC timestamp and a fresh random suffix. Keep all user-derived values in the JSON data, outside shell commands. Logging is complete when the written line parses as one JSON object and prior files and entries are preserved.
