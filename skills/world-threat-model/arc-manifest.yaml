@@ -16,7 +16,7 @@ capabilities:
   filesystem:
     read:
       - "./**"
-      - ~/.soma/skills/WorldThreatModel/**
+      - ~/.soma/skills/world-threat-model/**
       - ~/.soma/memory/RESEARCH/WorldModels/**
     write:
       - "./**"

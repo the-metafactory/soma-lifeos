@@ -16,7 +16,7 @@ capabilities:
   filesystem:
     read:
       - "./**"
-      - ~/.soma/skills/Evals/**
+      - ~/.soma/skills/evals/**
     write:
       - "./**"
       - ~/.soma/memory/SKILLS/execution.jsonl

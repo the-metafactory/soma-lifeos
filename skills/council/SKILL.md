@@ -10,7 +10,7 @@ Multi-agent debate system where custom-composed agents discuss topics in rounds,
 
 ## CRITICAL: Custom Agents Only
 
-**ALL council members MUST be custom-composed agents created via the Agents skill's ComposeAgent tool (`bun run ~/.soma/skills/Agents/Tools/ComposeAgent.ts`). NEVER use built-in agent types (Architect, Designer, Engineer, PerplexityResearcher, Silas, etc.).**
+**ALL council members MUST be custom-composed agents created via the Agents skill's ComposeAgent tool (`bun run ~/.soma/skills/agents/Tools/ComposeAgent.ts`). NEVER use built-in agent types (Architect, Designer, Engineer, PerplexityResearcher, Silas, etc.).**
 
 Built-in types are generic and topic-ignorant. Council debates require agents with:
 - Domain expertise tailored to the specific debate topic

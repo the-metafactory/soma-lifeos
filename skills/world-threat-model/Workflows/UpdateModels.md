@@ -16,7 +16,7 @@ Refresh or create world model documents using deep research and user-provided an
 
 ## Prerequisites
 
-- Model template at `~/.soma/skills/WorldThreatModel/ModelTemplate.md`
+- Model template at `~/.soma/skills/world-threat-model/ModelTemplate.md`
 - Research skill available for web research
 
 ## Workflow Steps

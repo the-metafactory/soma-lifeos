@@ -35,22 +35,22 @@ Before any debate rounds, compose 4 custom agents tailored to the topic using Co
 # Analyze the topic and determine what perspectives create productive friction
 # Then compose each agent with topic-specific traits:
 
-bun run ~/.soma/skills/Agents/Tools/ComposeAgent.ts \
+bun run ~/.soma/skills/agents/Tools/ComposeAgent.ts \
   --traits "[domain],enthusiastic,systematic" \
   --task "[debate topic]" \
   --output json
 
-bun run ~/.soma/skills/Agents/Tools/ComposeAgent.ts \
+bun run ~/.soma/skills/agents/Tools/ComposeAgent.ts \
   --traits "[domain],skeptical,meticulous" \
   --task "[debate topic]" \
   --output json
 
-bun run ~/.soma/skills/Agents/Tools/ComposeAgent.ts \
+bun run ~/.soma/skills/agents/Tools/ComposeAgent.ts \
   --traits "[domain],pragmatic,analytical" \
   --task "[debate topic]" \
   --output json
 
-bun run ~/.soma/skills/Agents/Tools/ComposeAgent.ts \
+bun run ~/.soma/skills/agents/Tools/ComposeAgent.ts \
   --traits "research,analytical,comparative" \
   --task "[debate topic]" \
   --output json
