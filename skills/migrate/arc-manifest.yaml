@@ -1,0 +1,29 @@
+schema: arc/v1
+name: migrate
+version: 0.1.0
+type: skill
+tier: custom
+description: Classify and import external content into the PAI taxonomy with provenance.
+license: MIT
+author:
+  name: The MetaFactory
+  github: the-metafactory
+upstream:
+  repo: danielmiessler/PAI
+  path: Packs/Migrate/src
+  commit: 2fde1bbe9e8f280cd4998e244b53e3c66f3dc8b9
+capabilities:
+  filesystem:
+    read:
+      - ./**
+      - ~/.soma/**
+    write:
+      - ./**
+      - ~/.soma/**
+  # Fixed service hosts; workflows also use URLs and targets chosen by the principal.
+  network:
+    - host: localhost
+      reason: Send the inherited local voice notification.
+  bash:
+    allowed: true
+  secrets: []

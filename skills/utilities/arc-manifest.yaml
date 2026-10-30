@@ -1,0 +1,46 @@
+schema: arc/v1
+name: utilities
+version: 0.1.0
+type: skill
+tier: custom
+description: "Route document processing, parsing, audio editing, Fabric patterns, and developer tools."
+license: MIT
+author:
+  name: The MetaFactory
+  github: the-metafactory
+upstream:
+  repo: danielmiessler/PAI
+  path: Packs/Utilities/src
+  commit: 2fde1bbe9e8f280cd4998e244b53e3c66f3dc8b9
+capabilities:
+  filesystem:
+    read:
+      - ./**
+      - /tmp/**
+      - ~/.soma/**
+    write:
+      - ./**
+      - /tmp/**
+      - ~/.soma/memory/SKILLS/utilities/**
+  # Fixed service hosts; workflows also use URLs and targets chosen by the principal.
+  network:
+    - host: api.anthropic.com
+      reason: Read Anthropic API and model information.
+    - host: api.cleanvoice.ai
+      reason: Submit audio cleanup jobs and retrieve results.
+    - host: api.cloudflare.com
+      reason: Manage Cloudflare resources.
+    - host: api.github.com
+      reason: Inspect upstream repositories and releases.
+    - host: generativelanguage.googleapis.com
+      reason: Run supported Gemini parsing workflows.
+    - host: localhost
+      reason: Drive local browser automation and development tools.
+  bash:
+    allowed: true
+  secrets:
+    - ANTHROPIC_API_KEY
+    - CLEANVOICE_API_KEY
+    - GITHUB_TOKEN
+    - CLOUDFLARE_API_TOKEN
+    - GEMINI_API_KEY

@@ -30,6 +30,18 @@ artifacts:
     description: "Automate real Chrome sessions and record, replay, and verify browser workflows."
   - path: skills/webdesign
     description: "Create, refine, export, integrate, and verify web interfaces through Claude Design."
+  - path: skills/telos
+    description: "Analyze personal goals and project context, and create reports and dashboards."
+  - path: skills/knowledge
+    description: "Manage and search a typed knowledge archive with linked notes and provenance."
+  - path: skills/migrate
+    description: "Classify and import external content into the PAI taxonomy with provenance."
+  - path: skills/sales
+    description: "Turn product documentation into sales narratives, visuals, and talking points."
+  - path: skills/security
+    description: "Route reconnaissance, web assessments, prompt injection testing, and security intelligence."
+  - path: skills/utilities
+    description: "Route document processing, parsing, audio editing, Fabric patterns, and developer tools."
   - path: skills/security-updates
     description: Collect ranked security news, research and breach reports with persistent deduplication.
   - path: skills/speaking
