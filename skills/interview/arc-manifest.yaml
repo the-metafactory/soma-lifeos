@@ -25,9 +25,7 @@ capabilities:
       - /tmp/**
       - "${SOMA_HOME}/memory/SKILLS/interview/**"
       - "${SOMA_HOME}/memory/SKILLS/execution.jsonl"
-  network:
-    - host: localhost
-      reason: Send workflow notifications to the local voice service.
+  network: []
   bash:
     allowed: true
   secrets:

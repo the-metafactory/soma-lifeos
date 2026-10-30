@@ -2,15 +2,6 @@
 
 **Hand-drawn classification systems, taxonomies, and reference grids using UL aesthetic.**
 
-## Voice Notification
-
-```bash
-curl -s -X POST http://localhost:31337/notify \
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the Taxonomies workflow in the Art skill to create taxonomies"}' \
-  > /dev/null 2>&1 &
-```
-
 Running **Taxonomies** in **Art**...
 
 ---
