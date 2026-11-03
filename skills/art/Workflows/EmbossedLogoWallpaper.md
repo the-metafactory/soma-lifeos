@@ -2,15 +2,6 @@
 
 **Generate sophisticated wallpapers with logo physically embossed into the design.**
 
-## Voice Notification
-
-```bash
-curl -s -X POST http://localhost:31337/notify \
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the EmbossedLogoWallpaper workflow in the Art skill to create wallpapers"}' \
-  > /dev/null 2>&1 &
-```
-
 Running **EmbossedLogoWallpaper** in **Art**...
 
 ---

@@ -6,15 +6,6 @@
 
 ---
 
-## Voice Notification
-
-```bash
-curl -s -X POST http://localhost:8888/notify \
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running catch-up documentation"}' \
-  > /dev/null 2>&1 &
-```
-
 Running the **DocumentRecent** workflow from the **System** skill...
 
 ---

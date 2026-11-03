@@ -2,15 +2,6 @@
 
 Comprehensive Cloudflare deployment troubleshooting workflow with recursive testing and automated fixes using Chrome MCP tools for visual verification.
 
-## Voice Notification
-
-```bash
-curl -s -X POST http://localhost:8888/notify \
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the Troubleshoot workflow in the Cloudflare skill to debug deployment issues"}' \
-  > /dev/null 2>&1 &
-```
-
 Running the **Troubleshoot** workflow in the **Cloudflare** skill to debug deployment issues...
 
 ## When to Use This Command

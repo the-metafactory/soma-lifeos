@@ -18,9 +18,7 @@
  */
 
 import { PlaywrightBrowser } from '../index.ts'
-import { getIdentity } from '../../../hooks/lib/identity'
 
-const VOICE_SERVER = 'http://localhost:8888/notify/personality'
 const STATE_FILE = '/tmp/browser-session.json'
 const DEFAULT_PORT = 9222
 const SESSION_TIMEOUT = 5000 // 5s to wait for session start
@@ -89,49 +87,6 @@ interface Diagnostics {
 // ============================================
 // UTILITIES
 // ============================================
-
-async function notify(message: string): Promise<void> {
-  try {
-    const identity = getIdentity()
-    const personality = identity.personality
-
-    if (!personality?.baseVoice) {
-      // Fall back to simple notify if no personality configured
-      await fetch('http://localhost:8888/notify', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message, play: true })
-      })
-      return
-    }
-
-    await fetch(VOICE_SERVER, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        message,
-        personality: {
-          name: identity.name.toLowerCase(),
-          base_voice: personality.baseVoice,
-          enthusiasm: personality.enthusiasm,
-          energy: personality.energy,
-          expressiveness: personality.expressiveness,
-          resilience: personality.resilience,
-          composure: personality.composure,
-          optimism: personality.optimism,
-          warmth: personality.warmth,
-          formality: personality.formality,
-          directness: personality.directness,
-          precision: personality.precision,
-          curiosity: personality.curiosity,
-          playfulness: personality.playfulness,
-        }
-      })
-    })
-  } catch {
-    // Voice server not running - silent fail
-  }
-}
 
 function formatBytes(bytes: number): string {
   if (bytes === 0) return '0 B'

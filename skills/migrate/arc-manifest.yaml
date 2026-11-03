@@ -21,9 +21,7 @@ capabilities:
       - ./**
       - ~/.soma/**
   # Fixed service hosts; workflows also use URLs and targets chosen by the principal.
-  network:
-    - host: localhost
-      reason: Send the inherited local voice notification.
+  network: []
   bash:
     allowed: true
   secrets: []

@@ -2,15 +2,6 @@
 
 **Hand-drawn frameworks, mental models, and conceptual diagrams using UL aesthetic.**
 
-## Voice Notification
-
-```bash
-curl -s -X POST http://localhost:31337/notify \
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running the Frameworks workflow in the Art skill to create diagrams"}' \
-  > /dev/null 2>&1 &
-```
-
 Running **Frameworks** in **Art**...
 
 ---

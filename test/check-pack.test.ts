@@ -1,4 +1,4 @@
-import { afterEach, expect, test } from "bun:test";
+import { afterEach, expect, spyOn, test } from "bun:test";
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
@@ -26,6 +26,31 @@ test("the repo's own manifest passes", () => {
 
 test("an empty library passes", () => {
   expect(checkPack(library("[]"))).toBe(0);
+});
+
+test.each([31337, 8888])("rejects localhost:%i in any nested skill file with its line number", (port) => {
+  const dir = library("[]");
+  const workflow = join(dir, "skills", "unlisted", "Workflows", "notify.txt");
+  mkdirSync(join(workflow, ".."), { recursive: true });
+  writeFileSync(workflow, `First line\r\n\r\ncurl http://localhost:${port}/notify\r\nAgain: localhost:${port}\r\n`);
+  const errors = spyOn(console, "error").mockImplementation(() => {});
+  try {
+    expect(checkPack(dir)).toBe(1);
+    expect(errors.mock.calls).toEqual([
+      [`skills/unlisted/Workflows/notify.txt:3: forbidden local notification endpoint localhost:${port}`],
+      [`skills/unlisted/Workflows/notify.txt:4: forbidden local notification endpoint localhost:${port}`],
+    ]);
+  } finally {
+    errors.mockRestore();
+  }
+});
+
+test("allows unrelated local services and ignores files outside skills", () => {
+  const dir = library("[]");
+  mkdirSync(join(dir, "skills", "demo"), { recursive: true });
+  writeFileSync(join(dir, "skills", "demo", "server.ts"), 'fetch("http://localhost:3000");\n');
+  writeFileSync(join(dir, "README.md"), "Retired endpoints: localhost:31337 and localhost:8888\n");
+  expect(checkPack(dir)).toBe(0);
 });
 
 test("a member pinned to another upstream fails", () => {
