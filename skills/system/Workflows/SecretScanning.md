@@ -6,15 +6,6 @@
 
 ---
 
-## Voice Notification
-
-```bash
-curl -s -X POST http://localhost:8888/notify \
-  -H "Content-Type: application/json" \
-  -d '{"message": "Running secret scanning workflow"}' \
-  > /dev/null 2>&1 &
-```
-
 Running the **SecretScanning** workflow from the **System** skill...
 
 ---
