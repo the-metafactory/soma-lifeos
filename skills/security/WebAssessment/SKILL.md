@@ -27,7 +27,6 @@ Security assessment infrastructure integrating reconnaissance, threat modeling, 
 | "OSINT", "reconnaissance", "open source intelligence" | Osint/MasterGuide |
 | "test web app", "Playwright", "browser automation" | Webapp/TestingGuide |
 | "bug bounty", "bounty programs" | BugBounty/Programs |
-| "vulnerability analysis with AI", "Gemini analysis" | VulnerabilityAnalysisGemini3 |
 
 ## Skill Integration
 
@@ -152,10 +151,7 @@ Generates prioritized attack plan:
 - `Workflows/Osint/Reconnaissance.md` - Domain recon
 - `Workflows/Osint/SocialMediaIntel.md` - SOCMINT
 - `Workflows/Osint/Automation.md` - SpiderFoot/Maltego
-- `Workflows/Osint/MetadataAnalysis.md` - ExifTool analysis
-
-**AI-Powered:**
-- `Workflows/VulnerabilityAnalysisGemini3.md` - Gemini deep analysis
+- [ExifTool notes](OsintTools/network-tools-notes.md#3-exiftool---metadata-extraction-from-files) - Metadata extraction commands
 
 ## Examples
 

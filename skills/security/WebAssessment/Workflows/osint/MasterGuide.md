@@ -626,7 +626,7 @@ CDN: Cloudflare
 - `Reconnaissance.md` - Subdomain enumeration and domain reconnaissance
 - `Social-media-intel.md` - Social media intelligence gathering
 - `Automation.md` - SpiderFoot and Maltego automation
-- `Metadata-analysis.md` - Document and image metadata extraction
+- [ExifTool notes](../../OsintTools/network-tools-notes.md#3-exiftool---metadata-extraction-from-files) - Metadata extraction commands
 - `../pentest/Reconnaissance.md` - Integration with penetration testing
 - `../pentest/Tool-inventory.md` - Complete tool reference
 
