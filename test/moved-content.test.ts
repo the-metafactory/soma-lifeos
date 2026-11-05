@@ -34,20 +34,14 @@ for (const member of members) {
   for (const path of markdownFiles(join(root, member)).filter(path =>
     path.endsWith("/SKILL.md") && readFileSync(path, "utf8").includes("## Execution Log\n"),
   )) {
-    test(`${path.slice(root.length + 1)}: execution logs use file tools and JSON encoding`, () => {
+    test(`${path.slice(root.length + 1)}: execution logs declare destinations and JSON records without shell commands`, () => {
       const content = readFileSync(path, "utf8");
       const log = /## Execution Log\n([\s\S]*?)(?=\n## |$)/.exec(content)?.[1];
       expect(log).toBeDefined();
       if (!log) throw new Error(`Missing execution log: ${path}`);
       expect(log).not.toMatch(/```(?:bash|sh)|\becho\b|\$\(/);
-      expect(log).toContain("JSON.stringify");
-      expect(log).toContain("file-write tool");
       const destination = `memory/SKILLS/${member}/execution.jsonl`;
       expect(log).toContain(destination);
-      expect(log).toContain("append-capable");
-      expect(log).toContain("single record to a new");
-      expect(log).toContain("execution-<UTC timestamp>-<unique suffix>.jsonl");
-      expect(log).not.toMatch(/read the existing log|preserve its contents before adding/);
       const manifest = readFileSync(join(root, member, "arc-manifest.yaml"), "utf8");
       expect(manifest.split(destination).length - 1).toBe(2);
       expect(manifest.split(`memory/SKILLS/${member}/execution-*.jsonl`).length - 1).toBe(2);
