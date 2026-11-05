@@ -39,7 +39,9 @@ for (const member of members) {
       const log = /## Execution Log\n([\s\S]*?)(?=\n## |$)/.exec(content)?.[1];
       expect(log).toBeDefined();
       if (!log) throw new Error(`Missing execution log: ${path}`);
+      expect(log).toMatch(/\bJSON\b/);
       expect(log).not.toMatch(/```(?:bash|sh)|\becho\b|\$\(/);
+      expect(log).not.toMatch(/read the existing log|preserve its contents before adding/);
       const destination = `memory/SKILLS/${member}/execution.jsonl`;
       expect(log).toContain(destination);
       const manifest = readFileSync(join(root, member, "arc-manifest.yaml"), "utf8");
