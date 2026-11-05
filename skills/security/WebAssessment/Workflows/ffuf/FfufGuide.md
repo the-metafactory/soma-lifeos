@@ -461,7 +461,6 @@ This skill includes supplementary materials in the `resources/` directory:
 
 ### Resource Files
 - **WORDLISTS.md**: Comprehensive guide to SecLists wordlists, recommended lists for different scenarios, file extensions, and quick reference patterns
-- **REQUEST_TEMPLATES.md**: Pre-built req.txt templates for common authentication scenarios (JWT, OAuth, session cookies, API keys, etc.) with usage examples
 
 ### Helper Script
 - **ffuf_helper.py**: Python script to assist with:
@@ -484,7 +483,7 @@ python3 ffuf_helper.py wordlist -o ids.txt -t numbers -s 1 -e 10000
 
 **When to use resources:**
 - Users need wordlist recommendations → Reference WORDLISTS.md
-- Users need help with authenticated requests → Reference REQUEST_TEMPLATES.md
+- Users need help with authenticated requests → Follow [Using Raw HTTP Requests](#using-raw-http-requests-critical-for-authenticated-fuzzing) above
 - Users want to analyze results → Use ffuf_helper.py analyze
 - Users need to generate req.txt → Use ffuf_helper.py create-req
 - Users need number ranges for IDOR → Use ffuf_helper.py wordlist

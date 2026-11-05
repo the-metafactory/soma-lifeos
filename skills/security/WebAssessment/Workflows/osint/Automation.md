@@ -1145,7 +1145,7 @@ grep -v "[a-f0-9]{32}" results.txt
 - `master-guide.md` - Complete OSINT methodology
 - `reconnaissance.md` - Manual reconnaissance techniques
 - `social-media-intel.md` - Social media intelligence
-- `metadata-analysis.md` - File and metadata analysis
+- [ExifTool notes](../../OsintTools/network-tools-notes.md#3-exiftool---metadata-extraction-from-files) - Metadata extraction commands
 
 ---
 
