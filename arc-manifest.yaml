@@ -1,7 +1,7 @@
 # Install: arc install https://github.com/the-metafactory/soma-lifeos
 schema: arc/v1
 name: soma-lifeos
-version: 0.1.0
+version: 0.1.1
 type: library
 tier: custom
 description: Skills from Daniel Miessler's PAI / LifeOS, ported to run on top of Soma.
