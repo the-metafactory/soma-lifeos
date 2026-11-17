@@ -1,6 +1,6 @@
 ---
 name: agents
-description: "Compose CUSTOM agents from Base Traits + Voice + Specialization; manage predefined functional TEAMS (engineering, architecture, marketing, design, security, research, content, strategy). Observer team: read-only oversight agents vote continue/halt/escalate against tool-activity audit log. USE WHEN compose/create custom agents, agent personalities/traits/voices, spawn parallel agents, any named team, observer team, audit agents. NOT FOR ad-hoc swarms or TeamCreate (use Delegation) or single-threaded delegation without unique identities (use Delegation Task)."
+description: "Compose CUSTOM agents from Base Traits + Voice + Specialization; manage predefined functional TEAMS (engineering, architecture, marketing, design, security, research, content, strategy). Observer team: read-only oversight agents vote continue/halt/escalate against the tool-activity audit log. Use for custom agent personalities, named teams or observer audits. NOT FOR ad-hoc swarms or TeamCreate (use Delegation) or single-threaded delegation without unique identities (use Delegation Task)."
 effort: medium
 ---
 

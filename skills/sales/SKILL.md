@@ -1,6 +1,6 @@
 ---
 name: sales
-description: "Transforms product docs into sales-ready narrative packages: story + charcoal gestural sketch art + talking points. Three workflows: CreateSalesPackage, CreateNarrative, CreateVisual. USE WHEN: sales, proposal, pitch deck, value proposition, sales narrative, sales deck, sales package, turn this into a pitch, create a sales story, sales materials, product pitch, transform docs to sales, sales script. NOT FOR Hormozi/$100M frameworks, value equation, irresistible offer, VOC mining (use _SALESHORMOZI). NOT FOR standalone diagrams/illustrations (use Art)."
+description: "Turn product docs into sales-ready packages: narrative, charcoal gestural sketch art and talking points. Use for pitches, proposals, value propositions or sales decks. NOT FOR Hormozi/$100M frameworks, value equation, irresistible offer, VOC mining (use _SALESHORMOZI). NOT FOR standalone diagrams/illustrations (use Art)."
 effort: medium
 ---
 # Sales Skill

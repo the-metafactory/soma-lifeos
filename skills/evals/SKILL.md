@@ -1,6 +1,6 @@
 ---
 name: evals
-description: "AI agent evaluation framework with code-based, model-based, and human graders. pass@k/pass^k scoring. Capability evals (~70% target) and regression evals (~99% target). Workflows: RunEval, CompareModels, ComparePrompts, CreateJudge, RunScenario, ViewResults. USE WHEN eval, evaluate, benchmark, regression test, compare models, compare prompts, create judge, test agent, pass@k, scenario simulation, capability test."
+description: "AI agent evaluation framework with code-based, model-based and human graders and pass@k/pass^k scoring, for capability and regression evals. Use to evaluate or benchmark an agent, compare models or prompts, or build an LLM judge."
 effort: high
 context: fork
 ---

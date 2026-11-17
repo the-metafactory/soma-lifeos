@@ -1,6 +1,6 @@
 ---
 name: interview
-description: "Phased conversational interview across PAI context files. Four phases: foundational TELOS, IDEAL_STATE, preferences, identity. Review mode (≥80% complete) sharpens; Fill mode (<80%) builds up. Timestamped backups before edits. USE WHEN /interview, resume interview, review TELOS, fill in context, conversational review, quarterly context refresh."
+description: "Phased conversational interview across PAI context files: TELOS, IDEAL_STATE, preferences, identity. Review mode sharpens a mostly complete set; Fill mode builds one up. Backs up before edits. Use for /interview or a periodic review of personal context."
 ---
 
 # Interview — phased conversational context review + fill

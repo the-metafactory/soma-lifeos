@@ -1,6 +1,6 @@
 ---
 name: iterative-depth
-description: "Multi-angle exploration: 2-8 passes through same problem from different scientific lenses. Each pass surfaces new ISC criteria; stops when yields repeat. Best at Extended+ effort. USE WHEN iterative depth, explore deeper, multi-angle analysis, surface hidden requirements, blind spot check, deep dive before building, what am I missing, quick depth."
+description: "Multi-angle exploration: 2-8 passes through the same problem from different scientific lenses, each surfacing new ISC criteria, stopping when yields repeat. Use to find hidden requirements or blind spots before building."
 effort: high
 ---
 # iterative-depth

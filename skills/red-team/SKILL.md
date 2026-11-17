@@ -1,6 +1,6 @@
 ---
 name: red-team
-description: "Adversarial analysis via 32 parallel expert agents. Stress-tests ideas, strategies, and plans — not systems. Two workflows: ParallelAnalysis (decompose → attack → synthesize → steelman) and AdversarialValidation. Goal: strengthen, not destroy. USE WHEN red team, attack idea, counterarguments, critique, stress test, devil's advocate, find weaknesses, break this, poke holes, what could go wrong, adversarial validation."
+description: "Adversarial analysis with parallel expert agents that stress-test ideas, strategies and plans (not systems), then steelman them. Goal: strengthen, not destroy. Use to critique, find weaknesses in or play devil's advocate against an idea."
 effort: high
 ---
 # red-team Skill

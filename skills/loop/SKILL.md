@@ -1,6 +1,6 @@
 ---
 name: loop
-description: "Iterative improvement loop — revisit and refine a target across multiple Algorithm cycles toward an ideal state. USE WHEN loop, iterate, refine, improve iteratively, multiple passes, keep improving, loop mode, revisit, rework."
+description: "Iterative improvement loop: revisit and refine a target across several Algorithm cycles toward an ideal state. Use when something should be reworked over multiple passes."
 disable-model-invocation: true
 effort: medium
 ---

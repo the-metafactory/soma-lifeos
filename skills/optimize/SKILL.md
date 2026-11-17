@@ -1,6 +1,6 @@
 ---
 name: optimize
-description: "Autonomous optimization loop — hill-climb any target. Code with metrics, or skills/prompts/agents with LLM-as-judge eval. USE WHEN optimize, autoresearch, hill climb, improve metric, reduce latency, improve performance, benchmark optimization, bundle size, page speed, autonomous improvement loop, optimize skill, optimize prompt, improve quality, eval mode."
+description: "Autonomous optimization loop that hill-climbs any target: code against a metric, or skills, prompts and agents against an LLM-as-judge eval. Use to improve a measurable quality, speed or size autonomously."
 disable-model-invocation: true
 effort: medium
 ---

@@ -1,6 +1,6 @@
 ---
 name: telos
-description: "Life OS and organizational analysis. Personal: read/update goals, beliefs, wisdom, books, movies, challenges, narratives, strategies, mission, models in USER/TELOS/. Project: analyze .md/.csv for dependency chains, reports (WriteReport), narrative points (CreateNarrativePoints), dashboards. USE WHEN Telos, life goals, update TELOS, beliefs, wisdom, write report, narrative points, project analysis, dashboard, dependency mapping, mental models."
+description: "Life OS and organizational analysis. Personal: read and update goals, beliefs, wisdom, books, challenges, strategies, mission and models in USER/TELOS/. Project: analyze .md/.csv files for dependency chains, reports, narrative points and dashboards. Use for TELOS updates or project dependency analysis."
 effort: medium
 ---
 # Telos

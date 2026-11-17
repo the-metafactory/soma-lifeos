@@ -1,6 +1,6 @@
 ---
 name: knowledge
-description: "Manage the PAI Knowledge Archive as a typed graph of People, Companies, Ideas, and Research with typed cross-links and multi-pass search. USE WHEN knowledge, knowledge base, search knowledge, what do we know about, archive, harvest, knowledge status, develop note, add to knowledge, ingest, contradictions, knowledge graph, graph, retrieve, mine conversations. NOT FOR session/ISA context recovery (use ContextSearch)."
+description: "Manage the PAI Knowledge Archive as a typed graph of People, Companies, Ideas and Research with typed cross-links and multi-pass search. Use to search, add to, ingest into, harvest or maintain the knowledge base. NOT FOR session/ISA context recovery (use ContextSearch)."
 argument-hint: [search|add|harvest|develop|ingest|contradictions|graph|retrieve|mine|<query>]
 effort: low
 context: fork

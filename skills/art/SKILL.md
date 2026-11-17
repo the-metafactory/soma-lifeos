@@ -1,6 +1,6 @@
 ---
 name: art
-description: "Static visual content via Flux, Nano Banana Pro, GPT-Image-1. 20+ formats: headers, Mermaid, diagrams, D3 dashboards, timelines, comics, thumbnails, icons, wallpapers. 20 named workflows. Output staged to ~/Downloads/. USE WHEN art, illustration, diagram, flowchart, header image, thumbnail, generate image, mermaid, comic, icon, D3 chart, remove background, wallpaper."
+description: "Static visual content via Flux, Nano Banana Pro and GPT-Image-1 in 20+ formats: headers, diagrams, Mermaid, D3 dashboards, comics, thumbnails, icons, wallpapers. Output staged to ~/Downloads/. Use for any generated image or illustration."
 effort: medium
 ---
 
@@ -68,15 +68,9 @@ If no workflow matches the request, **stop and surface to the user** before gene
 
 ---
 
-## 🚨🚨🚨 MANDATORY: Output to Downloads First 🚨🚨🚨
+## Output goes to ~/Downloads/ first
 
-```
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-⚠️  ALL GENERATED IMAGES GO TO ~/Downloads/ FIRST                   ⚠️
-⚠️  NEVER output directly to project directories                    ⚠️
-⚠️  User MUST preview in Finder/Preview before use                  ⚠️
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-```
+Write every generated image to `~/Downloads/` so the principal can preview it before it goes into a project. Writing straight into repos shipped the wrong images more than once.
 
 **This applies to ALL workflows in this skill.**
 
@@ -183,12 +177,6 @@ Each model accepts different `--size` formats. Using the wrong format causes val
 
 **Note:** `nano-banana-pro` uses `--size` for resolution quality and a separate `--aspect-ratio` flag for aspect ratio (defaults to `16:9`).
 
-### 🚨 CRITICAL: Always Output to Downloads First
-
-**ALL generated images MUST go to `~/Downloads/` first for preview and selection.**
-
-Never output directly to a project's `public/images/` directory. User needs to review images in Preview before they're used.
-
 **Workflow:**
 1. Generate to `~/Downloads/[descriptive-name].png`
 2. User reviews in Preview
@@ -275,7 +263,6 @@ User: "create icon for the skill system pack"
 
 ## Gotchas
 
-- **Always output to ~/Downloads/ first — NEVER directly to project directories.** User must preview before use. Multiple past failures from pushing wrong images directly to repos.
 - **Verify image dimensions match target use case before claiming done.** Social media previews, blog headers, and thumbnails have different size requirements. A header that works on the blog may break OG/social previews.
 - **nano-banana-pro uses `--size` for resolution (1K/2K/4K) and SEPARATE `--aspect-ratio` flag.** Don't pass aspect ratio values to `--size`.
 - **Reference images: max 5 human, 6 object, 14 total per request** (Gemini API limit).

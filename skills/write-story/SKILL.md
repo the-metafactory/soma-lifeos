@@ -1,6 +1,6 @@
 ---
 name: write-story
-description: "Fiction across 7 narrative layers (Storr + Pressfield + Forsyth). Anti-cliche system. Five workflows: Interview, BuildBible, Explore, WriteChapter, Revise. Short story to multi-book series. USE WHEN write story, fiction, novel, chapter, story bible, character arc, creative writing, worldbuilding, write chapter, write scene, revise, brainstorm."
+description: "Fiction across 7 narrative layers (Storr, Pressfield, Forsyth) with an anti-cliché system, from short story to multi-book series: interview, story bible, exploration, chapters, revision. Use for any creative fiction writing or worldbuilding."
 effort: high
 ---
 # WriteStory

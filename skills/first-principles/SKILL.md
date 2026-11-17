@@ -1,6 +1,6 @@
 ---
 name: first-principles
-description: "Deconstruct problems to irreducible truths. Three steps: DECONSTRUCT (constituent parts), CHALLENGE (hard/soft/assumption classification), RECONSTRUCT (build from fundamentals). Four workflows: Deconstruct, Challenge, Reconstruct, Superior. USE WHEN first principles, challenge assumptions, is this a real constraint, rebuild from scratch, what are we paying for, start over, physics first, question everything, is this really necessary, Superior, how would a far more capable mind build this."
+description: "Deconstruct a problem to irreducible truths, classify each constraint as hard, soft or assumption, and rebuild from fundamentals. Use to challenge assumptions, test whether a constraint is real, or rethink a design from scratch."
 effort: high
 ---
 # first-principles Skill

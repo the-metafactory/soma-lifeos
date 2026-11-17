@@ -1,6 +1,6 @@
 ---
 name: migrate
-description: "Intake external content, classify against PAI taxonomy, commit with provenance. Sources: markdown, CLAUDE.md, cursorrules, Obsidian/Notion/Apple Notes exports, journal dumps. Confidence-based approval: ≥70% auto, 40-70% confirm, <40% walk-through. USE WHEN /migrate, migrate content, import notes, import Cursor rules, import CLAUDE.md, bulk import, Obsidian import, Notion import."
+description: "Intake external content (markdown, CLAUDE.md, cursorrules, Obsidian, Notion or Apple Notes exports, journals), classify it against the PAI taxonomy and commit it with provenance, asking for confirmation in proportion to classification confidence. Use for /migrate or any bulk import of notes or rules."
 ---
 
 # Migrate — external-content intake and classification

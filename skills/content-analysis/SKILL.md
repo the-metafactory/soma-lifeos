@@ -1,6 +1,6 @@
 ---
 name: content-analysis
-description: Content extraction and analysis — wisdom extraction from videos, podcasts, articles, and YouTube. USE WHEN extract wisdom, content analysis, analyze content, insight report, analyze video, analyze podcast, extract insights, key takeaways, what did I miss, extract from YouTube.
+description: "Content extraction and analysis: wisdom and insight extraction from videos, podcasts, articles and YouTube. Use to pull the key takeaways out of a piece of content."
 ---
 
 # ContentAnalysis

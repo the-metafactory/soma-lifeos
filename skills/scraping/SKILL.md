@@ -1,6 +1,6 @@
 ---
 name: scraping
-description: Web scraping via progressive escalation (Bright Data proxy) and social media platform actors (Apify). USE WHEN scraping, Bright Data, proxy, crawl, scrape URL, Twitter scraping, Instagram scraping, LinkedIn scraping, TikTok scraping, YouTube scraping, Facebook scraping, Google Maps, Amazon scraping, Apify, bot detection, CAPTCHA, spider, four tier scrape, site blocking.
+description: "Web scraping via progressive escalation (Bright Data proxy) and social media platform actors (Apify). Use to scrape a site or social platform, especially one that blocks fetching."
 ---
 
 # Scraping

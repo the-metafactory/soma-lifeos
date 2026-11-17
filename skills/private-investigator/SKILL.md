@@ -1,6 +1,6 @@
 ---
 name: private-investigator
-description: "Ethical people-finding via 15 parallel agents across people search, social media, public records, reverse lookups. Confidence-scored results. Workflows: FindPerson, SocialMediaSearch, PublicRecordsSearch, ReverseLookup, VerifyIdentity. USE WHEN find person, reconnect, lost contact, reverse phone lookup, who owns this email, reverse image search, find by username, verify identity, people search, who is this caller."
+description: "Ethical people-finding via parallel agents across people search, social media, public records and reverse lookups, with confidence-scored results. Use to find or reconnect with a person, or to identify who is behind a phone number, email, username or image."
 effort: high
 ---
 # PrivateInvestigator - Ethical People Finding

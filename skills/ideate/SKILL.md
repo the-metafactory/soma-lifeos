@@ -1,6 +1,6 @@
 ---
 name: ideate
-description: "Evolutionary ideation engine — loop-controlled multi-cycle idea generation across 9 phases, producing ranked novel candidates with provenance and fitness scoring; strategies evolve across cycles via a Lamarckian meta-learner. USE WHEN ideate, id8, evolve ideas, generate breakthrough solutions, novel approaches, idea evolution, multi-cycle creativity, creative solutions to hard problems, or need genuinely new approaches. NOT FOR quick single-pass brainstorming (use be-creative)."
+description: "Evolutionary ideation engine: multi-cycle idea generation across 9 phases, producing ranked novel candidates with provenance and fitness scores, with strategies evolving across cycles. Use (or \"id8\") when a hard problem needs genuinely new approaches. NOT FOR quick single-pass brainstorming (use be-creative)."
 effort: high
 context: fork
 ---

@@ -1,6 +1,6 @@
 ---
 name: bright-data
-description: "4-tier progressive scraping (WebFetch, curl+Chrome headers, agent-browser, Bright Data MCP) with auto-escalation; single-URL or multi-page crawl, outputs markdown. USE WHEN Bright Data, scrape URL, bot detection, CAPTCHA, site blocking, crawl site, extract page content, spider domain, URL to markdown. NOT FOR headless batch automation without scraping need (use browser), simple public content (use WebFetch directly), or logged-in real-browser bypass/zero-CDP-fingerprint (use interceptor)."
+description: "4-tier progressive scraping (WebFetch, curl+Chrome headers, agent-browser, Bright Data MCP) with auto-escalation; single URL or multi-page crawl, outputs markdown. Use when a site blocks fetching (bot detection, CAPTCHA) or a site needs crawling. NOT FOR headless batch automation without scraping need (use browser), simple public content (use WebFetch directly), or logged-in real-browser bypass/zero-CDP-fingerprint (use interceptor)."
 effort: medium
 ---
 ## Workflow Routing

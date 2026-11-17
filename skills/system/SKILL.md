@@ -1,6 +1,6 @@
 ---
 name: system
-description: System maintenance with four core operations - integrity check (find/fix broken references), document session (current transcript), document recent (catch-up since last update), git push (git commit + push). Plus security workflows. USE WHEN integrity check, audit system, document session, document this session, document today, document recent, catch up docs, what's undocumented, git push, commit and push, check for secrets, security scan, privacy check, cross-repo validation, OR asking about past work ("we just worked on", "remember when we").
+description: "System maintenance: integrity check (find and fix broken references), document the current session or recent work, git commit and push, and security checks for secrets and privacy across repos. Use for these, or when asked about past work (\"we just worked on\", \"remember when we\")."
 triggers:
   - pattern: "/system"
     type: command
