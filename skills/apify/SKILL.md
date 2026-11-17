@@ -1,6 +1,6 @@
 ---
 name: apify
-description: "Apify-based scraping for social media, business data, e-commerce, and general web crawling via TypeScript actor wrappers that filter results for major token savings. USE WHEN scraping Instagram, LinkedIn, TikTok, YouTube, Facebook, Google Maps leads, Amazon reviews, business intel, multi-platform social listening, competitive analysis, lead generation, social monitoring, Apify actors, web crawl, or contact extraction. SKIP: X/Twitter bookmarks (use X-API skill) and progressive scraping (use bright-data)."
+description: "Apify-based scraping of social media, business data, e-commerce and general web crawls through TypeScript actor wrappers that filter results to save tokens. Use for scraping social platforms, maps listings or e-commerce data, social listening or lead generation. SKIP: X/Twitter bookmarks (use X-API skill) and progressive scraping (use bright-data)."
 effort: medium
 ---
 # Apify - Social Media & Web Scraping

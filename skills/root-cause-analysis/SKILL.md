@@ -1,6 +1,6 @@
 ---
 name: root-cause-analysis
-description: "Structured incident investigation (TPS, Ishikawa, Swiss Cheese, Apollo, SRE). Five workflows: FiveWhys, Fishbone, Postmortem, FaultTree, KepnerTregoe. Core axiom: humans are never root causes. Also supports FMEA pre-launch risk. USE WHEN root cause, RCA, 5 whys, fishbone, postmortem, incident analysis, why did this happen, fault tree, why does this keep failing, blameless, recurring bug, pre-launch risk."
+description: "Structured incident investigation (5 Whys, fishbone, postmortem, fault tree, Kepner-Tregoe) on the axiom that humans are never root causes; also FMEA for pre-launch risk. Use to find why an incident or recurring failure happened, or to assess launch risk."
 effort: high
 context: fork
 ---

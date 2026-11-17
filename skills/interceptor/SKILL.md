@@ -1,6 +1,6 @@
 ---
 name: interceptor
-description: "Real Chrome browser automation via the interceptor extension — zero CDP fingerprint, passes bot detection, stays logged in. MANDATORY for visual verification; never use agent-browser for deploy confirmation. USE WHEN verify deploy, confirm UI, screenshot/visual QA, interceptor, debug web, authenticated pages, bot detection bypass, agent-browser failing, reproduce bug, record/replay flow, test form, regression check. NOT FOR batch headless automation (use browser). NOT FOR large-scale crawling/scraping (use bright-data)."
+description: "Real Chrome browser automation via the interceptor extension: zero CDP fingerprint, passes bot detection, stays logged in. Use for visual verification of a deploy or UI (never agent-browser for deploy confirmation), authenticated pages, reproducing a web bug, recording a flow or testing a form. NOT FOR batch headless automation (use browser). NOT FOR large-scale crawling/scraping (use bright-data)."
 version: 2.0.0
 effort: medium
 ---

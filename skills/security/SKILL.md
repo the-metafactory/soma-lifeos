@@ -1,7 +1,7 @@
 ---
 name: security
 effort: high
-description: USE WHEN recon, reconnaissance, port scan, subdomain, DNS, WHOIS, ASN, netblock, CIDR, mass scan, path discovery, endpoint discovery, corporate structure, bounty programs, IP recon, domain recon, passive recon, web assessment, OWASP, pentest, threat model, vulnerability analysis, ffuf, Playwright, Gemini analysis, prompt injection, jailbreak, LLM security, guardrail bypass, direct injection, indirect injection, multi-stage attack, security news, sec updates, breaches, tldrsec, security research, annual reports, threat landscape, security trends, vendor reports, fetch report, list sources.
+description: "Offensive and defensive security work: recon (subdomains, DNS, WHOIS, ASN, ports, endpoints, corporate structure, bounty programs), web assessment and pentest (OWASP, ffuf), threat modeling, LLM security (prompt injection, jailbreaks, guardrail bypass), and security news and vendor annual reports. Use for any of these."
 ---
 
 # Security

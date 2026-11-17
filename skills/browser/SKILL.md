@@ -1,6 +1,6 @@
 ---
 name: browser
-description: "Headless browser automation via agent-browser: Rust CLI daemon with persistent per-site auth profiles for fast, scriptable, parallel browser work. Workflows: ReviewStories, Automate, Update. USE WHEN headless browser work, batch screenshots/scraping, dev server tests, parallel sessions, data extraction, story review, or recipe automation. NOT FOR deploy verification or real-Chrome UI confirmation (use interceptor), simple single-URL fetches (use WebFetch), or CAPTCHA/bot-bypass (use bright-data or interceptor)."
+description: "Headless browser automation via agent-browser: Rust CLI daemon with persistent per-site auth profiles for fast, scriptable, parallel browser work. Use for batch screenshots or scraping, dev-server tests, parallel sessions, data extraction or story review. NOT FOR deploy verification or real-Chrome UI confirmation (use interceptor), simple single-URL fetches (use WebFetch), or CAPTCHA/bot-bypass (use bright-data or interceptor)."
 version: 10.0.0
 effort: medium
 ---

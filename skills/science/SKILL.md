@@ -1,6 +1,6 @@
 ---
 name: science
-description: "Scientific method as problem-solving algorithm. Seven workflows: DefineGoal, GenerateHypotheses (min 3), DesignExperiment, MeasureResults, AnalyzeResults, Iterate, FullCycle. Plus QuickDiagnosis and StructuredInvestigation shortcuts. USE WHEN experiment, iterate, improve, optimize, hypothesis, science, quick diagnosis, structured investigation, what might work, how do we test, analyze results."
+description: "The scientific method as a problem-solving algorithm: define the goal, generate at least 3 hypotheses, design experiments, measure, analyze and iterate; with quick-diagnosis and structured-investigation shortcuts. Use to test what might work through experiments."
 effort: high
 ---
 # Science - The Universal Algorithm

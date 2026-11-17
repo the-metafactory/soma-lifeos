@@ -1,6 +1,6 @@
 ---
 name: be-creative
-description: "Divergent ideation and corpus expansion using Verbalized Sampling. Single-shot generates 5 diverse candidates, surfaces strongest. Multi-turn expands seed corpus into diverse dataset. Seven workflows: StandardCreativity, MaximumCreativity, IdeaGeneration, TreeOfThoughts, DomainSpecific, TechnicalCreativity, SyntheticDataExpansion. USE WHEN be creative, brainstorm, divergent ideas, maximum creativity, tree of thoughts, creative angle, unconventional approach, expand corpus, synthetic data, generate diverse examples."
+description: "Divergent ideation and corpus expansion using Verbalized Sampling: one shot generates 5 diverse candidates and surfaces the strongest; multi-turn expands a seed corpus into a diverse dataset. Use for brainstorming, unconventional angles or synthetic data."
 effort: medium
 ---
 # be-creative Skill

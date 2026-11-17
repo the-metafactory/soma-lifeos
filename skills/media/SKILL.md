@@ -1,6 +1,6 @@
 ---
 name: media
-description: Visual and video content creation. USE WHEN art, header images, visualizations, mermaid, diagrams, flowcharts, infographics, pack icons, video, animation, motion graphics, Remotion, video rendering, YouTube thumbnails, comics, comparisons, frameworks, maps, timelines, taxonomies, stats, aphorisms, recipe cards, annotated screenshots, D3 dashboards, embossed logo wallpaper, remove background, essay illustration, technical diagrams, content to animation, generate image, Midjourney.
+description: "Visual and video content creation: generated images, diagrams, infographics, thumbnails, comics, D3 dashboards, and video, animation and motion graphics with Remotion. Use for any image or video production."
 ---
 
 # Media

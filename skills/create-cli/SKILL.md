@@ -1,6 +1,6 @@
 ---
 name: create-cli
-description: "Production TypeScript CLIs via 3-tier templates: Tier 1 zero-dep Bun (80%), Tier 2 Commander.js (15%), Tier 3 oclif reference. Workflows: CreateCli, AddCommand, UpgradeTier. Output to ~/.soma/UNMAPPED/Bin/ or ~/Projects/. USE WHEN create CLI, build CLI, command-line tool, wrap API, add command, upgrade tier, TypeScript CLI, generate CLI."
+description: "Production TypeScript CLIs from 3-tier templates: zero-dep Bun, Commander.js, or oclif. Use to create a CLI, wrap an API as a command-line tool, add a command or upgrade a CLI's tier."
 effort: medium
 ---
 # CreateCLI

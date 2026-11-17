@@ -1,6 +1,6 @@
 ---
 name: create-skill
-description: "Complete PAI skill development lifecycle across two tracks: structure (scaffold, validate, canonicalize against canonical format) and effectiveness (Anthropic methodology — test with-skill vs baseline, improve instructions, optimize trigger accuracy). USE WHEN create skill, new skill, validate skill, test skill, improve skill, optimize description, skill not triggering, skill overtriggering, canonicalize, scaffold skill, skill quality. NOT FOR TypeScript CLI generation (use CreateCLI)."
+description: "PAI skill development lifecycle on two tracks: structure (scaffold, validate, canonicalize) and effectiveness (test with-skill vs baseline, improve instructions, tune trigger accuracy). Use to create, validate, test or improve a skill, including one that under- or over-triggers. NOT FOR TypeScript CLI generation (use CreateCLI)."
 effort: medium
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: world-threat-model
-description: "Stress-test an idea or strategy against future time horizons (TestIdea), refresh world models (UpdateModels), or inspect their current state (ViewModels). USE WHEN world threat model, temporal threat modeling, long-term risk analysis, update world models, or view world models."
+description: "Stress-test an idea or strategy against future time horizons (TestIdea), refresh world models (UpdateModels), or inspect their current state (ViewModels). Use for long-term risk analysis of an idea or to maintain the world models."
 effort: high
 ---
 

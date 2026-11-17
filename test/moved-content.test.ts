@@ -79,7 +79,7 @@ test("council execution steps support composing prompts without agents", () => {
 test("model-invoked descriptions retain explicit routing triggers", () => {
   for (const member of ["council", "webdesign", "world-threat-model"]) {
     const content = readFileSync(join(root, member, "SKILL.md"), "utf8");
-    expect(/^description: .*USE WHEN .+$/m.test(content), member).toBe(true);
+    expect(/^description: .*\b(USE WHEN|Use (when|for|to)) .+$/m.test(content), member).toBe(true);
   }
 });
 

@@ -1,6 +1,6 @@
 ---
 name: aperture-oscillation
-description: "3-pass scope oscillation — narrow/tactical, wide/strategic, then synthesis — to surface design tensions invisible at any single zoom level. Produces design tensions, scope recommendations, coherence assessments. USE WHEN aperture oscillation, oscillate scope, tactical vs strategic, scope framing, design tension, architecture decision, feature fits system, coherence check, wrong scope, design review."
+description: "3-pass scope oscillation (narrow/tactical, wide/strategic, then synthesis) to surface design tensions invisible at a single zoom level. Use for an architecture or scope decision, or to check whether a feature fits the system."
 effort: medium
 ---
 # aperture-oscillation

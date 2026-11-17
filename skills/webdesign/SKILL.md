@@ -1,6 +1,6 @@
 ---
 name: webdesign
-description: "Design and refine web interfaces through Claude Design. USE WHEN webdesign, create a prototype, extract a design system, redesign a site, export code, integrate a design into an app, or deploy a design. For static graphics or video, use the optional art or media skill."
+description: "Design and refine web interfaces through Claude Design. Use to create a prototype, extract a design system, redesign a site, export code, integrate a design into an app, or deploy a design. For static graphics or video, use the optional art or media skill."
 license: Complete terms in LICENSE.txt
 effort: medium
 ---

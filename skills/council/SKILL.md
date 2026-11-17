@@ -1,6 +1,6 @@
 ---
 name: council
-description: "Debate a decision through multiple expert perspectives and visible deliberation rounds. USE WHEN council, debate, weigh options, compare tradeoffs, or seek consensus. Use red-team for a purely adversarial critique and delegation for parallel task execution."
+description: "Debate a decision through multiple expert perspectives and visible deliberation rounds. Use to weigh options or tradeoffs toward consensus. Use red-team for a purely adversarial critique and delegation for parallel task execution."
 effort: high
 context: fork
 ---

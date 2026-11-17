@@ -1,6 +1,6 @@
 ---
 name: extract-wisdom
-description: "Content-adaptive wisdom extraction — detects wisdom domains present, builds custom sections. Five depth levels: Instant, Fast, Basic, Full (default), Comprehensive. YouTube via fabric -y, articles via WebFetch. USE WHEN extract wisdom, analyze video, analyze podcast, extract insights, extract from YouTube, key takeaways, process this content, summarize interview, distill this content."
+description: "Content-adaptive wisdom extraction that detects which wisdom domains are present and builds custom sections, at five depth levels (Full by default). YouTube via fabric -y, articles via WebFetch. Use to distill a video, podcast, interview or article into its insights."
 effort: medium
 ---
 # ExtractWisdom — Dynamic Content Extraction

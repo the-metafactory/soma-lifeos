@@ -1,6 +1,6 @@
 ---
 name: utilities
-description: "Developer utilities — documents (PDF, DOCX, XLSX, PPTX), parsing (URL, transcript, entities, JSON), audio editing, Fabric patterns, Cloudflare infrastructure, meta-prompting, and aphorisms. USE WHEN process document, convert format, extract text, PDF, Word, Excel, PowerPoint, parse content, clean audio, fabric pattern, Cloudflare, worker, wrangler, meta-prompt, aphorism, quote."
+description: "Developer utilities: documents (PDF, DOCX, XLSX, PPTX), parsing (URL, transcript, entities, JSON), audio cleanup, Fabric patterns, Cloudflare infrastructure (workers, wrangler), meta-prompting and aphorisms. Use for format conversion, text extraction and these tools."
 ---
 
 # Utilities

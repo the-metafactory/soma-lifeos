@@ -1,13 +1,11 @@
 ---
 name: research
-description: "Research and content extraction with 4 depth modes: Quick (1 agent), Standard (4 agents cross-checked), Extensive (7+2 verifiers), Deep Investigation (iterative vault). All URLs verified. Confidence-tagged [HIGH/MED/LOW/CONFLICT]. Additional workflows: ExtractAlpha, Retrieve, YoutubeExtraction, WebScraping, InterviewResearch, AnalyzeAiTrends, Fabric, Enhance, ExtractKnowledge. USE WHEN research, quick research, extensive research, deep investigation, find information, extract alpha, AI trends, interview research, YouTube extraction, competitive analysis."
+description: "Use for any request to research a topic. Research and content extraction in 4 depth modes: Quick (1 agent), Standard (4 agents cross-checked), Extensive (7+2 verifiers), Deep Investigation (iterative vault). All URLs verified; findings confidence-tagged [HIGH/MED/LOW/CONFLICT]."
 effort: high
 context: fork
 ---
 
-## ⚠️ MANDATORY TRIGGER
-
-**When user says "research" (in any form), ALWAYS invoke this skill.**
+## Mode selection
 
 | User Says | Action |
 |-----------|--------|

@@ -1,6 +1,6 @@
 ---
 name: prompting
-description: "Meta-prompting — generate, optimize, compose prompts programmatically. Three pillars: Standards (Anthropic best practices), Templates (Handlebars-based), Tools (RenderTemplate.ts). Output is always a prompt, not final content. USE WHEN meta-prompting, prompt optimization, prompt engineering, write a prompt for, create system prompt, Handlebars template, optimize this prompt, context engineering."
+description: "Meta-prompting: generate, optimize and compose prompts from Anthropic best practices and Handlebars templates. The output is always a prompt, not final content. Use to write, optimize or template a prompt or system prompt."
 effort: medium
 ---
 # Prompting - Meta-Prompting & Template System

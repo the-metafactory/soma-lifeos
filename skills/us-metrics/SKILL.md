@@ -1,6 +1,6 @@
 ---
 name: us-metrics
-description: "68 US economic/social indicators from FRED, EIA, Treasury, BLS, Census. Ten categories covering GDP through life expectancy. Two workflows: UpdateData (fetch live), GetCurrentState (multi-timeframe trend analysis). USE WHEN GDP, inflation, unemployment, economic metrics, gas prices, how is the economy, update data, economic overview, FRED, US metrics, economic trends."
+description: "68 US economic and social indicators from FRED, EIA, Treasury, BLS and Census, with live updates and multi-timeframe trend analysis. Use for questions about the US economy: GDP, inflation, unemployment, gas prices."
 effort: medium
 ---
 # US Metrics - Economic & Social Indicator Analysis

@@ -1,6 +1,6 @@
 ---
 name: delegation
-description: "Parallelize work across agents — built-in, worktree-isolated, background, custom, teams, and parallel dispatch — with two-tier delegation (lightweight one-shot vs full multi-step). Decision rule: agents share state → Teams; independent one-shot work → Subagents. USE WHEN 3+ workstreams, parallel execution, agent specialization, agent team, swarm, spawn agents, create team, fan out, divide and conquer, multi-agent, coordinate agents. NOT FOR single-agent custom personality composition (use Agents skill)."
+description: "Parallelize work across agents (built-in, worktree-isolated, background, custom, teams) with two-tier delegation: lightweight one-shot or full multi-step. Agents that share state → Teams; independent one-shot work → Subagents. Use when work splits into 3+ parallel workstreams or needs an agent team. NOT FOR single-agent custom personality composition (use Agents skill)."
 effort: medium
 ---
 
